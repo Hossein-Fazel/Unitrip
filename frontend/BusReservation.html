@@ -36,10 +36,10 @@
             border-top: 1px solid #dee2e6;
             padding-top: 2rem;
             padding-bottom: 2rem;
-            color: #6c757d; /* Muted text color */
+            color: #6c757d;
         }
         .site-footer h5, .site-footer h6 {
-            color: #212529; /* Dark text color */
+            color: #212529;
         }
         .site-footer a {
             color: #6c757d;
@@ -199,14 +199,7 @@
             </div>
             <div class="card-body p-4">
                 <div class="bus-layout-container">
-                    <!-- SVG Bus Floor Plan -->
-                    <svg class="bus-floor-plan" viewBox="0 0 950 250" preserveAspectRatio="none">
-                        <rect x="5" y="5" width="940" height="240" rx="60" fill="#dde2e8" stroke="#c8ced5" stroke-width="3"/>
-                        <path d="M 50 80 L 10 125 L 50 170 Z" fill="#c8ced5" />
-                        <circle cx="50" cy="125" r="15" fill="#f4f6f9" stroke="#c8ced5" stroke-width="2" />
-                    </svg>
-
-                    <!-- Seats arranged with seat 13 in the gap -->
+                    <svg class="bus-floor-plan" viewBox="0 0 950 250" preserveAspectRatio="none"><rect x="5" y="5" width="940" height="240" rx="60" fill="#dde2e8" stroke="#c8ced5" stroke-width="3"/><path d="M 50 80 L 10 125 L 50 170 Z" fill="#c8ced5" /><circle cx="50" cy="125" r="15" fill="#f4f6f9" stroke="#c8ced5" stroke-width="2" /></svg>
                     <div class="seat-column" style="top: 30px; left: 8%;"><div class="seat-row"><div class="seat available">1</div></div><div class="seat-row"><div class="seat available">2</div></div></div>
                     <div class="seat-column" style="top: 155px; left: 8%;"><div class="seat-row"><div class="seat taken-male">3</div></div></div>
                     <div class="seat-column" style="top: 30px; left: 18%;"><div class="seat-row"><div class="seat available">4</div></div><div class="seat-row"><div class="seat available">5</div></div></div>
@@ -225,14 +218,7 @@
                     <div class="seat-column" style="top: 30px; left: 88%;"><div class="seat-row"><div class="seat available">23</div></div><div class="seat-row"><div class="seat available">24</div></div></div>
                     <div class="seat-column" style="top: 155px; left: 88%;"><div class="seat-row"><div class="seat available">25</div></div></div>
                 </div>
-
-                <!-- Seat Legend -->
-                <div class="seat-legend">
-                    <div class="legend-item"><div class="legend-color" style="background: #fff; border: 1px solid #ced4da;"></div><span>Available</span></div>
-                    <div class="legend-item"><div class="legend-color" style="background: #4caf50;"></div><span>Your Selection</span></div>
-                    <div class="legend-item"><div class="legend-color" style="background: #aadaff;"></div><span>Booked (Male)</span></div>
-                    <div class="legend-item"><div class="legend-color" style="background: #ffc0cb;"></div><span>Booked (Female)</span></div>
-                </div>
+                <div class="seat-legend"><div class="legend-item"><div class="legend-color" style="background: #fff; border: 1px solid #ced4da;"></div><span>Available</span></div><div class="legend-item"><div class="legend-color" style="background: #4caf50;"></div><span>Your Selection</span></div><div class="legend-item"><div class="legend-color" style="background: #aadaff;"></div><span>Booked (Male)</span></div><div class="legend-item"><div class="legend-color" style="background: #ffc0cb;"></div><span>Booked (Female)</span></div></div>
             </div>
         </div>
 
@@ -241,14 +227,20 @@
             <div class="card-header bg-white py-3"><h4 class="mb-0">Passenger Information</h4></div>
             <div class="card-body">
                 <form>
+                    <!-- Primary Passenger Fields -->
+                    <h5 class="mb-3">Primary Passenger</h5>
                     <div class="row g-3">
-                        <div class="col-md-6"><label for="firstName" class="form-label">First Name</label><input type="text" class="form-control" id="firstName"></div>
-                        <div class="col-md-6"><label for="lastName" class="form-label">Last Name</label><input type="text" class="form-control" id="lastName"></div>
+                        <div class="col-md-6"><label for="fullName" class="form-label">Full Name</label><input type="text" class="form-control" id="fullName"></div>
                         <div class="col-md-6"><label for="nationalId" class="form-label">National ID</label><input type="text" class="form-control" id="nationalId"></div>
                         <div class="col-md-6"><label for="mobile" class="form-label">Mobile Number</label><input type="tel" class="form-control" id="mobile"></div>
-                        <div class="col-12"><label class="form-label">Date of Birth</label><div class="row g-2"><div class="col"><select class="form-select" id="birthYear"><option selected disabled>Year</option></select></div><div class="col"><select class="form-select" id="birthMonth"><option selected disabled>Month</option></select></div><div class="col"><select class="form-select" id="birthDay"><option selected disabled>Day</option></select></div></div></div>
-                        <div class="col-12 mt-4"><hr><div class="d-flex justify-content-between align-items-center"><h5 class="mb-0">Total Price: <span id="total-price" class="fw-bold" style="color:#ef4056;">$0</span></h5><button type="submit" class="btn btn-pay btn-lg px-5">Pay & Reserve</button></div></div>
+                        <div class="col-md-6"><label class="form-label">Date of Birth</label><div class="row g-2"><div class="col"><select class="form-select" id="birthYear"><option selected disabled>Year</option></select></div><div class="col"><select class="form-select" id="birthMonth"><option selected disabled>Month</option></select></div><div class="col"><select class="form-select" id="birthDay"><option selected disabled>Day</option></select></div></div></div>
                     </div>
+                    
+                    <!-- Container for Additional Passenger Fields -->
+                    <div id="additional-passengers" class="mt-3"></div>
+
+                    <!-- Payment Section -->
+                    <div class="col-12 mt-4"><hr><div class="d-flex justify-content-between align-items-center"><h5 class="mb-0">Total Price: <span id="total-price" class="fw-bold" style="color:#ef4056;">$0</span></h5><button type="submit" class="btn btn-primary">Reserve</button></div></div>
                 </form>
             </div>
         </div>
@@ -281,12 +273,45 @@
             const seats = document.querySelectorAll('.seat.available');
             const passengerForm = document.getElementById('passenger-info-form');
             const totalPriceElement = document.getElementById('total-price');
+            const additionalPassengersContainer = document.getElementById('additional-passengers');
             const SEAT_PRICE = 45;
 
             function updateSelection() {
                 const selectedSeats = document.querySelectorAll('.seat.selected');
-                passengerForm.style.display = selectedSeats.length > 0 ? 'block' : 'none';
-                totalPriceElement.textContent = `$${selectedSeats.length * SEAT_PRICE}`;
+                const selectedCount = selectedSeats.length;
+                
+                // Show form if at least one seat is selected
+                passengerForm.style.display = selectedCount > 0 ? 'block' : 'none';
+                
+                // Update total price
+                totalPriceElement.textContent = `$${selectedCount * SEAT_PRICE}`;
+
+                // Clear previous additional passenger forms
+                additionalPassengersContainer.innerHTML = '';
+
+                // If more than one seat is selected, generate fields for additional passengers
+                if (selectedCount > 1) {
+                    for (let i = 1; i < selectedCount; i++) {
+                        const seat = selectedSeats[i];
+                        const seatNumber = seat.textContent;
+
+                        const passengerFieldsHTML = `
+                            <hr class="my-4">
+                            <h5 class="mb-3">Passenger for Seat #${seatNumber}</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="fullName_seat_${seatNumber}" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="fullName_seat_${seatNumber}" name="passenger_fullName[]">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nationalId_seat_${seatNumber}" class="form-label">National ID</label>
+                                    <input type="text" class="form-control" id="nationalId_seat_${seatNumber}" name="passenger_nationalId[]">
+                                </div>
+                            </div>
+                        `;
+                        additionalPassengersContainer.innerHTML += passengerFieldsHTML;
+                    }
+                }
             }
 
             seats.forEach(seat => {
