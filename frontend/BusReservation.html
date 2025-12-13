@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Reservation - Unitrip</title>
+    <!-- Bootstrap 5 LTR CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts (Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f6f9;
+            color: #212529;
+        }
+
+        /* Header & Footer Styling (Light Theme) */
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .navbar-brand {
+            font-weight: 700;
+        }
+        .btn-teal {
+            background-color: #00a693;
+            color: white;
+        }
+        .btn-teal:hover {
+            background-color: #008a79;
+            color: white;
+        }
+        .site-footer {
+            border-top: 1px solid #dee2e6;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            color: #6c757d; /* Muted text color */
+        }
+        .site-footer h5, .site-footer h6 {
+            color: #212529; /* Dark text color */
+        }
+        .site-footer a {
+            color: #6c757d;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        .site-footer a:hover {
+            color: #00a693;
+        }
+
+        /* Main Content Styling (Light Theme) */
+        .card {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: none;
+            border-radius: 0.75rem;
+        }
+        
+        .trip-info-header {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .trip-info-header .city {
+            font-size: 1.1rem;
+            color: #212529;
+        }
+
+        .bus-layout-container {
+            position: relative;
+            width: 100%;
+            max-width: 950px;
+            margin: 2rem auto 0 auto;
+            height: 250px;
+        }
+        
+        .bus-floor-plan {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .seat-column {
+            position: absolute;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .seat-row { display: flex; gap: 10px; }
+
+        .seat {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-weight: 600;
+            user-select: none;
+            color: #495057;
+            font-size: 0.9rem;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .seat.available {
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            cursor: pointer;
+        }
+        .seat.available:hover {
+            border-color: #0d6efd;
+            transform: translateY(-2px);
+        }
+
+        .seat.selected {
+            background-color: #4caf50;
+            color: white;
+            border-color: #4caf50;
+            transform: scale(1.1);
+        }
+
+        .seat.taken-male {
+            background-color: #aadaff;
+            border: 1px solid #aadaff;
+            cursor: not-allowed;
+        }
+        
+        .seat.taken-female {
+            background-color: #ffc0cb;
+            border: 1px solid #ffc0cb;
+            cursor: not-allowed;
+        }
+        
+        .seat-legend {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .legend-item { display: flex; align-items: center; gap: 0.75rem; }
+        .legend-color { width: 25px; height: 25px; border-radius: 6px; }
+        .form-label { font-weight: 600; }
+        
+        .btn-pay {
+             background-color: #ef4056;
+             border-color: #ef4056;
+             color: white;
+        }
+        
+        .btn-pay:hover {
+             background-color: #d63045;
+             border-color: #d63045;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container">
+        <a class="navbar-brand" href="#">Unitrip</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="#contact-section">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about-section">About</a></li>
+            <li class="nav-item dropdown">
+              <button class="btn btn-teal btn-sm dropdown-toggle ms-2" data-bs-toggle="dropdown" aria-expanded="false">Book</button>
+              <ul class="dropdown-menu dropdown-menu-end p-2">
+                <li><button class="dropdown-item"><i class="bi bi-building-fill me-2"></i>Hotel</button></li>
+                <li><button class="dropdown-item"><i class="bi bi-bus-front-fill me-2"></i>Bus</button></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="card">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="mb-0">Select Your Seat</h4>
+                    <p class="text-muted mb-0 small">Please select seats according to gender.</p>
+                </div>
+                <div class="trip-info-header text-end">
+                    <span class="city">Tehran</span> → <span class="city">Isfahan</span>
+                    <div class="small text-muted">Distance: 448 km</div>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="bus-layout-container">
+                    <!-- SVG Bus Floor Plan -->
+                    <svg class="bus-floor-plan" viewBox="0 0 950 250" preserveAspectRatio="none">
+                        <rect x="5" y="5" width="940" height="240" rx="60" fill="#dde2e8" stroke="#c8ced5" stroke-width="3"/>
+                        <path d="M 50 80 L 10 125 L 50 170 Z" fill="#c8ced5" />
+                        <circle cx="50" cy="125" r="15" fill="#f4f6f9" stroke="#c8ced5" stroke-width="2" />
+                    </svg>
+
+                    <!-- Seats arranged with seat 13 in the gap -->
+                    <div class="seat-column" style="top: 30px; left: 8%;"><div class="seat-row"><div class="seat available">1</div></div><div class="seat-row"><div class="seat available">2</div></div></div>
+                    <div class="seat-column" style="top: 155px; left: 8%;"><div class="seat-row"><div class="seat taken-male">3</div></div></div>
+                    <div class="seat-column" style="top: 30px; left: 18%;"><div class="seat-row"><div class="seat available">4</div></div><div class="seat-row"><div class="seat available">5</div></div></div>
+                    <div class="seat-column" style="top: 155px; left: 18%;"><div class="seat-row"><div class="seat available">6</div></div></div>
+                    <div class="seat-column" style="top: 30px; left: 28%;"><div class="seat-row"><div class="seat taken-male">7</div></div><div class="seat-row"><div class="seat taken-male">8</div></div></div>
+                    <div class="seat-column" style="top: 155px; left: 28%;"><div class="seat-row"><div class="seat taken-male">9</div></div></div>
+                    <div class="seat-column" style="top: 30px; left: 38%;"><div class="seat-row"><div class="seat taken-male">10</div></div><div class="seat-row"><div class="seat taken-male">11</div></div></div>
+                    <div class="seat-column" style="top: 155px; left: 38%;"><div class="seat-row"><div class="seat taken-male">12</div></div></div>
+                    <div class="seat-column" style="top: 155px; left: 48%;"><div class="seat-row"><div class="seat available">13</div></div></div>
+                    <div class="seat-column" style="top: 30px; left: 58%;"><div class="seat-row"><div class="seat taken-female">14</div></div><div class="seat-row"><div class="seat taken-male">15</div></div></div>
+                    <div class="seat-column" style="top: 155px; left: 58%;"><div class="seat-row"><div class="seat taken-female">16</div></div></div>
+                    <div class="seat-column" style="top: 30px; left: 68%;"><div class="seat-row"><div class="seat taken-male">17</div></div><div class="seat-row"><div class="seat taken-male">18</div></div></div>
+                    <div class="seat-column" style="top: 155px; left: 68%;"><div class="seat-row"><div class="seat available">19</div></div></div>
+                    <div class="seat-column" style="top: 30px; left: 78%;"><div class="seat-row"><div class="seat available">20</div></div><div class="seat-row"><div class="seat available">21</div></div></div>
+                    <div class="seat-column" style="top: 155px; left: 78%;"><div class="seat-row"><div class="seat available">22</div></div></div>
+                    <div class="seat-column" style="top: 30px; left: 88%;"><div class="seat-row"><div class="seat available">23</div></div><div class="seat-row"><div class="seat available">24</div></div></div>
+                    <div class="seat-column" style="top: 155px; left: 88%;"><div class="seat-row"><div class="seat available">25</div></div></div>
+                </div>
+
+                <!-- Seat Legend -->
+                <div class="seat-legend">
+                    <div class="legend-item"><div class="legend-color" style="background: #fff; border: 1px solid #ced4da;"></div><span>Available</span></div>
+                    <div class="legend-item"><div class="legend-color" style="background: #4caf50;"></div><span>Your Selection</span></div>
+                    <div class="legend-item"><div class="legend-color" style="background: #aadaff;"></div><span>Booked (Male)</span></div>
+                    <div class="legend-item"><div class="legend-color" style="background: #ffc0cb;"></div><span>Booked (Female)</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Passenger Info Form Card (Initially Hidden) -->
+        <div id="passenger-info-form" class="card mt-4" style="display: none;">
+            <div class="card-header bg-white py-3"><h4 class="mb-0">Passenger Information</h4></div>
+            <div class="card-body">
+                <form>
+                    <div class="row g-3">
+                        <div class="col-md-6"><label for="firstName" class="form-label">First Name</label><input type="text" class="form-control" id="firstName"></div>
+                        <div class="col-md-6"><label for="lastName" class="form-label">Last Name</label><input type="text" class="form-control" id="lastName"></div>
+                        <div class="col-md-6"><label for="nationalId" class="form-label">National ID</label><input type="text" class="form-control" id="nationalId"></div>
+                        <div class="col-md-6"><label for="mobile" class="form-label">Mobile Number</label><input type="tel" class="form-control" id="mobile"></div>
+                        <div class="col-12"><label class="form-label">Date of Birth</label><div class="row g-2"><div class="col"><select class="form-select" id="birthYear"><option selected disabled>Year</option></select></div><div class="col"><select class="form-select" id="birthMonth"><option selected disabled>Month</option></select></div><div class="col"><select class="form-select" id="birthDay"><option selected disabled>Day</option></select></div></div></div>
+                        <div class="col-12 mt-4"><hr><div class="d-flex justify-content-between align-items-center"><h5 class="mb-0">Total Price: <span id="total-price" class="fw-bold" style="color:#ef4056;">$0</span></h5><button type="submit" class="btn btn-pay btn-lg px-5">Pay & Reserve</button></div></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer container">
+        <div class="row">
+        <div class="col-md-4">
+            <h5>Unitrip</h5>
+            <p class="small muted">Smart travel bookings — hotel & bus reservations in one place.</p>
+        </div>
+        <div class="col-md-4">
+            <h6>Contact</h6>
+            <p class="small muted mb-1">Phone: +1 234 567 890</p>
+            <p class="small muted">Email: hello@unitrip.example</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <h6>Follow</h6>
+            <a href="#" class="me-2"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="me-2"><i class="bi bi-telegram"></i></a>
+            <a href="#" class="me-2"><i class="bi bi-facebook"></i></a>
+        </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const seats = document.querySelectorAll('.seat.available');
+            const passengerForm = document.getElementById('passenger-info-form');
+            const totalPriceElement = document.getElementById('total-price');
+            const SEAT_PRICE = 45;
+
+            function updateSelection() {
+                const selectedSeats = document.querySelectorAll('.seat.selected');
+                passengerForm.style.display = selectedSeats.length > 0 ? 'block' : 'none';
+                totalPriceElement.textContent = `$${selectedSeats.length * SEAT_PRICE}`;
+            }
+
+            seats.forEach(seat => {
+                seat.addEventListener('click', () => {
+                    seat.classList.toggle('selected');
+                    updateSelection();
+                });
+            });
+
+            function populateDateDropdowns() {
+                const daySelect = document.getElementById('birthDay'), monthSelect = document.getElementById('birthMonth'), yearSelect = document.getElementById('birthYear');
+                const currentYear = new Date().getFullYear();
+                for (let i = currentYear - 80; i <= currentYear - 5; i++) { yearSelect.add(new Option(i, i)); }
+                const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                monthNames.forEach((month, index) => { monthSelect.add(new Option(month, index + 1)); });
+                for (let i = 1; i <= 31; i++) { daySelect.add(new Option(i, i)); }
+            }
+
+            populateDateDropdowns();
+            updateSelection();
+        });
+    </script>
+</body>
+</html>
