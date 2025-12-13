@@ -17,15 +17,15 @@
 
   <style>
     :root {
-      --bg-dark: #d6d7eb;
-      --panel: #ffffff;
+      --bg-dark: #ffedd9;
+      --panel: #e4d6d6;
       --card: #a01515;
-      --white-card: #b3c8db;
-      --accent: #7c7adbcc;
+      --white-card: #E6E6E6;
+      --accent: #f7ddbf;
       /* bright teal */
-      --accent-2: #7c7adbcc;
-      --muted: #fffdfd;
-      --glass: #93fbfd;
+      --accent-2: #e3400acc;
+      --muted: #835b5b;
+      --glass: #ff9f72;
     }
 
     html,
@@ -35,8 +35,8 @@
 
     body {
       margin: 0;
-      background: linear-gradient(180deg, var(--bg-dark) 0%, #aee4fd 100%);
-      color: #ffffff;
+      background: linear-gradient(180deg, var(--bg-dark) 0%, #ffedd9 100%);
+      color: #9d4141;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -44,7 +44,7 @@
 
     /* NAVBAR */
     .navbar {
-      background: linear-gradient(90deg, #7c7adbcc, #521663cc) !important;
+      background: linear-gradient(90deg, #ff941acc, #ff774dcc) !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       padding-top: .75rem;
       padding-bottom: .75rem;
@@ -180,11 +180,11 @@
       border-top: 1px solid rgba(255, 255, 255, 0.03);
       padding-top: 28px;
       padding-bottom: 28px;
-      color: #000000;
+      color: #211515;
     }
 
     footer a {
-      color: var(--accent);
+      color: var(--glass);
     }
 
     /* small */
@@ -311,7 +311,7 @@
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand" href="#">SnappTripDark</a>
+      <a class="navbar-brand large" href="#">UniTrip</a>
 
       <button class="navbar-toggler btn btn-outline-light" type="button" data-bs-toggle="collapse"
         data-bs-target="#navMenu">
@@ -509,7 +509,7 @@
 
       <!-- Best Destinations (horizontal scroll of white city cards) -->
       <section class="panel">
-        <h3 style="color:var(--accent)">Popular Destinations</h3>
+        <h3 style="color:var(--accent-2)">Popular Destinations</h3>
         <div class="py-2" style="overflow-x:auto; white-space:nowrap;">
           <div class="city-card">
             <img
@@ -633,7 +633,7 @@
           <div class="shareholder-card">
             <img src="https://i.pravatar.cc/150?img=2" alt="Shareholder 2" class="shareholder-img ">
             <div class="shareholder-info mt-3">
-              <h5>Jane Doe</h5>
+              <h5>Hossein Fazel</h5>
               <p class="small muted">Chief Technology Officer</p>
             </div>
           </div>
@@ -643,7 +643,7 @@
           <div class="shareholder-card">
             <img src="https://i.pravatar.cc/150?img=2" alt="Shareholder 2" class="shareholder-img ">
             <div class="shareholder-info mt-3">
-              <h5>Jane Doe</h5>
+              <h5>sara Rashedi</h5>
               <p class="small muted">Chief Technology Officer</p>
             </div>
           </div>
@@ -654,18 +654,13 @@
           <div class="shareholder-card">
             <img src="https://i.pravatar.cc/150?img=3" alt="Shareholder 3" class="shareholder-img">
             <div class="shareholder-info mt-3">
-              <h5>John Smith</h5>
+              <h5>Ali Azizkhani</h5>
               <p class="small muted">Lead Investor</p>
             </div>
           </div>
         </div>
       </div>
     </section>
-
-
-
-
-
 
 
 
@@ -720,22 +715,22 @@
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer container">
+    <footer class="site-footer container bg-light">
       <div class="row">
         <div class="col-md-4">
-          <h5>SnappTripDark</h5>
+          <h5>uniTrip</h5>
           <p class="muted small">Smart travel bookings — hotel & bus reservations in one place.</p>
         </div>
 
         <div class="col-md-4">
           <h6>Contact</h6>
-          <p class="small muted mb-1">Phone: +1 234 567 890</p>
-          <p class="small muted">Email: hello@snapptripdark.example</p>
+          <p class="medium muted mb-1">Phone: +1 234 567 890</p>
+          <p class="large muted">Email: hello@unitrip.example</p>
         </div>
 
         <div class="col-md-4 text-md-end">
-          <h6>Follow</h6>
-          <a href="#" class="me-2"><i class="bi bi-instagram"></i></a>
+          <h6 class="large">Follow</h6>
+          <a href="#" class="me-2"><i class="bi bi-instagram "></i></a>
           <a href="#" class="me-2"><i class="bi bi-telegram"></i></a>
           <a href="#" class="me-2"><i class="bi bi-facebook"></i></a>
         </div>
