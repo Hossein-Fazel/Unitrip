@@ -148,17 +148,6 @@
         .legend-item { display: flex; align-items: center; gap: 0.75rem; }
         .legend-color { width: 25px; height: 25px; border-radius: 6px; }
         .form-label { font-weight: 600; }
-        
-        .btn-pay {
-             background-color: #ef4056;
-             border-color: #ef4056;
-             color: white;
-        }
-        
-        .btn-pay:hover {
-             background-color: #d63045;
-             border-color: #d63045;
-        }
     </style>
 </head>
 <body>
@@ -171,8 +160,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navMenu">
           <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item"><a class="nav-link" href="#contact-section">Contact</a></li>
-            <li class="nav-item"><a class="nav-link" href="#about-section">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
             <li class="nav-item dropdown">
               <button class="btn btn-teal btn-sm dropdown-toggle ms-2" data-bs-toggle="dropdown" aria-expanded="false">Book</button>
               <ul class="dropdown-menu dropdown-menu-end p-2">
@@ -222,25 +211,15 @@
             </div>
         </div>
 
-        <!-- Passenger Info Form Card (Initially Hidden) -->
+        <!-- Passenger Info Form Card -->
         <div id="passenger-info-form" class="card mt-4" style="display: none;">
             <div class="card-header bg-white py-3"><h4 class="mb-0">Passenger Information</h4></div>
             <div class="card-body">
-                <form>
-                    <!-- Primary Passenger Fields -->
+                <form id="booking-form">
                     <h5 class="mb-3">Primary Passenger</h5>
-                    <div class="row g-3">
-                        <div class="col-md-6"><label for="fullName" class="form-label">Full Name</label><input type="text" class="form-control" id="fullName"></div>
-                        <div class="col-md-6"><label for="nationalId" class="form-label">National ID</label><input type="text" class="form-control" id="nationalId"></div>
-                        <div class="col-md-6"><label for="mobile" class="form-label">Mobile Number</label><input type="tel" class="form-control" id="mobile"></div>
-                        <div class="col-md-6"><label class="form-label">Date of Birth</label><div class="row g-2"><div class="col"><select class="form-select" id="birthYear"><option selected disabled>Year</option></select></div><div class="col"><select class="form-select" id="birthMonth"><option selected disabled>Month</option></select></div><div class="col"><select class="form-select" id="birthDay"><option selected disabled>Day</option></select></div></div></div>
-                    </div>
-                    
-                    <!-- Container for Additional Passenger Fields -->
+                    <div class="row g-3"><div class="col-md-6"><label for="fullName" class="form-label">Full Name</label><input type="text" class="form-control" id="fullName" required></div><div class="col-md-6"><label for="nationalId" class="form-label">National ID</label><input type="text" class="form-control" id="nationalId" required></div><div class="col-md-4"><label for="mobile" class="form-label">Mobile Number</label><input type="tel" class="form-control" id="mobile" required></div><div class="col-md-4"><label for="birthDate" class="form-label">Date of Birth</label><input type="date" class="form-control" id="birthDate" required></div><div class="col-md-4"><label for="gender" class="form-label">Gender</label><select class="form-select" id="gender" required><option value="" selected disabled>Select...</option><option>Male</option><option>Female</option></select></div></div>
                     <div id="additional-passengers" class="mt-3"></div>
-
-                    <!-- Payment Section -->
-                    <div class="col-12 mt-4"><hr><div class="d-flex justify-content-between align-items-center"><h5 class="mb-0">Total Price: <span id="total-price" class="fw-bold" style="color:#ef4056;">$0</span></h5><button type="submit" class="btn btn-primary">Reserve</button></div></div>
+                    <div class="col-12 mt-4"><hr><div class="d-flex justify-content-between align-items-center"><h5 class="mb-0">Total Price: <span id="total-price" class="fw-bold" style="color:#ef4056;">$0</span></h5><button type="submit" class="btn btn-primary btn-lg px-5">Pay & Reserve</button></div></div>
                 </form>
             </div>
         </div>
@@ -248,90 +227,84 @@
 
     <!-- Footer -->
     <footer class="site-footer container">
-        <div class="row">
-        <div class="col-md-4">
-            <h5>Unitrip</h5>
-            <p class="small muted">Smart travel bookings — hotel & bus reservations in one place.</p>
-        </div>
-        <div class="col-md-4">
-            <h6>Contact</h6>
-            <p class="small muted mb-1">Phone: +1 234 567 890</p>
-            <p class="small muted">Email: hello@unitrip.example</p>
-        </div>
-        <div class="col-md-4 text-md-end">
-            <h6>Follow</h6>
-            <a href="#" class="me-2"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="me-2"><i class="bi bi-telegram"></i></a>
-            <a href="#" class="me-2"><i class="bi bi-facebook"></i></a>
-        </div>
-        </div>
+        <div class="row"><div class="col-md-4"><h5>Unitrip</h5><p class="small muted">Smart travel bookings — hotel & bus reservations in one place.</p></div><div class="col-md-4"><h6>Contact</h6><p class="small muted mb-1">Phone: +1 234 567 890</p><p class="small muted">Email: hello@unitrip.example</p></div><div class="col-md-4 text-md-end"><h6>Follow</h6><a href="#" class="me-2"><i class="bi bi-instagram"></i></a><a href="#" class="me-2"><i class="bi bi-telegram"></i></a><a href="#" class="me-2"><i class="bi bi-facebook"></i></a></div></div>
     </footer>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header border-0"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-center py-4"><i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i><h4 class="modal-title mt-3">Booking Successful!</h4><p class="text-muted mt-2">Your reservation for <span id="modal-seat-count"></span> seat(s) with a total of <strong id="modal-total-price"></strong> has been confirmed.</p></div><div class="modal-footer border-0 justify-content-center"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button></div></div></div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const seats = document.querySelectorAll('.seat.available');
             const passengerForm = document.getElementById('passenger-info-form');
+            const bookingForm = document.getElementById('booking-form');
             const totalPriceElement = document.getElementById('total-price');
             const additionalPassengersContainer = document.getElementById('additional-passengers');
             const SEAT_PRICE = 45;
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
 
-            function updateSelection() {
+            const seatClickHandler = (event) => {
+                event.target.classList.toggle('selected');
+                updateSelectionState();
+            };
+            
+            document.querySelectorAll('.seat.available').forEach(seat => {
+                seat.addEventListener('click', seatClickHandler);
+            });
+
+            function updateSelectionState() {
                 const selectedSeats = document.querySelectorAll('.seat.selected');
                 const selectedCount = selectedSeats.length;
                 
-                // Show form if at least one seat is selected
                 passengerForm.style.display = selectedCount > 0 ? 'block' : 'none';
-                
-                // Update total price
                 totalPriceElement.textContent = `$${selectedCount * SEAT_PRICE}`;
-
-                // Clear previous additional passenger forms
                 additionalPassengersContainer.innerHTML = '';
 
-                // If more than one seat is selected, generate fields for additional passengers
                 if (selectedCount > 1) {
                     for (let i = 1; i < selectedCount; i++) {
                         const seat = selectedSeats[i];
                         const seatNumber = seat.textContent;
-
-                        const passengerFieldsHTML = `
-                            <hr class="my-4">
-                            <h5 class="mb-3">Passenger for Seat #${seatNumber}</h5>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="fullName_seat_${seatNumber}" class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" id="fullName_seat_${seatNumber}" name="passenger_fullName[]">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="nationalId_seat_${seatNumber}" class="form-label">National ID</label>
-                                    <input type="text" class="form-control" id="nationalId_seat_${seatNumber}" name="passenger_nationalId[]">
-                                </div>
-                            </div>
-                        `;
+                        const passengerFieldsHTML = `<hr class="my-4"><h5 class="mb-3">Passenger for Seat #${seatNumber}</h5><div class="row g-3"><div class="col-md-6"><label for="fullName_seat_${seatNumber}" class="form-label">Full Name</label><input type="text" class="form-control" id="fullName_seat_${seatNumber}" required></div><div class="col-md-4"><label for="nationalId_seat_${seatNumber}" class="form-label">National ID</label><input type="text" class="form-control" id="nationalId_seat_${seatNumber}" required></div><div class="col-md-2"><label for="gender_seat_${seatNumber}" class="form-label">Gender</label><select class="form-select" id="gender_seat_${seatNumber}" required><option value="" selected disabled>...</option><option>Male</option><option>Female</option></select></div></div>`;
                         additionalPassengersContainer.innerHTML += passengerFieldsHTML;
                     }
                 }
             }
 
-            seats.forEach(seat => {
-                seat.addEventListener('click', () => {
-                    seat.classList.toggle('selected');
-                    updateSelection();
+            bookingForm.addEventListener('submit', function (event) {
+                event.preventDefault(); 
+
+                const selectedSeats = document.querySelectorAll('.seat.selected');
+                
+                const genders = [];
+                genders.push(document.getElementById('gender').value); 
+                for (let i = 1; i < selectedSeats.length; i++) {
+                    const seatNumber = selectedSeats[i].textContent;
+                    genders.push(document.getElementById(`gender_seat_${seatNumber}`).value);
+                }
+                
+                document.getElementById('modal-seat-count').textContent = selectedSeats.length;
+                document.getElementById('modal-total-price').textContent = totalPriceElement.textContent;
+                successModal.show();
+                
+                selectedSeats.forEach((seat, index) => {
+                    seat.classList.remove('selected', 'available');
+                    seat.removeEventListener('click', seatClickHandler);
+
+                    if (genders[index] === 'Male') {
+                        seat.classList.add('taken-male');
+                    } else {
+                        seat.classList.add('taken-female');
+                    }
                 });
+
+                passengerForm.style.display = 'none';
+                additionalPassengersContainer.innerHTML = '';
+                bookingForm.reset();
             });
-
-            function populateDateDropdowns() {
-                const daySelect = document.getElementById('birthDay'), monthSelect = document.getElementById('birthMonth'), yearSelect = document.getElementById('birthYear');
-                const currentYear = new Date().getFullYear();
-                for (let i = currentYear - 80; i <= currentYear - 5; i++) { yearSelect.add(new Option(i, i)); }
-                const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                monthNames.forEach((month, index) => { monthSelect.add(new Option(month, index + 1)); });
-                for (let i = 1; i <= 31; i++) { daySelect.add(new Option(i, i)); }
-            }
-
-            populateDateDropdowns();
-            updateSelection();
+            
+            updateSelectionState();
         });
     </script>
 </body>
