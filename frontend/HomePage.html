@@ -12,21 +12,21 @@
 
   <style>
     :root{
-      --bg-dark: #0e1214;
-      --panel: #0f1b1a;
-      --card: #0f2221;
-      --white-card: #ffffff;
-      --accent: #00c9b7;    /* bright teal */
-      --accent-2: #1fb6a9;
-      --muted: #98a0a0;
-      --glass: rgba(255,255,255,0.04);
+      --bg-dark: #d6d7eb;
+      --panel: #ffffff;
+      --card: #a01515;
+      --white-card: #b3c8db;
+      --accent: #7c7adbcc;    /* bright teal */
+      --accent-2: #7c7adbcc;
+      --muted: #fffdfd;
+      --glass: #93fbfd;
     }
 
     html,body { height:100%; }
     body{
       margin:0;
-      background: linear-gradient(180deg, var(--bg-dark) 0%, #071017 100%);
-      color: #e6f6f4;
+      background: linear-gradient(180deg, var(--bg-dark) 0%, #aee4fd 100%);
+      color: #ffffff;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
@@ -34,7 +34,7 @@
 
     /* NAVBAR */
     .navbar{
-      background: linear-gradient(90deg,#071417CC, #0b2b2aCC) !important;
+      background: linear-gradient(90deg,#7c7adbcc, #521663cc) !important;
       border-bottom: 1px solid rgba(255,255,255,0.03);
       padding-top: .75rem;
       padding-bottom: .75rem;
@@ -115,9 +115,9 @@
       vertical-align:top;
     }
     .city-card img { width:100%; height:132px; object-fit:cover; display:block; }
-    .city-card .meta { padding:12px; background: #fff; color:#0b2523; }
+    .city-card .meta { padding:12px; background: #fff; color:#000000; }
 
-    .results-list .card { background: #071817; border:1px solid rgba(255,255,255,0.03); color:#dbeeea; }
+    .results-list .card { background: #ffffff; border:1px solid rgba(255,255,255,0.03); color:#000000; }
 
     footer.site-footer{
       margin-top: 32px;
@@ -125,7 +125,7 @@
       border-top:1px solid rgba(255,255,255,0.03);
       padding-top:28px;
       padding-bottom:28px;
-      color: #bcdcd6;
+      color: #000000;
     }
     footer a { color: var(--accent); }
 
@@ -157,8 +157,8 @@
 
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link text-white" href="#contact-section">Contact</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#about-section">About</a></li>
+          <li class="nav-item"><a class="nav-link " href="#contact-section">signup/signin</a></li>
+          <li class="nav-item"><a class="nav-link " href="#about-section">About</a></li>
           <li class="nav-item dropdown">
             <button class="btn btn-teal btn-sm dropdown-toggle ms-2" data-bs-toggle="dropdown" aria-expanded="false">Book</button>
             <ul class="dropdown-menu dropdown-menu-end p-2">
