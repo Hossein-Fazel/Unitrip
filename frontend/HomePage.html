@@ -20,23 +20,31 @@
       --bg-dark: #ffedd9;
       --panel: #e4d6d6;
       --card: #a01515;
-      --white-card: #E6E6E6;
+      --white-card: #ffffff;
       --accent: #f7ddbf;
       /* bright teal */
-      --accent-2: #e3400acc;
+      --accent-2: #ff6c03cc;
       --muted: #835b5b;
-      --glass: #ff9f72;
+       --glass: #ff9f72; 
     }
 
     html,
     body {
+      margin: 0;
+      /* === START: BACKGROUND IMAGE STYLES === */
+      background-image: url('imgs/bbg.jpg');
+      background-size: cover; /* تصویر کل پس‌زمینه را می‌پوشاند */
+      background-position: center; /* تصویر در مرکز قرار می‌گیرد */
+      background-attachment: fixed; /* تصویر هنگام اسکرول ثابت می‌ماند */
+      background-repeat: no-repeat; /* از تکرار تصویر جلوگیری می‌کند */
+      /* === END: BACKGROUND IMAGE STYLES === */
       height: 100%;
     }
 
     body {
       margin: 0;
-      background: linear-gradient(180deg, var(--bg-dark) 0%, #ffedd9 100%);
-      color: #9d4141;
+      
+      color: #5f2d24;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -49,6 +57,7 @@
       padding-top: .75rem;
       padding-bottom: .75rem;
     }
+    
 
     .navbar-brand {
       font-weight: 700;
@@ -65,7 +74,7 @@
       background: linear-gradient(180deg, var(--accent), var(--accent-2));
       color: #04211f;
       border: none;
-      box-shadow: 0 6px 18px rgba(9, 131, 118, .12);
+      box-shadow: 0 6px 18px rgba(241, 32, 32, 0.12);
     }
 
     .btn-teal:active,
@@ -204,7 +213,7 @@
 
     .shareholder-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 16px 32px rgba(2, 36, 34, 0.25);
+      box-shadow: 0 16px 32px rgb(255, 119, 8);
     }
 
     .shareholder-img {
@@ -212,7 +221,7 @@
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #fff;
+      border: 4px solid #5b4949;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
@@ -323,10 +332,10 @@
           <li class="nav-item"><a class="nav-link " href="#contact-section">signup/signin</a></li>
           <li class="nav-item"><a class="nav-link " href="#about-section">About</a></li>
           <li class="nav-item dropdown">
-            <button class="btn btn-teal btn-sm dropdown-toggle ms-2" data-bs-toggle="dropdown"
+            <button class="btn btn-teal btn-md dropdown-toggle ms-2" data-bs-toggle="dropdown"
               aria-expanded="false">Book</button>
             <ul class="dropdown-menu dropdown-menu-end p-2">
-              <li><button class="dropdown-item" onclick="showService('hotel')"><i
+              <li><button class="dropdown-item " onclick="showService('hotel') "><i
                     class="bi bi-building-fill me-2"></i>Hotel</button></li>
               <li><button class="dropdown-item" onclick="showService('bus')"><i
                     class="bi bi-bus-front-fill me-2"></i>Bus</button></li>
@@ -621,30 +630,30 @@
         <!-- Shareholder 1 -->
         <div class="col-lg-3 col-md-6">
           <div class="shareholder-card">
-            <img src="https://i.pravatar.cc/150?img=1" alt="Shareholder 1" class="shareholder-img">
+            <img src="imgs\medi.jpg"" alt="Shareholder 1" class="shareholder-img">
             <div class="shareholder-info mt-3">
               <h5>Medisa Khabazi</h5>
-              <p class="small muted">Co-Founder & CEO</p>
+              <p class="small muted">front-end designer</p>
             </div>
           </div>
         </div>
         <!-- Shareholder 2 -->
         <div class="col-lg-3 col-md-6">
           <div class="shareholder-card">
-            <img src="https://i.pravatar.cc/150?img=2" alt="Shareholder 2" class="shareholder-img ">
+            <img src="imgs\hossi.jpg" alt="Shareholder 2" class="shareholder-img ">
             <div class="shareholder-info mt-3">
               <h5>Hossein Fazel</h5>
-              <p class="small muted">Chief Technology Officer</p>
+              <p class="small muted">back-end developer</p>
             </div>
           </div>
         </div>
         <!-- Shareholder 3 -->
         <div class="col-lg-3 col-md-6">
           <div class="shareholder-card">
-            <img src="https://i.pravatar.cc/150?img=2" alt="Shareholder 2" class="shareholder-img ">
+            <img src="imgs\sara.jpg"" alt="Shareholder 2" class="shareholder-img ">
             <div class="shareholder-info mt-3">
               <h5>sara Rashedi</h5>
-              <p class="small muted">Chief Technology Officer</p>
+              <p class="small muted">back-end developer</p>
             </div>
           </div>
         </div>
@@ -652,10 +661,10 @@
         <!-- Shareholder 4 -->
         <div class="col-lg-3 col-md-6">
           <div class="shareholder-card">
-            <img src="https://i.pravatar.cc/150?img=3" alt="Shareholder 3" class="shareholder-img">
+            <img src="imgs\ali.jpg" alt="Shareholder 3" class="shareholder-img">
             <div class="shareholder-info mt-3">
               <h5>Ali Azizkhani</h5>
-              <p class="small muted">Lead Investor</p>
+              <p class="small muted">front-end designer</p>
             </div>
           </div>
         </div>
@@ -714,28 +723,42 @@
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="site-footer container bg-light">
-      <div class="row">
-        <div class="col-md-4">
-          <h5>uniTrip</h5>
-          <p class="muted small">Smart travel bookings — hotel & bus reservations in one place.</p>
-        </div>
-
-        <div class="col-md-4">
-          <h6>Contact</h6>
-          <p class="medium muted mb-1">Phone: +1 234 567 890</p>
-          <p class="large muted">Email: hello@unitrip.example</p>
-        </div>
-
-        <div class="col-md-4 text-md-end">
-          <h6 class="large">Follow</h6>
-          <a href="#" class="me-2"><i class="bi bi-instagram "></i></a>
-          <a href="#" class="me-2"><i class="bi bi-telegram"></i></a>
-          <a href="#" class="me-2"><i class="bi bi-facebook"></i></a>
-        </div>
+ <!-- Footer -->
+<footer class="site-footer bg-light py-4 navbar-expand-lg" style="background: linear-gradient(90deg, #ff941acc, #ff774dcc) !important;">
+  <div class="container">
+    <div class="row">
+      
+      <!-- ستون اول -->
+      <div class="col-md-4">
+        <h5>uniTrip</h5>
+        <p class="text-muted small">Smart travel bookings — hotel & bus reservations in one place.</p>
       </div>
-    </footer>
+
+      <!-- ستون دوم -->
+      <div class="col-md-4">
+        <h6>Contact</h6>
+        <p class="text-muted small mb-1">Phone: +1 234 567 890</p>
+        <p class="text-muted small">Email: hello@unitrip.example</p>
+      </div>
+
+      <!-- ستون سوم (اصلاح‌شده) -->
+      <div class="col-md-4 text-end">
+        <h6>Follow</h6>
+        <a href="#" class="me-2 text-muted"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="me-2 text-muted"><i class="bi bi-telegram"></i></a>
+        <a href="#" class="me-2 text-muted"><i class="bi bi-facebook"></i></a>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+
+    </div>
+  </div>
+</footer>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
