@@ -493,7 +493,7 @@
               </div>
               <div class="col-md-1">
                 <label class="form-label small">Nights</label>
-                <input id="hotel-days" type="number" min="0" class="form-control" placeholder="0" readonly>
+                <input id="hotel-days" min="0" class="form-control" placeholder="0" readonly>
               </div>
               <div class="col-md-1 d-grid">
                 <button class="btn btn-teal" onclick="searchHotel()">Search</button>
@@ -769,40 +769,44 @@
         document.getElementById('hotel-date-from').addEventListener('change', calcNights);
         document.getElementById('hotel-date-to').addEventListener('change', calcNights);
       });
-
+      
       function toggleTab(type) {
         // UI tab button states
         document.getElementById('tab-bus').classList.toggle('active', type === 'bus');
         document.getElementById('tab-hotel').classList.toggle('active', type === 'hotel');
-
+        
         // show/hide forms
         document.getElementById('bus-form').classList.toggle('d-none', type !== 'bus');
         document.getElementById('hotel-form').classList.toggle('d-none', type !== 'hotel');
-        // update service-title for context (not visible but kept)
-        document.getElementById('service-title').innerText = type === 'bus' ? 'Bus Booking' : 'Hotel Booking';
+
         // scroll into view
         document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-
+      
       // helper: parse date string YYYY-MM-DD
       function parseDate(s) {
         if (!s) return null;
         const parts = s.split('-').map(Number);
         return new Date(parts[0], parts[1] - 1, parts[2]);
       }
-
+      
       function calcNights() {
+
         const from = document.getElementById('hotel-date-from').value;
         const to = document.getElementById('hotel-date-to').value;
+
         const fd = parseDate(from);
         const td = parseDate(to);
+
+        let days = '';
+
         if (fd && td) {
           const diffMs = td.getTime() - fd.getTime();
-          const days = Math.max(0, Math.round(diffMs / 86400000));
-          document.getElementById('hotel-days').value = days;
-        } else {
-          document.getElementById('hotel-days').value = '';
+          days = Math.max(0, Math.round(diffMs / 86400000));
         }
+
+        document.getElementById('hotel-days').value = days;
+        console.log("days:", days);
       }
 
       // MAIN search triggered from hero search card
