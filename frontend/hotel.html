@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Travel & Booking — Dark SnappTrip Style</title>
+  <link rel="icon" sizes="16x16" href="imgs/icon.png">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg-dark: #ffedd9;
+      --panel: #e4d6d6;
+      --card: #a01515;
+      --white-card: #ffffff;
+      --accent: #f7ddbf;
+      --accent-2: #ff6c03cc;
+      --muted: #835b5b;
+      --glass: #ff9f72;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      color: #5f2d24;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-image: url('imgs/bbg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, #ff941acc, #ff774dcc) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .2px;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.8);
+      margin-right: .4rem;
+    }
+
+    .btn-teal {
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      color: #04211f;
+      border: none;
+      box-shadow: 0 6px 18px rgba(241, 32, 32, 0.12);
+    }
+
+    .btn-teal:active,
+    .btn-teal:focus {
+      outline: none;
+      box-shadow: 0 6px 22px rgba(9, 131, 118, .18);
+    }
+
+    footer.site-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+      color: #211515;
+      background: linear-gradient(90deg, #ff941acc, #ff774dcc) !important;
+    }
+
+    footer a {
+      color: var(--glass);
+    }
+     /* --- Hotel Section --- */
+    .hotel-card {background-color:white; border: 1px solid #eee; border-radius: 12px; overflow: hidden; height: 100%; position: relative; }
+    .hotel-card:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15); 
+    z-index: 5; 
+}
+    .hotel-card img { height: 200px; 
+      width: 100%;
+       object-fit: cover;
+       }
+    .rating-badge { 
+      position: absolute; 
+      top: 10px; 
+      right: 10px;
+       background: #fff;
+        color: #ff941a; 
+        padding: 2px 8px; 
+        border-radius: 8px;
+         font-weight: bold;
+          font-size: 0.75rem; }
+
+    
+    .review-row {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .review-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      max-width: 500px;
+    }
+
+    
+    .item-left { align-self: flex-start; }
+    
+    .item-right { align-self: flex-end; flex-direction: row-reverse; text-align: right; }
+
+    .user-circle {
+      width: 65px; height: 65px; border-radius: 50%; border: 2px solid #ff941a;
+      display: flex; align-items: center; justify-content: center;
+      background: #ffffff; color: #ff941a; font-weight: bold; flex-shrink: 0;
+    }
+    .review-text { font-style: italic; color: #5a4a42; font-size: 1rem; margin-bottom: 2px; }
+    .user-name { color: #ff941a; font-weight: bold; font-size: 0.9rem; }
+
+   
+
+    /* Footer */
+    .site-footer { background: var(--orange-grad) !important; color: #fff; padding: 40px 0; }
+    
+.reviews-box-container {
+    background-color: #fdf6f0;
+    border-radius: 40px;
+    padding: 60px 20px;
+    margin: 50px 0;
+    position: relative; 
+    overflow: visible; 
+}
+
+.custom-carousel-control {
+    position: absolute;
+    top: 28%; 
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    z-index: 10;
+    padding: 0;
+    width: auto;
+}
+
+.custom-carousel-control.prev { left: 20px; } 
+.custom-carousel-control.next { right: 20px; }
+
+.custom-carousel-control i {
+    color: #ff941a;
+    font-size: 2.5rem; 
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.custom-carousel-control i:hover {
+    transform: scale(1.2);
+    color: #ff774d;
+}
+
+
+.review-row {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 40px; /
+}
+
+
+.carousel-inner {
+    overflow: hidden;
+}
+
+.carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+
+@media (max-width: 768px) {
+   
+    .review-text {
+        font-size: 0.75rem !important; 
+        line-height: 1.2;
+    }
+
+    .user-name {
+        font-size: 0.7rem !important;
+    }
+
+  
+    .user-circle {
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 0.7rem !important;
+        flex-shrink: 0; 
+    }
+
+    
+    .review-row {
+        padding: 0 55px !important; 
+        gap: 30px !important; 
+    }
+
+    
+    .custom-carousel-control i {
+        font-size: 1.8rem !important;
+    }
+
+  
+    .review-item {
+        max-width: 85% !important;
+    }
+}
+
+
+
+.nav-search-form {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15); 
+    border: 1px solid rgba(255, 148, 26, 0.4); 
+    border-radius: 20px;
+    padding: 2px 5px 2px 15px;
+    transition: all 0.3s ease;
+}
+
+
+.search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #333;
+    font-size: 0.85rem;
+    width: 120px; 
+    transition: width 0.4s ease;
+}
+
+
+.search-input:focus {
+    width: 180px;
+}
+
+
+.search-btn {
+    background: #ff941a;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.search-btn:hover {
+    background: #e68516;
+    transform: scale(1.1);
+}
+
+.nav-search-form:focus-within {
+    background: #fff;
+    border-color: #ff941a;
+    box-shadow: 0 0 10px rgba(255, 148, 26, 0.2);
+}
+  </style>
+</head>
+<body>
+
+  
+  <div class="d-flex flex-column min-vh-100">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="imgs/logo5.png" alt="UniTrip Logo" height="80" class="me-2">
+    </a>
+
+    <button class="navbar-toggler btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-center">
+        
+        <li class="nav-item ms-lg-3 me-lg-2 my-2 my-lg-0">
+          <form class="nav-search-form" role="search">
+            <input type="text" class="search-input" placeholder="Destination..." aria-label="Search">
+            <button type="submit" class="search-btn">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#contact-section">Sign Up / Sign In</a></li>
+
+        <li class="nav-item"><a class="nav-link" href="#about-section">About</a></li>
+        
+        <li class="nav-item dropdown ms-lg-2">
+          <button class="btn btn-teal btn-md dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Book</button>
+          <ul class="dropdown-menu dropdown-menu-end p-2">
+            <li><button class="dropdown-item" onclick="showService('hotel')"><i class="bi bi-building-fill me-2"></i> Hotel</button></li>
+            <li><button class="dropdown-item" onclick="showService('bus')"><i class="bi bi-bus-front-fill me-2"></i> Bus</button></li>
+          </ul>
+        </li>
+
+        <li class="nav-item ms-lg-3"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <!-- Main content area  -->
+    <main class="container mt-5">
+    
+    <h3 class="fw-bold mb-4 text-center">Recommended Hotels</h3>
+    <div class="row g-4">
+     <div class="col-md-4">
+  <div class="hotel-card shadow-sm h-100"> <div class="rating-badge shadow-sm">4.8 <i class="bi bi-star-fill"></i></div>
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/8c/39/cc/uninterrupted-city-view.jpg?w=900&h=500&s=1" alt="Hotel">
+    
+    <div class="p-3">
+      <h5 class="fw-bold h6 mb-1">Espinas Palace Hotel</h5>
+      
+      <div class="hotel-location mb-2">
+        <i class="bi bi-geo-alt-fill small"></i> 
+        <span class="text-secondary small">Tehran</span>
+      </div>
+
+      <p class="small text-muted mb-3">Luxury experience in North Tehran.</p>
+      
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="fw-bold text-dark">$300 <small class="fw-normal text-muted">/night</small></span>
+        <button class="btn btn-warning btn-sm text-white rounded-pill px-3 shadow-sm">See More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="hotel-card shadow-sm h-100"> <div class="rating-badge shadow-sm">4.7 <i class="bi bi-star-fill"></i></div>
+    <img src="https://cdn.alibaba.ir/ostorage/hotel-accommodation-images/67065348666674792fcccb98_2022-07-11-28cb0936-71d1-47fa-b9ec-605b7d4a6be2.webp?" alt="Hotel">
+    
+    <div class="p-3">
+      <h5 class="fw-bold h6 mb-1">Toranj Hotel</h5>
+      
+      <div class="hotel-location mb-2">
+        <i class="bi bi-geo-alt-fill small"></i> 
+        <span class="text-secondary small">Kish</span>
+      </div>
+
+      <p class="small text-muted mb-3">Relax by the Persian Gulf shores.</p>
+      
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="fw-bold text-dark">$200  <small class="fw-normal text-muted">/night</small></span>
+        <button class="btn btn-warning btn-sm text-white rounded-pill px-3 shadow-sm">See More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <div class="col-md-4">
+  <div class="hotel-card shadow-sm h-100"> <div class="rating-badge shadow-sm">4.5 <i class="bi bi-star-fill"></i></div>
+    <img src="https://media.imna.ir/d/2020/09/16/4/1656664.jpg" alt="Hotel">
+    
+    <div class="p-3">
+      <h5 class="fw-bold h6 mb-1">Abbasi Hotel</h5>
+      
+      <div class="hotel-location mb-2">
+        <i class="bi bi-geo-alt-fill small"></i> 
+        <span class="text-secondary small">Isfehan</span>
+      </div>
+
+      <p class="small text-muted mb-3">A masterpiece of Safavid architecture.</p>
+      
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="fw-bold text-dark">$120  <small class="fw-normal text-muted">/night</small></span>
+        <button class="btn btn-warning btn-sm text-white rounded-pill px-3 shadow-sm">See More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="hotel-card shadow-sm h-100"> <div class="rating-badge shadow-sm">5 <i class="bi bi-star-fill"></i></div>
+    <img src="https://cdn-a-hid.cdnfl2.ir/upload/hotelimagesdomestic/667/17.jpg" alt="Hotel">
+    
+    <div class="p-3">
+      <h5 class="fw-bold h6 mb-1">DARIUSH Hotel</h5>
+      
+      <div class="hotel-location mb-2">
+        <i class="bi bi-geo-alt-fill small"></i> 
+        <span class="text-secondary small">Kish</span>
+      </div>
+
+      <p class="small text-muted mb-3">Relax by the Persian Gulf shores.</p>
+      
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="fw-bold text-dark">$200  <small class="fw-normal text-muted">/night</small></span>
+        <button class="btn btn-warning btn-sm text-white rounded-pill px-3 shadow-sm">See More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+   <div class="reviews-box-container shadow-sm">
+  <h4 class="text-center fw-bold mb-5" style="color: #ff791a;">User Experiences</h4>
+
+  <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+
+  <div class="carousel-inner">
+    </div>
+</div>
+    <div class="carousel-inner px-md-5">
+      
+      <div class="carousel-item active">
+        <div class="review-row">
+          <div class="review-item item-left">
+            <div class="user-circle shadow-sm">User</div>
+            <div>
+              <p class="review-text">"The booking process was incredibly smooth."</p>
+              <span class="user-name">Sara</span>
+            </div>
+          </div>
+          <div class="review-item item-right">
+            <div class="user-circle shadow-sm">User</div>
+            <div>
+              <p class="review-text">"Found a great deal for my family trip."</p>
+              <span class="user-name">Medisa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="review-row">
+          <div class="review-item item-left">
+            <div class="user-circle shadow-sm">User</div>
+            <div>
+              <p class="review-text">"The customer support was very helpful."</p>
+              <span class="user-name">Ali</span>
+            </div>
+          </div>
+          <div class="review-item item-right">
+            <div class="user-circle shadow-sm">User</div>
+            <div>
+              <p class="review-text">"Best prices compared to other websites."</p>
+              <span class="user-name">Hossein</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="custom-carousel-control prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+    <i class="bi bi-chevron-left"></i>
+</button>
+<button class="custom-carousel-control next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+    <i class="bi bi-chevron-right"></i>
+</button>
+
+    
+  </div>
+</div>
+    
+
+  </main>
+
+    <!-- FOOTER  -->
+    <footer class="site-footer text-dark">
+      <div class="container py-3">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>UniTrip</h5>
+            <p class="text-muted small">Smart travel bookings — hotel & bus reservations in one place.</p>
+          </div>
+          <div class="col-md-4">
+            <h6>Contact</h6>
+            <p class="text-muted small mb-1">Phone: +1 234 567 890</p>
+            <p class="text-muted small">Email: hello@unitrip.example</p>
+          </div>
+          <div class="col-md-4 text-md-end">
+            <h6>Follow</h6>
+            <a href="#" class="me-2 text-muted"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="me-2 text-muted"><i class="bi bi-telegram"></i></a>
+            <a href="#" class="me-2 text-muted"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- end flex container -->
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function showService(type) {
+      toggleTab(type);
+    }
+
+    function toggleTab(type) {
+      const tabBus = document.getElementById('tab-bus');
+      const tabHotel = document.getElementById('tab-hotel');
+      if (tabBus) tabBus.classList.toggle('active', type === 'bus');
+      if (tabHotel) tabHotel.classList.toggle('active', type === 'hotel');
+
+      const busForm = document.getElementById('bus-form');
+      const hotelForm = document.getElementById('hotel-form');
+      if (busForm) busForm.classList.toggle('d-none', type !== 'bus');
+      if (hotelForm) hotelForm.classList.toggle('d-none', type !== 'hotel');
+
+      const title = document.getElementById('service-title');
+      if (title) {
+        title.innerText = type === 'bus' ? 'Bus Booking' : 'Hotel Booking';
+      }
+
+      const bookingSection = document.getElementById('booking');
+      if (bookingSection) {
+        bookingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const results = document.getElementById('results');
+      if (results) results.classList.add('d-none');
+
+      const fromInput = document.getElementById('hotel-date-from');
+      const toInput = document.getElementById('hotel-date-to');
+      if (fromInput && toInput) {
+        const calcNights = () => { /* implement if needed */ };
+        fromInput.addEventListener('change', calcNights);
+        toInput.addEventListener('change', calcNights);
+      }
+
+      showService('bus');
+    });
+  </script>
+</body>
+</html>
