@@ -90,13 +90,13 @@
     .hotel-card img { height: 200px; 
       width: 100%;
        object-fit: cover;
-       }
+     }
     .rating-badge { 
       position: absolute; 
       top: 10px; 
       right: 10px;
        background: #fff;
-        color: #ff941a; 
+      color: #ff941a; 
         padding: 2px 8px; 
         border-radius: 8px;
          font-weight: bold;
@@ -275,6 +275,83 @@
     border-color: #ff941a;
     box-shadow: 0 0 10px rgba(255, 148, 26, 0.2);
 }
+
+
+
+
+/* --- Optimized Categories Style --- */
+.category-wrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 20px 10px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    -webkit-overflow-scrolling: touch;
+}
+
+.category-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+/* هوشمندی دیزاین: در دسکتاپ وسط‌چین، در موبایل اسکرول */
+@media (min-width: 992px) {
+    .category-wrapper {
+        justify-content: center;
+        overflow-x: hidden;
+        gap: 40px; /* فاصله بیشتر در دسکتاپ */
+    }
+}
+
+.category-item {
+    flex: 0 0 auto; /* جلوگیری از فشرده شدن در موبایل */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    min-width: 80px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 3px solid transparent;
+    padding-bottom: 10px;
+    color: #5f2d24;
+    text-decoration: none;
+    opacity: 0.7; /* حالت غیرفعال کمی کمرنگ‌تر */
+}
+
+.category-item i {
+    font-size: 1.6rem;
+    color: #ff941a;
+    transition: transform 0.3s ease;
+}
+
+.category-item span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* حالت فعال (Active) و هوور */
+.category-item:hover, 
+.category-item.active {
+    opacity: 1;
+    color: #ff774d;
+    border-bottom: 3px solid #ff941a;
+}
+
+.category-item:hover i {
+    transform: translateY(-5px); /* پرش ملایم آیکون */
+}
+
+/* انیمیشن ظاهر شدن کارت‌های هتل */
+.hotel-filter-item {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
   </style>
 </head>
 <body>
@@ -322,10 +399,39 @@
   </div>
 </nav>
 
-    <!-- Main content area  -->
     <main class="container mt-5">
+      <div class="category-wrapper  mb-4">
+
+     <a href="#" class="category-item active">
+      <i class="bi bi-grid "></i>
+      <span>All</span>
+    </a>
+    <a href="#" class="category-item ">
+        <i class="bi bi-gem"></i>
+        <span>Luxury</span>
+    </a>
+    <a href="#" class="category-item">
+        <i class="bi bi-tsunami"></i>
+        <span>Coastal</span>
+    </a>
+    <a href="#" class="category-item">
+        <i class="bi bi-tree"></i>
+        <span>Nature</span>
+    </a>
+    <a href="#" class="category-item">
+        <i class="bi bi-snow"></i>
+        <span>Winter</span>
+    </a>
+    <a href="#" class="category-item">
+        <i class="bi bi-buildings"></i>
+        <span>City Center</span>
+    </a>
+</div>
+
+<hr class="mb-5" style="opacity: 0.3 ;height: 2px;">
     
     <h3 class="fw-bold mb-4 text-center">Recommended Hotels</h3>
+    <br>
     <div class="row g-4">
      <div class="col-md-4">
   <div class="hotel-card shadow-sm h-100"> <div class="rating-badge shadow-sm">4.8 <i class="bi bi-star-fill"></i></div>
@@ -538,20 +644,6 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const results = document.getElementById('results');
-      if (results) results.classList.add('d-none');
-
-      const fromInput = document.getElementById('hotel-date-from');
-      const toInput = document.getElementById('hotel-date-to');
-      if (fromInput && toInput) {
-        const calcNights = () => { /* implement if needed */ };
-        fromInput.addEventListener('change', calcNights);
-        toInput.addEventListener('change', calcNights);
-      }
-
-      showService('bus');
-    });
   </script>
 </body>
 </html>
