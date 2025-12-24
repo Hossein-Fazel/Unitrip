@@ -122,6 +122,26 @@
       z-index: 40;
     }
 
+  .search-container {
+    position: relative;
+    }
+
+  .search-input {
+    height: 50px;
+    border-radius: 30px;
+    padding-left: 35px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #888;
+  }
+
     .input-lg {
       height: 56px;
       border-radius: 10px;
@@ -305,6 +325,24 @@
         margin-bottom: 12px;
       }
     }
+    
+        .contact-box {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .contact-title {
+            font-weight: bold;
+            color: #4a4a4a;
+        }
+
+        .invite-text {
+            font-size: 0.95rem;
+            color: #666;
+        }
+  
   </style>
 </head>
 
@@ -396,7 +434,19 @@
     <main class="container">
       <!-- Spacer so search card doesn't overlap content -->
       <div style="height:48px"></div>
-      
+
+    <!--search box-->  
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="search-container">
+              <input type="text" class="form-control search-input" placeholder="Search...">
+              <i class="fas fa-search search-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Booking forms -->
       <section id="booking" class="panel">
         <div class="booking-card">
@@ -657,25 +707,7 @@
         </div>
       </section>
 
-      <!-- Contact / CTA -->
-      <section class="panel">
-        <div class="white-card p-3">
-          <div class="row align-items-center">
-            <div class="col-md-6">
-              <h4>Get travel deals & updates</h4>
-              <p class="muted small">Subscribe to our newsletter for hot deals and last-minute discounts.</p>
-            </div>
-            <div class="col-md-6">
-              <div class="input-group">
-                <input id="newsletter" class="form-control" placeholder="Your email">
-                <button class="btn btn-teal" onclick="subscribeNewsletter()">Subscribe</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </main>
+  
 
 
     <!-- SHAREHOLDERS SECTION -->
@@ -726,7 +758,64 @@
       </div>
     </section>
 
+    <br><br><br>
 
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-md-11">
+            <div class="contact-box">
+
+                <h3 class="text-center contact-title mb-3">Contact Us</h3>
+                <p class="text-center invite-text mb-4">
+                    We are always happy to collaborate with talented people and companies.
+                    Feel free to contact us!
+                </p>
+
+                <form>
+                    <!-- Row 1 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your name">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" placeholder="example@email.com">
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" placeholder="+98 912 000 0000">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Company Name</label>
+                            <input type="text" class="form-control" placeholder="Your company">
+                        </div>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="mb-3">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-control" rows="3" placeholder="Let’s work together..."></textarea>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-teal btn-lg">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+  </main>
 
 
     <!-- ABOUT SECTION -->
@@ -778,6 +867,8 @@
       </div>
     </section>
 
+
+  
  <!-- Footer -->
 <footer class="site-footer bg-light py-4 navbar-expand-lg" style="background: linear-gradient(90deg, #ff941acc, #ff774dcc) !important;">
   <div class="container">
