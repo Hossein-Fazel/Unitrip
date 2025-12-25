@@ -15,37 +15,38 @@
       scroll-behavior: smooth;
     }
 
-    :root {
+     :root {
       --bg-dark: #ffedd9;
       --panel: #e4d6d6;
       --card: #a01515;
       --white-card: #ffffff;
-      --accent: #f7ddbf;
-      --accent-2: #ff6c03cc;
+      --accent: #ff9879;
+      /* bright teal */
+      --accent-2: #ff774dcc;
       --muted: #835b5b;
-      --glass: #ff9f72;
+      --glass: #240577dc;
     }
 
+    html,
     body {
       margin: 0;
-      padding: 0;
-      color: #5f2d24;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+
       background-image: url('imgs/bbg.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
       background-repeat: no-repeat;
+      height: 100%;
     }
 
+    /* NAVBAR */
     .navbar {
-      background: linear-gradient(90deg, #ff941acc, #ff774dcc) !important;
+      background: linear-gradient(90deg, #240577dc, #ff774dcc) !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       padding-top: .75rem;
       padding-bottom: .75rem;
     }
+
 
     .navbar-brand {
       font-weight: 700;
@@ -58,7 +59,8 @@
       margin-right: .4rem;
     }
 
-    .btn-teal {
+
+     .btn-teal {
       background: linear-gradient(180deg, var(--accent), var(--accent-2));
       color: #04211f;
       border: none;
@@ -71,36 +73,84 @@
       box-shadow: 0 6px 22px rgba(9, 131, 118, .18);
     }
 
-    footer.site-footer {
+   footer.site-footer {
+      margin-top: 32px;
+      background: transparent;
       border-top: 1px solid rgba(255, 255, 255, 0.03);
+      padding-top: 28px;
+      padding-bottom: 28px;
       color: #211515;
-      background: linear-gradient(90deg, #ff941acc, #ff774dcc) !important;
     }
 
     footer a {
       color: var(--glass);
     }
-     /* --- Hotel Section --- */
-    .hotel-card {background-color:white; border: 1px solid #eee; border-radius: 12px; overflow: hidden; height: 100%; position: relative; }
+    .hotel-card {
+      background-color: white;
+      border: 1px solid #eee;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex; /* افقی کردن کارت */
+      flex-direction: row;
+      transition: all 0.3s ease;
+      position: relative;
+      height: 220px; /* ارتفاع ثابت برای هماهنگی */
+      margin-bottom: 20px;
+    }
+
     .hotel-card:hover {
-    transform: scale(1.05); 
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15); 
-    z-index: 5; 
-}
-    .hotel-card img { height: 200px; 
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    .hotel-img-wrapper {
+      width: 35%; /* اختصاص ۳۵٪ عرض به عکس */
+      min-width: 250px;
+      height: 100%;
+      position: relative;
+    }
+
+    .hotel-card img {
       width: 100%;
-       object-fit: cover;
-     }
-    .rating-badge { 
-      position: absolute; 
-      top: 10px; 
-      right: 10px;
-       background: #fff;
-      color: #ff941a; 
-        padding: 2px 8px; 
-        border-radius: 8px;
-         font-weight: bold;
-          font-size: 0.75rem; }
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hotel-details {
+      flex: 1;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .rating-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px; /* انتقال به سمت چپ روی عکس */
+      background: rgba(255,255,255,0.9);
+      color: #ecff1a;
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      z-index: 5;
+    }
+
+    
+
+    /* Responsive for Mobile */
+    @media (max-width: 768px) {
+      .hotel-card {
+        flex-direction: column;
+        height: auto;
+      }
+      .hotel-img-wrapper {
+        width: 100%;
+        height: 200px;
+      }
+      .rating-badge { right: 10px; left: auto; }
+    }
 
     
     .review-row {
@@ -135,7 +185,7 @@
     .site-footer { background: var(--orange-grad) !important; color: #fff; padding: 40px 0; }
     
 .reviews-box-container {
-    background-color: #fdf6f0;
+    background-color:white;
     border-radius: 40px;
     padding: 60px 20px;
     margin: 50px 0;
@@ -279,79 +329,8 @@
 
 
 
-/* --- Optimized Categories Style --- */
-.category-wrapper {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    padding: 20px 10px;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-    -webkit-overflow-scrolling: touch;
-}
 
-.category-wrapper::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-}
 
-/* هوشمندی دیزاین: در دسکتاپ وسط‌چین، در موبایل اسکرول */
-@media (min-width: 992px) {
-    .category-wrapper {
-        justify-content: center;
-        overflow-x: hidden;
-        gap: 40px; /* فاصله بیشتر در دسکتاپ */
-    }
-}
-
-.category-item {
-    flex: 0 0 auto; /* جلوگیری از فشرده شدن در موبایل */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    min-width: 80px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-bottom: 3px solid transparent;
-    padding-bottom: 10px;
-    color: #5f2d24;
-    text-decoration: none;
-    opacity: 0.7; /* حالت غیرفعال کمی کمرنگ‌تر */
-}
-
-.category-item i {
-    font-size: 1.6rem;
-    color: #ff941a;
-    transition: transform 0.3s ease;
-}
-
-.category-item span {
-    font-size: 0.85rem;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-/* حالت فعال (Active) و هوور */
-.category-item:hover, 
-.category-item.active {
-    opacity: 1;
-    color: #ff774d;
-    border-bottom: 3px solid #ff941a;
-}
-
-.category-item:hover i {
-    transform: translateY(-5px); /* پرش ملایم آیکون */
-}
-
-/* انیمیشن ظاهر شدن کارت‌های هتل */
-.hotel-filter-item {
-    animation: fadeIn 0.5s ease forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
   </style>
 </head>
 <body>
@@ -360,170 +339,126 @@
   <div class="d-flex flex-column min-vh-100">
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="imgs/logo5.png" alt="UniTrip Logo" height="80" class="me-2">
-    </a>
+  <nav class="navbar navbar-expand-md ">
+    <div class="container">
+      <a class="navbar-brand  large" href="#">
+        <img src="imgs/icon.png" alt="UniTrip Logo" height="40" class="me-5">
 
-    <button class="navbar-toggler btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      </a>
 
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto align-items-center">
-        
-        <li class="nav-item ms-lg-3 me-lg-2 my-2 my-lg-0">
-          <form class="nav-search-form" role="search">
-            <input type="text" class="search-input" placeholder="Destination..." aria-label="Search">
-            <button type="submit" class="search-btn">
-              <i class="bi bi-search"></i>
-            </button>
-          </form>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="#contact-section">Sign Up / Sign In</a></li>
+      <button class="navbar-toggler btn btn-outline-light" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <li class="nav-item"><a class="nav-link" href="#about-section">About</a></li>
-        
-        <li class="nav-item dropdown ms-lg-2">
-          <button class="btn btn-teal btn-md dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Book</button>
-          <ul class="dropdown-menu dropdown-menu-end p-2">
-            <li><button class="dropdown-item" onclick="showService('hotel')"><i class="bi bi-building-fill me-2"></i> Hotel</button></li>
-            <li><button class="dropdown-item" onclick="showService('bus')"><i class="bi bi-bus-front-fill me-2"></i> Bus</button></li>
-          </ul>
-        </li>
-
-        <li class="nav-item ms-lg-3"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
+      <div class="collapse navbar-collapse" id="navMenu" >
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link " href="./signup.html">Signup/Login</a></li>
+          <li class="nav-item"><a class="nav-link " href="#about-section">About</a></li>
+          <li class="nav-item dropdown">
+            <button class="btn btn-teal btn-md dropdown-toggle ms-2" data-bs-toggle="dropdown"
+              aria-expanded="false">Book</button>
+            <ul class="dropdown-menu dropdown-menu-end p-2">
+              <li><button class="dropdown-item " onclick="showService('hotel') "><i
+                    class="bi bi-building-fill me-2"></i>Hotel</button></li>
+              <li><button class="dropdown-item" onclick="showService('bus')"><i
+                    class="bi bi-bus-front-fill me-2"></i>Bus</button></li>
+            </ul>
+          </li>
+          <li class="nav-item "><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
     <main class="container mt-5">
-      <div class="category-wrapper  mb-4">
 
-     <a href="#" class="category-item active">
-      <i class="bi bi-grid "></i>
-      <span>All</span>
-    </a>
-    <a href="#" class="category-item ">
-        <i class="bi bi-gem"></i>
-        <span>Luxury</span>
-    </a>
-    <a href="#" class="category-item">
-        <i class="bi bi-tsunami"></i>
-        <span>Coastal</span>
-    </a>
-    <a href="#" class="category-item">
-        <i class="bi bi-tree"></i>
-        <span>Nature</span>
-    </a>
-    <a href="#" class="category-item">
-        <i class="bi bi-snow"></i>
-        <span>Winter</span>
-    </a>
-    <a href="#" class="category-item">
-        <i class="bi bi-buildings"></i>
-        <span>City Center</span>
-    </a>
-</div>
 
-<hr class="mb-5" style="opacity: 0.3 ;height: 2px;">
     
-    <h3 class="fw-bold mb-4 text-center">Recommended Hotels</h3>
-    <br>
+    <h3 class="fw-bold mb-5 text-center">Recommended Hotels</h3>
+
     <div class="row g-4">
-     <div class="col-md-4">
-  <div class="hotel-card shadow-sm h-100"> <div class="rating-badge shadow-sm">4.8 <i class="bi bi-star-fill"></i></div>
-    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/8c/39/cc/uninterrupted-city-view.jpg?w=900&h=500&s=1" alt="Hotel">
-    
-    <div class="p-3">
-      <h5 class="fw-bold h6 mb-1">Espinas Palace Hotel</h5>
-      
-      <div class="hotel-location mb-2">
-        <i class="bi bi-geo-alt-fill small"></i> 
-        <span class="text-secondary small">Tehran</span>
+      <div class="col-12">
+        <div class="hotel-card shadow-sm">
+          <div class="rating-badge shadow-sm">4.8 <i class="bi bi-star-fill"></i></div>
+          <div class="hotel-img-wrapper">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/8c/39/cc/uninterrupted-city-view.jpg?w=900&h=500&s=1" alt="Hotel">
+          </div>
+          <div class="hotel-details">
+            <div>
+              <h5 class="fw-bold mb-1">Espinas Palace Hotel</h5>
+              <div class="mb-2"><i class="bi bi-geo-alt-fill text-danger small"></i> <span class="text-secondary small">Tehran, Iran</span></div>
+              <p class="text-muted small">A symbol of luxury in the heights of Tehran with breathtaking city views.</p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="fw-bold fs-5">$300 <small class="fw-normal text-muted">/night</small></span>
+              <button class="btn btn-primary text-white rounded-pill px-4 shadow-sm">See More</button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <p class="small text-muted mb-3">Luxury experience in North Tehran.</p>
-      
-      <div class="d-flex justify-content-between align-items-center">
-        <span class="fw-bold text-dark">$300 <small class="fw-normal text-muted">/night</small></span>
-        <button class="btn btn-warning btn-sm text-white rounded-pill px-3 shadow-sm">See More</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="col-md-4">
-  <div class="hotel-card shadow-sm h-100"> <div class="rating-badge shadow-sm">4.7 <i class="bi bi-star-fill"></i></div>
-    <img src="https://cdn.alibaba.ir/ostorage/hotel-accommodation-images/67065348666674792fcccb98_2022-07-11-28cb0936-71d1-47fa-b9ec-605b7d4a6be2.webp?" alt="Hotel">
-    
-    <div class="p-3">
-      <h5 class="fw-bold h6 mb-1">Toranj Hotel</h5>
-      
-      <div class="hotel-location mb-2">
-        <i class="bi bi-geo-alt-fill small"></i> 
-        <span class="text-secondary small">Kish</span>
+      <div class="col-12">
+        <div class="hotel-card shadow-sm">
+          <div class="rating-badge shadow-sm">4.7 <i class="bi bi-star-fill"></i></div>
+          <div class="hotel-img-wrapper">
+            <img src="https://cdn.alibaba.ir/ostorage/hotel-accommodation-images/67065348666674792fcccb98_2022-07-11-28cb0936-71d1-47fa-b9ec-605b7d4a6be2.webp?" alt="Hotel">
+          </div>
+          <div class="hotel-details">
+            <div>
+              <h5 class="fw-bold mb-1">Toranj Marine Hotel</h5>
+              <div class="mb-2"><i class="bi bi-geo-alt-fill text-danger small"></i> <span class="text-secondary small">Kish Island, Iran</span></div>
+              <p class="text-muted small">Unique experience of staying on the Persian Gulf crystal waters.</p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="fw-bold fs-5">$200 <small class="fw-normal text-muted">/night</small></span>
+              <button class="btn btn-warning text-white rounded-pill px-4 shadow-sm">See More</button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <p class="small text-muted mb-3">Relax by the Persian Gulf shores.</p>
-      
-      <div class="d-flex justify-content-between align-items-center">
-        <span class="fw-bold text-dark">$200  <small class="fw-normal text-muted">/night</small></span>
-        <button class="btn btn-warning btn-sm text-white rounded-pill px-3 shadow-sm">See More</button>
-      </div>
-    </div>
-  </div>
-</div>
-
- <div class="col-md-4">
-  <div class="hotel-card shadow-sm h-100"> <div class="rating-badge shadow-sm">4.5 <i class="bi bi-star-fill"></i></div>
-    <img src="https://media.imna.ir/d/2020/09/16/4/1656664.jpg" alt="Hotel">
-    
-    <div class="p-3">
-      <h5 class="fw-bold h6 mb-1">Abbasi Hotel</h5>
-      
-      <div class="hotel-location mb-2">
-        <i class="bi bi-geo-alt-fill small"></i> 
-        <span class="text-secondary small">Isfehan</span>
+      <div class="col-12">
+        <div class="hotel-card shadow-sm">
+          <div class="rating-badge shadow-sm">4.5 <i class="bi bi-star-fill"></i></div>
+          <div class="hotel-img-wrapper">
+            <img src="https://media.imna.ir/d/2020/09/16/4/1656664.jpg" alt="Hotel">
+          </div>
+          <div class="hotel-details">
+            <div>
+              <h5 class="fw-bold mb-1">Abbasi Historical Hotel</h5>
+              <div class="mb-2"><i class="bi bi-geo-alt-fill text-danger small"></i> <span class="text-secondary small">Isfahan, Iran</span></div>
+              <p class="text-muted small">The oldest hotel in the world, a masterpiece of Safavid architecture.</p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="fw-bold fs-5">$120 <small class="fw-normal text-muted">/night</small></span>
+              <button class="btn btn-warning text-white rounded-pill px-4 shadow-sm">See More</button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <p class="small text-muted mb-3">A masterpiece of Safavid architecture.</p>
-      
-      <div class="d-flex justify-content-between align-items-center">
-        <span class="fw-bold text-dark">$120  <small class="fw-normal text-muted">/night</small></span>
-        <button class="btn btn-warning btn-sm text-white rounded-pill px-3 shadow-sm">See More</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="col-md-4">
-  <div class="hotel-card shadow-sm h-100"> <div class="rating-badge shadow-sm">5 <i class="bi bi-star-fill"></i></div>
-    <img src="https://cdn-a-hid.cdnfl2.ir/upload/hotelimagesdomestic/667/17.jpg" alt="Hotel">
-    
-    <div class="p-3">
-      <h5 class="fw-bold h6 mb-1">DARIUSH Hotel</h5>
-      
-      <div class="hotel-location mb-2">
-        <i class="bi bi-geo-alt-fill small"></i> 
-        <span class="text-secondary small">Kish</span>
-      </div>
-
-      <p class="small text-muted mb-3">Relax by the Persian Gulf shores.</p>
-      
-      <div class="d-flex justify-content-between align-items-center">
-        <span class="fw-bold text-dark">$200  <small class="fw-normal text-muted">/night</small></span>
-        <button class="btn btn-warning btn-sm text-white rounded-pill px-3 shadow-sm">See More</button>
+      <div class="col-12">
+        <div class="hotel-card shadow-sm">
+          <div class="rating-badge shadow-sm">5.0 <i class="bi bi-star-fill"></i></div>
+          <div class="hotel-img-wrapper">
+            <img src="https://cdn-a-hid.cdnfl2.ir/upload/hotelimagesdomestic/667/17.jpg" alt="Hotel">
+          </div>
+          <div class="hotel-details">
+            <div>
+              <h5 class="fw-bold mb-1">Dariush Grand Hotel</h5>
+              <div class="mb-2"><br><i class="bi bi-geo-alt-fill text-danger small"></i> <span class="text-secondary small">Kish Island, Iran</span></div>
+              <p class="text-muted small"><br>Inspired by Persepolis, providing an authentic Persian royal experience.</p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="fw-bold fs-5">$220 <small class="fw-normal text-muted">/night</small></span>
+              <button class="btn btn-warning text-white rounded-pill px-4 shadow-sm">See More</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-
-
-</div>
    <div class="reviews-box-container shadow-sm">
   <h4 class="text-center fw-bold mb-5" style="color: #ff791a;">User Experiences</h4>
 
@@ -589,25 +524,34 @@
 
   </main>
 
-    <!-- FOOTER  -->
-    <footer class="site-footer text-dark">
-      <div class="container py-3">
+   
+    <!-- Footer -->
+    <footer class="site-footer bg-light py-4 navbar-expand-lg"
+      style="background: linear-gradient(90deg, #240577dc, #ff774dcc) !important;">
+      <div class="container">
         <div class="row">
-          <div class="col-md-4">
+
+          <!-- ستون اول -->
+          <div class="col-md-4 text-light">
             <h5>UniTrip</h5>
-            <p class="text-muted small">Smart travel bookings — hotel & bus reservations in one place.</p>
+            <p class="text-light small">Smart travel bookings — hotel & bus reservations in one place.</p>
           </div>
-          <div class="col-md-4">
+
+          <!-- ستون دوم -->
+          <div class="col-md-4 text-light">
             <h6>Contact</h6>
-            <p class="text-muted small mb-1">Phone: +1 234 567 890</p>
-            <p class="text-muted small">Email: hello@unitrip.example</p>
+            <p class="text-light small mb-1">Phone: +1 234 567 890</p>
+            <p class="text-light small">Email: hello@unitrip.example</p>
           </div>
-          <div class="col-md-4 text-md-end">
+
+          <!-- ستون سوم (اصلاح‌شده) -->
+          <div class="col-md-4 text-end text-light">
             <h6>Follow</h6>
-            <a href="#" class="me-2 text-muted"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="me-2 text-muted"><i class="bi bi-telegram"></i></a>
-            <a href="#" class="me-2 text-muted"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="me-2 text-light"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="me-2 text-light"><i class="bi bi-telegram"></i></a>
+            <a href="#" class="me-2 text-light"><i class="bi bi-facebook"></i></a>
           </div>
+
         </div>
       </div>
     </footer>
