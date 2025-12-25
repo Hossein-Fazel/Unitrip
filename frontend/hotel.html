@@ -90,11 +90,11 @@
       border: 1px solid #eee;
       border-radius: 15px;
       overflow: hidden;
-      display: flex; /* افقی کردن کارت */
+      display: flex;
       flex-direction: row;
       transition: all 0.3s ease;
       position: relative;
-      height: 220px; /* ارتفاع ثابت برای هماهنگی */
+      height: 220px;
       margin-bottom: 20px;
     }
 
@@ -104,7 +104,7 @@
     }
 
     .hotel-img-wrapper {
-      width: 35%; /* اختصاص ۳۵٪ عرض به عکس */
+      width: 35%; 
       min-width: 250px;
       height: 100%;
       position: relative;
@@ -127,7 +127,7 @@
     .rating-badge {
       position: absolute;
       top: 10px;
-      left: 10px; /* انتقال به سمت چپ روی عکس */
+      left: 10px;
       background: rgba(255,255,255,0.9);
       color: #ecff1a;
       padding: 3px 10px;
@@ -152,12 +152,12 @@
       .rating-badge { right: 10px; left: auto; }
     }
 
-    
     .review-row {
-      display: flex;
-      flex-direction: column;
-      gap: 50px;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 40px; 
+}
 
     .review-item {
       display: flex;
@@ -181,8 +181,6 @@
 
    
 
-    /* Footer */
-    .site-footer { background: var(--orange-grad) !important; color: #fff; padding: 40px 0; }
     
 .reviews-box-container {
     background-color:white;
@@ -221,13 +219,6 @@
 }
 
 
-.review-row {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    padding: 0 40px; /
-}
-
 
 .carousel-inner {
     overflow: hidden;
@@ -254,7 +245,16 @@
         height: 45px !important;
         font-size: 0.7rem !important;
         flex-shrink: 0; 
+        overflow: hidden; 
+         padding: 0;
     }
+
+    .user-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* این خط بسیار مهم است: باعث می‌شود عکس بدون تغییر شکل، دایره را پر کند */
+    display: block;
+}
 
     
     .review-row {
@@ -272,62 +272,6 @@
         max-width: 85% !important;
     }
 }
-
-
-
-.nav-search-form {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.15); 
-    border: 1px solid rgba(255, 148, 26, 0.4); 
-    border-radius: 20px;
-    padding: 2px 5px 2px 15px;
-    transition: all 0.3s ease;
-}
-
-
-.search-input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #333;
-    font-size: 0.85rem;
-    width: 120px; 
-    transition: width 0.4s ease;
-}
-
-
-.search-input:focus {
-    width: 180px;
-}
-
-
-.search-btn {
-    background: #ff941a;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-}
-
-.search-btn:hover {
-    background: #e68516;
-    transform: scale(1.1);
-}
-
-.nav-search-form:focus-within {
-    background: #fff;
-    border-color: #ff941a;
-    box-shadow: 0 0 10px rgba(255, 148, 26, 0.2);
-}
-
-
-
 
 
 
@@ -473,14 +417,18 @@
       <div class="carousel-item active">
         <div class="review-row">
           <div class="review-item item-left">
-            <div class="user-circle shadow-sm">User</div>
+            <div class="user-circle shadow-sm">
+              <img src="path-to-your-image.jpg" alt="Sara" class="user-img">
+            </div>
             <div>
               <p class="review-text">"The booking process was incredibly smooth."</p>
               <span class="user-name">Sara</span>
             </div>
           </div>
           <div class="review-item item-right">
-            <div class="user-circle shadow-sm">User</div>
+            <div class="user-circle shadow-sm">
+              <img src="path-to-your-image.jpg" alt="Sara" class="user-img">
+            </div>
             <div>
               <p class="review-text">"Found a great deal for my family trip."</p>
               <span class="user-name">Medisa</span>
@@ -492,14 +440,18 @@
       <div class="carousel-item">
         <div class="review-row">
           <div class="review-item item-left">
-            <div class="user-circle shadow-sm">User</div>
+            <div class="user-circle shadow-sm">
+              <img src="path-to-your-image.jpg" alt="Sara" class="user-img">
+            </div>
             <div>
               <p class="review-text">"The customer support was very helpful."</p>
               <span class="user-name">Ali</span>
             </div>
           </div>
           <div class="review-item item-right">
-            <div class="user-circle shadow-sm">User</div>
+            <div class="user-circle shadow-sm">
+              <img src="path-to-your-image.jpg" alt="Sara" class="user-img">
+            </div>
             <div>
               <p class="review-text">"Best prices compared to other websites."</p>
               <span class="user-name">Hossein</span>
