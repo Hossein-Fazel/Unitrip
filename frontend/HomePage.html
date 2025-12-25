@@ -80,142 +80,157 @@
 
 
 
-/* ---------- Search Wrapper ---------- */
-.search-wrapper{
-  margin-top:-60px; 
-  position:relative;
-  z-index:1000;
-  padding: 0 15px;
-}
+    /* ---------- Search Wrapper ---------- */
+    .search-wrapper {
+      margin-top: -60px;
+      position: relative;
+      z-index: 1000;
+      padding: 0 15px;
+    }
 
-/* ---------- Capsule & Responsive Layout ---------- */
-.capsule{
-  background:#fff;
-  border-radius:100px;
-  padding:8px;
-  display:flex;
-  align-items:center;
-  max-width:1100px;
-  margin:auto;
-  width:100%;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
+    /* ---------- Capsule & Responsive Layout ---------- */
+    .capsule {
+      background: #fff;
+      border-radius: 100px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      max-width: 1100px;
+      margin: auto;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
 
-/* ---------- Fields ---------- */
-.fields{
-  display:flex;
-  flex:1;
-}
-.segment{
-  flex:1;
-  padding:6px 18px;
-  border-right:1px solid #eee;
-  position:relative;
-}
-.segment:last-child{border:none}
-.segment label{
-  font-size:10px;
-  font-weight:800;
-  color:var(--primary);
-  text-transform:uppercase;
-  display: block;
-}
-.segment input, .segment .fake-input{
-  border:none;
-  outline:none;
-  width:100%;
-  background:transparent;
-  font-size:14px;
-  font-weight:500;
-  cursor:pointer;
-}
+    /* ---------- Fields ---------- */
+    .fields {
+      display: flex;
+      flex: 1;
+    }
 
-/* ---------- Mode Switch ---------- */
- .mode-switch{
-  display:flex;
-  background:#f1f3f5;
-  border-radius:50px;
-  padding:4px;
-  margin-right:10px;
-}
-.mode-btn{
-  border:none;
-  background:transparent;
-  padding:10px 15px;
-  border-radius:40px;
-  font-weight:600;
-  font-size: 14px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center; 
-  gap:8px;
-  transition:.3s;
-  min-width: 120px
-}
-.mode-btn.active{
-  background:#fff;
-  color:#00569E;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
+    .segment {
+      flex: 1;
+      padding: 6px 18px;
+      border-right: 1px solid #eee;
+      position: relative;
+    }
 
-/* ---------- Search Button ---------- */
-.search-btn {
-  background: #FDB713;
-  color: #fff;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px; 
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-}
+    .segment:last-child {
+      border: none
+    }
 
-.search-text {
-  display: none; 
-  font-weight: 600;
-}
-.search-btn:hover { transform: scale(1.05); }
+    .segment label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      display: block;
+    }
 
+    .segment input,
+    .segment .fake-input {
+      border: none;
+      outline: none;
+      width: 100%;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
 
-/* ---------- Picker ---------- */
-.picker{
-  position:absolute;
-  top:120%;
-  left:0;
-  width:260px;
-  background:#fff;
-  border-radius:15px;
-  padding:15px;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
-  display:none;
-  z-index:2000;
-}
-.picker.active{display:block}
-.counter{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-}
-.counter button{
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  border:1px solid var(--primary);
-  background:#fff;
-  cursor:pointer;
-}
+    /* ---------- Mode Switch ---------- */
+    .mode-switch {
+      display: flex;
+      background: #f1f3f5;
+      border-radius: 50px;
+      padding: 4px;
+      margin-right: 10px;
+    }
 
-.d-none{display:none}
+    .mode-btn {
+      border: none;
+      background: transparent;
+      padding: 10px 15px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: .3s;
+      min-width: 120px
+    }
+
+    .mode-btn.active {
+      background: #fff;
+      color: #00569E;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ---------- Search Button ---------- */
+    .search-btn {
+      background: #FDB713;
+      color: #fff;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .search-text {
+      display: none;
+      font-weight: 600;
+    }
+
+    .search-btn:hover {
+      transform: scale(1.05);
+    }
 
 
+    /* ---------- Picker ---------- */
+    .picker {
+      position: absolute;
+      top: 120%;
+      left: 0;
+      width: 260px;
+      background: #fff;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .25);
+      display: none;
+      z-index: 2000;
+    }
 
+    .picker.active {
+      display: block
+    }
 
+    .counter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .counter button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--primary);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .d-none {
+      display: none
+    }
 
     /* HERO */
     .hero {
@@ -226,7 +241,7 @@
       position: relative;
       overflow: visible;
       border: 1px solid rgba(255, 255, 255, 0.03);
-      
+
     }
 
     .hero h1 {
@@ -241,30 +256,31 @@
       margin-top: .4rem;
     }
 
-  .hero-slider, 
-.hero-slider .carousel-inner, 
-.hero-slider .carousel-item {
-  height: 350px !important; 
-}
+    .hero-slider,
+    .hero-slider .carousel-inner,
+    .hero-slider .carousel-item {
+      height: 350px !important;
+    }
 
 
-.hero-slider .carousel-item img {
-  height: 100% !important;
-  object-fit: cover !important; 
-  width: 100%;
-}
+    .hero-slider .carousel-item img {
+      height: 100% !important;
+      object-fit: cover !important;
+      width: 100%;
+    }
 
 
-.hero-slider .carousel-caption {
-  bottom: 0 !important;
-  top: 35% !important;
-  transform: translateY(-50%) !important;
-  height: min-content;
-}
+    .hero-slider .carousel-caption {
+      bottom: 0 !important;
+      top: 35% !important;
+      transform: translateY(-50%) !important;
+      height: min-content;
+    }
 
-.btn-orange:hover, .btn-teal:hover {
-  transform: scale(1.05); 
-}
+    .btn-orange:hover,
+    .btn-teal:hover {
+      transform: scale(1.05);
+    }
 
 
 
@@ -317,7 +333,7 @@
       box-shadow: 0 12px 30px rgba(2, 36, 34, 0.22);
     }
 
-    
+
 
     /* city cards (white) */
     .city-card {
@@ -331,7 +347,7 @@
 
     .search-input {
       padding-left: 10px;
-     
+
     }
 
     .search-icon {
@@ -412,6 +428,7 @@
       border: 4px solid #5b4949;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+
     .about-us-card {
       background: var(--white-card);
       border-radius: 24px;
@@ -479,62 +496,71 @@
       }
 
 
-      .hero-slider, 
-  .hero-slider .carousel-inner, 
-  .hero-slider .carousel-item {
-    height: 250px !important; 
-  }
+      .hero-slider,
+      .hero-slider .carousel-inner,
+      .hero-slider .carousel-item {
+        height: 250px !important;
+      }
 
     }
 
     @media (max-width: 1020px) {
-  .search-wrapper {
-    margin-top: -30px;
-  }
-  .capsule {
-    flex-direction: column;
-    border-radius: 20px;
-    padding: 15px;
-  }
-  .mode-switch {
-    margin-bottom: 15px;
-    width: 100%;
-    margin-right: 0;
-  }
-  .mode-btn {
-    min-width: 0; 
-    flex: 1;      
-  }
-  .fields {
-    flex-direction: column;
-    width: 100%;
-  }
-  .segment {
-    border-right: none;
-    border-bottom: 1px solid #eee;
-    padding: 12px 5px;
-    width: 100%;
-  }
-  .search-btn {
-    width: 100%;     
-    border-radius: 12px; 
-    height: 50px;
-    margin-top: 15px;
-    margin-left: 0;
-  }
+      .search-wrapper {
+        margin-top: -30px;
+      }
 
-  .search-text {
-    display: inline; 
-    font-size: 16px;
-  }
+      .capsule {
+        flex-direction: column;
+        border-radius: 20px;
+        padding: 15px;
+      }
 
-  .search-btn i{
-    display: none;
-  }
-  .hero-slider .carousel-item { height: 35vh; }
-}
+      .mode-switch {
+        margin-bottom: 15px;
+        width: 100%;
+        margin-right: 0;
+      }
 
-  @media (max-width: 992px) {
+      .mode-btn {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .fields {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .segment {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding: 12px 5px;
+        width: 100%;
+      }
+
+      .search-btn {
+        width: 100%;
+        border-radius: 12px;
+        height: 50px;
+        margin-top: 15px;
+        margin-left: 0;
+      }
+
+      .search-text {
+        display: inline;
+        font-size: 16px;
+      }
+
+      .search-btn i {
+        display: none;
+      }
+
+      .hero-slider .carousel-item {
+        height: 35vh;
+      }
+    }
+
+    @media (max-width: 992px) {
       .hero h1 {
         font-size: 1.6rem;
       }
@@ -579,11 +605,10 @@
       color: #666;
     }
 
-    .btn-orange, .btn-teal {
-  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-}
-
-
+    .btn-orange,
+    .btn-teal {
+      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    }
   </style>
 </head>
 
@@ -602,7 +627,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navMenu" >
+      <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link " href="./signup.html">Sign In</a></li>
           <li class="nav-item"><a class="nav-link " href="#about-section">About</a></li>
@@ -673,58 +698,64 @@
     </section>
 
 
-<div class="search-wrapper">
-  <div class="capsule">
-    <div class="mode-switch">
-      <button class="mode-btn active" id="btnHotel" onclick="switchMode('hotel')">
-        <i class="fa-solid fa-hotel"></i> Hotels
-      </button>
-      <button class="mode-btn" id="btnBus" onclick="switchMode('bus')">
-        <i class="fa-solid fa-bus"></i> Bus
-      </button>
-    </div>
-
-    <div class="fields" id="hotelFields">
-      <div class="segment">
-        <label>Destination</label>
-        <input type="text" placeholder="Where are you going?">
-      </div>
-      <div class="segment">
-        <label>Check-in</label>
-        <input type="date">
-      </div>
-      <div class="segment">
-        <label>Check-out</label>
-        <input type="date">
-      </div>
-      <div class="segment" onclick="togglePicker(event,'hotelPicker')">
-        <label>Guests</label>
-        <div class="fake-input" id="hotelSummary">1 Room, 2 Guests</div>
-        <div class="picker" id="hotelPicker">
-          <div class="counter">Rooms <div><button onclick="changeVal(event,'rooms',-1)">-</button> <span id="roomsVal">1</span> <button onclick="changeVal(event,'rooms',1)">+</button></div></div>
-          <div class="counter">Guests <div><button onclick="changeVal(event,'guests',-1)">-</button> <span id="guestsVal">2</span> <button onclick="changeVal(event,'guests',1)">+</button></div></div>
+    <div class="search-wrapper">
+      <div class="capsule">
+        <div class="mode-switch">
+          <button class="mode-btn active" id="btnHotel" onclick="switchMode('hotel')">
+            <i class="fa-solid fa-hotel"></i> Hotels
+          </button>
+          <button class="mode-btn" id="btnBus" onclick="switchMode('bus')">
+            <i class="fa-solid fa-bus"></i> Bus
+          </button>
         </div>
-      </div>
-    </div>
 
-    <div class="fields d-none" id="busFields">
-      <div class="segment"><label>From</label> <input placeholder="Origin"></div>
-      <div class="segment"><label>To</label> <input placeholder="Destination"></div>
-      <div class="segment"><label>Date</label><input type="date"></div>
-      <div class="segment" onclick="togglePicker(event,'busPicker')">
-        <label>Seats</label>
-        <div class="fake-input" id="busSummary">1 Seat</div>
-        <div class="picker" id="busPicker">
-          <div class="counter">Seats <div><button onclick="changeSeat(event,-1)">-</button> <span id="seatVal">1</span> <button onclick="changeSeat(event,1)">+</button></div></div>
+        <div class="fields" id="hotelFields">
+          <div class="segment">
+            <label>Destination</label>
+            <input type="text" placeholder="Where are you going?">
+          </div>
+          <div class="segment">
+            <label>Check-in</label>
+            <input type="date">
+          </div>
+          <div class="segment">
+            <label>Check-out</label>
+            <input type="date">
+          </div>
+          <div class="segment" onclick="togglePicker(event,'hotelPicker')">
+            <label>Guests</label>
+            <div class="fake-input" id="hotelSummary">1 Room, 2 Guests</div>
+            <div class="picker" id="hotelPicker">
+              <div class="counter">Rooms <div><button onclick="changeVal(event,'rooms',-1)">-</button> <span
+                    id="roomsVal">1</span> <button onclick="changeVal(event,'rooms',1)">+</button></div>
+              </div>
+              <div class="counter">Guests <div><button onclick="changeVal(event,'guests',-1)">-</button> <span
+                    id="guestsVal">2</span> <button onclick="changeVal(event,'guests',1)">+</button></div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <div class="fields d-none" id="busFields">
+          <div class="segment"><label>From</label> <input placeholder="Origin"></div>
+          <div class="segment"><label>To</label> <input placeholder="Destination"></div>
+          <div class="segment"><label>Date</label><input type="date"></div>
+          <div class="segment" onclick="togglePicker(event,'busPicker')">
+            <label>Seats</label>
+            <div class="fake-input" id="busSummary">1 Seat</div>
+            <div class="picker" id="busPicker">
+              <div class="counter">Seats <div><button onclick="changeSeat(event,-1)">-</button> <span
+                    id="seatVal">1</span> <button onclick="changeSeat(event,1)">+</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="search-btn">
+          <i class="fa fa-search"></i> <span class="search-text">Search</span>
+        </button>
       </div>
     </div>
-
-    <button class="search-btn">
-      <i class="fa fa-search"></i> <span class="search-text">Search</span>
-    </button>
-  </div>
-</div>
 
 
 
@@ -753,7 +784,7 @@
               <div class="mt-3">
                 <button class="btn btn-teal btn-sm" onclick="showService('bus')"><i class="bi bi-bus-front me-1"></i>
                   Find
-                    Bus</button>
+                  Bus</button>
               </div>
             </div>
           </div>
@@ -761,7 +792,7 @@
           <div class="col-lg-4">
             <div class="white-card p-4">
               <h5>Travel Packages</h5>
-              <p class="muted small">All-in packages —  hotels and tours.</p>
+              <p class="muted small">All-in packages — hotels and tours.</p>
               <div class="mt-3">
                 <button class="btn btn-teal btn-sm">Explore Packages</button>
               </div>
@@ -770,9 +801,9 @@
         </div>
       </section>
 
-      
-        
-   <br><br>
+
+
+      <br><br>
 
       <!-- ABOUT & STATS SECTION -->
       <section id="about-section" class="panel my-5">
@@ -833,7 +864,7 @@
       </section>
 
 
-      
+
 
       <!-- Best Destinations -->
       <section class="panel">
@@ -921,7 +952,7 @@
         </div>
       </section>
 
-       
+
 
       <!-- SHAREHOLDERS SECTION -->
       <section id="about-section" class="panel text-center">
@@ -982,61 +1013,62 @@
       <br><br><br>
 
 
-     <!-- CONTACT US SECTION -->
-  <section id="contact-us" class="panel my-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-7">
-          <div class="contact-box p-4 border rounded shadow-sm bg-light">
-            <h3 class="text-center contact-title mb-3">Contact Us</h3>
-            <p class="text-center text-muted mb-4">
-              We are always happy to collaborate with talented people and companies. Feel free to contact us!
-            </p>
+      <!-- CONTACT US SECTION -->
+      <section id="contact-us" class="panel my-5">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-7">
+              <div class="contact-box p-4 border rounded shadow-sm bg-light">
+                <h3 class="text-center contact-title mb-3">Contact Us</h3>
+                <p class="text-center text-muted mb-4">
+                  We are always happy to collaborate with talented people and companies. Feel free to contact us!
+                </p>
 
-            <!-- 1. محل جدید برای نمایش پیام‌ها -->
-            <div id="message-alert" class="alert d-none" role="alert"></div>
+                <!-- 1. محل جدید برای نمایش پیام‌ها -->
+                <div id="message-alert" class="alert d-none" role="alert"></div>
 
-            <!-- onsubmit به تابع جاوااسکریپت متصل شده -->
-            <form onsubmit="return validateContactForm()">
-              <!-- Row 1 -->
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <label for="contact-name" class="form-label">Full Name</label>
-                  <!-- 2. به تمام فیلدها id اضافه شد -->
-                  <input type="text" id="contact-name" class="form-control" placeholder="Enter your name">
-                </div>
-                <div class="col-md-6">
-                  <label for="contact-email" class="form-label">Email Address</label>
-                  <input type="email" id="contact-email" class="form-control" placeholder="example@email.com">
-                </div>
+                <!-- onsubmit به تابع جاوااسکریپت متصل شده -->
+                <form onsubmit="return validateContactForm()">
+                  <!-- Row 1 -->
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="contact-name" class="form-label">Full Name</label>
+                      <!-- 2. به تمام فیلدها id اضافه شد -->
+                      <input type="text" id="contact-name" class="form-control" placeholder="Enter your name">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="contact-email" class="form-label">Email Address</label>
+                      <input type="email" id="contact-email" class="form-control" placeholder="example@email.com">
+                    </div>
+                  </div>
+                  <!-- Row 2 -->
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="contact-phone" class="form-label">Phone Number</label>
+                      <input type="tel" id="contact-phone" class="form-control" placeholder="+98 912 000 0000">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="contact-company" class="form-label">Company Name</label>
+                      <input type="text" id="contact-company" class="form-control" placeholder="Your company">
+                    </div>
+                  </div>
+                  <!-- Message -->
+                  <div class="mb-3">
+                    <label for="contact-message" class="form-label">Message</label>
+                    <textarea id="contact-message" class="form-control" rows="3"
+                      placeholder="Let’s work together..."></textarea>
+                  </div>
+                  <div class="d-grid col-8 mx-auto">
+                    <button type="submit" class="btn btn-teal btn-lg">
+                      Send Message
+                    </button>
+                  </div>
+                </form>
               </div>
-              <!-- Row 2 -->
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <label for="contact-phone" class="form-label">Phone Number</label>
-                  <input type="tel" id="contact-phone" class="form-control" placeholder="+98 912 000 0000">
-                </div>
-                <div class="col-md-6">
-                  <label for="contact-company" class="form-label">Company Name</label>
-                  <input type="text" id="contact-company" class="form-control" placeholder="Your company">
-                </div>
-              </div>
-              <!-- Message -->
-              <div class="mb-3">
-                <label for="contact-message" class="form-label">Message</label>
-                <textarea id="contact-message" class="form-control" rows="3" placeholder="Let’s work together..."></textarea>
-              </div>
-              <div class="d-grid col-8 mx-auto">
-                <button type="submit" class="btn btn-teal btn-lg">
-                  Send Message
-                </button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
     </main>
 
@@ -1049,7 +1081,7 @@
 
         <div class="col-md-3 col-12">
           <div class="card about-us-card h-100 shadow-sm">
-            <img src="https://picsum.photos/300/200?travel1" class="card-img-top">
+            <img src="./imgs/about1.png" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">Our Mission</h5>
               <p class="card-text">We provide the easiest way to book buses, hotels, and trips.</p>
@@ -1059,7 +1091,7 @@
 
         <div class="col-md-3 col-12">
           <div class="card about-us-card h-100 shadow-sm">
-            <img src="https://picsum.photos/300/200?travel2" class="card-img-top">
+            <img src="./imgs/about2.png" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">Our Team</h5>
               <p class="card-text">A passionate team helping millions travel smarter.</p>
@@ -1069,7 +1101,7 @@
 
         <div class="col-md-3 col-12">
           <div class="card about-us-card h-100 shadow-sm">
-            <img src="https://picsum.photos/300/200?travel3" class="card-img-top">
+            <img src="./imgs/about3.png" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">Why Choose Us?</h5>
               <p class="card-text">Fast booking, best prices, secure payments.</p>
@@ -1079,7 +1111,7 @@
 
         <div class="col-md-3 col-12">
           <div class="card about-us-card h-100 shadow-sm">
-            <img src="https://picsum.photos/300/200?travel4" class="card-img-top">
+            <img src="./imgs/about4.png" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">24/7 Support</h5>
               <p class="card-text">We are here anytime to assist your travel needs.</p>
@@ -1097,10 +1129,10 @@
       style="background: linear-gradient(90deg, #240577dc, #ff774dcc) !important;">
       <div class="container">
         <div class="col-sm-4 text-light"></div>
-        <img src="imgs/logo2.png" alt="UniTrip Logo" height="30" >
+        <img src="imgs/logo2.png" alt="UniTrip Logo" height="30">
         <div class="row">
           <!-- ستون اول -->
-          <div class="col-sm-4 text-light">
+          <div class="col-sm-4 text-align text-light">
             <p class="text-light small">Smart travel bookings — hotel & bus reservations in one place.</p>
           </div>
 
@@ -1245,92 +1277,92 @@
 
 
 
-      let rooms=1, guests=2, seats=1;
+      let rooms = 1, guests = 2, seats = 1;
 
-const hotelFields = document.getElementById('hotelFields');
-const busFields = document.getElementById('busFields');
-const btnHotel = document.getElementById('btnHotel');
-const btnBus = document.getElementById('btnBus');
+      const hotelFields = document.getElementById('hotelFields');
+      const busFields = document.getElementById('busFields');
+      const btnHotel = document.getElementById('btnHotel');
+      const btnBus = document.getElementById('btnBus');
 
-function switchMode(m){
-  hotelFields.classList.toggle('d-none', m!=='hotel');
-  busFields.classList.toggle('d-none', m!=='bus');
-  btnHotel.classList.toggle('active', m==='hotel');
-  btnBus.classList.toggle('active', m==='bus');
-}
-
-function togglePicker(e,id){
-  e.stopPropagation();
-  document.querySelectorAll('.picker').forEach(p=> {
-      if(p.id !== id) p.classList.remove('active');
-  });
-  document.getElementById(id).classList.toggle('active');
-}
-
-function changeVal(e,type,d){
-  e.stopPropagation();
-  if(type==='rooms') rooms=Math.max(1,rooms+d);
-  if(type==='guests') guests=Math.max(1,guests+d);
-  document.getElementById('roomsVal').innerText=rooms;
-  document.getElementById('guestsVal').innerText=guests;
-  document.getElementById('hotelSummary').innerText=`${rooms} Room, ${guests} Guests`;
-}
-
-function changeSeat(e,d){
-  e.stopPropagation();
-  seats=Math.max(1,seats+d);
-  document.getElementById('seatVal').innerText=seats;
-  document.getElementById('busSummary').innerText=`${seats} Seat`;
-}
-
-window.onclick=()=>document.querySelectorAll('.picker').forEach(p=>p.classList.remove('active'));
-
-
-const conAlert = document.getElementById('message-alert');
-
-
-function showAlert(message, type) {
-      conAlert.textContent = message;
-      conAlert.className = `alert alert-${type}`;
-    }
-
-function clearForm() {
-      document.getElementById('contact-name').value = '';
-      document.getElementById('contact-email').value = '';
-      document.getElementById('contact-phone').value = '';
-      document.getElementById('contact-company').value = '';
-      document.getElementById('contact-message').value = '';
-    }    
-
-function validateContactForm() {
-
-      const name = document.getElementById('contact-name').value;
-      const email = document.getElementById('contact-email').value;
-      const phone = document.getElementById('contact-phone').value;
-      const companyname = document.getElementById('contact-company').value;
-      const con_message = document.getElementById('contact-message').value;
-      
-
-      if (!name || !email || !phone || !companyname || !con_message) {
-        showAlert('All fields are required.', 'danger'); 
-        return false; 
+      function switchMode(m) {
+        hotelFields.classList.toggle('d-none', m !== 'hotel');
+        busFields.classList.toggle('d-none', m !== 'bus');
+        btnHotel.classList.toggle('active', m === 'hotel');
+        btnBus.classList.toggle('active', m === 'bus');
       }
-  
-      if (phone.length < 11) {
-        showAlert('Phone number must be at least 11 characters long.', 'danger');
+
+      function togglePicker(e, id) {
+        e.stopPropagation();
+        document.querySelectorAll('.picker').forEach(p => {
+          if (p.id !== id) p.classList.remove('active');
+        });
+        document.getElementById(id).classList.toggle('active');
+      }
+
+      function changeVal(e, type, d) {
+        e.stopPropagation();
+        if (type === 'rooms') rooms = Math.max(1, rooms + d);
+        if (type === 'guests') guests = Math.max(1, guests + d);
+        document.getElementById('roomsVal').innerText = rooms;
+        document.getElementById('guestsVal').innerText = guests;
+        document.getElementById('hotelSummary').innerText = `${rooms} Room, ${guests} Guests`;
+      }
+
+      function changeSeat(e, d) {
+        e.stopPropagation();
+        seats = Math.max(1, seats + d);
+        document.getElementById('seatVal').innerText = seats;
+        document.getElementById('busSummary').innerText = `${seats} Seat`;
+      }
+
+      window.onclick = () => document.querySelectorAll('.picker').forEach(p => p.classList.remove('active'));
+
+
+      const conAlert = document.getElementById('message-alert');
+
+
+      function showAlert(message, type) {
+        conAlert.textContent = message;
+        conAlert.className = `alert alert-${type}`;
+      }
+
+      function clearForm() {
+        document.getElementById('contact-name').value = '';
+        document.getElementById('contact-email').value = '';
+        document.getElementById('contact-phone').value = '';
+        document.getElementById('contact-company').value = '';
+        document.getElementById('contact-message').value = '';
+      }
+
+      function validateContactForm() {
+
+        const name = document.getElementById('contact-name').value;
+        const email = document.getElementById('contact-email').value;
+        const phone = document.getElementById('contact-phone').value;
+        const companyname = document.getElementById('contact-company').value;
+        const con_message = document.getElementById('contact-message').value;
+
+
+        if (!name || !email || !phone || !companyname || !con_message) {
+          showAlert('All fields are required.', 'danger');
+          return false;
+        }
+
+        if (phone.length < 11) {
+          showAlert('Phone number must be at least 11 characters long.', 'danger');
+          return false;
+        }
+        if (!/^\d+$/.test(phone)) {
+          showAlert('Phone number must contain only numbers.', 'danger');
+          return false;
+        }
+
+
+        showAlert('We sincerely thank you for your cooperation.', 'success');
+        clearForm();
+
         return false;
       }
-      if (!/^\d+$/.test(phone)) {
-        showAlert('Phone number must contain only numbers.', 'danger');
-        return false;
-      } 
-
-
-      showAlert('We sincerely thank you for your cooperation.', 'success');
-      clearForm();
-      
-      return false; 
-    }
     </script>
   </body>
 
