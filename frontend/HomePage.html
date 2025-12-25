@@ -982,63 +982,61 @@
       <br><br><br>
 
 
-      <!--contact us-->
-      <section id="contact-us" class="panel my-5"></section>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-6 col-md-7">
-            <div class="contact-box">
+     <!-- CONTACT US SECTION -->
+  <section id="contact-us" class="panel my-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-7">
+          <div class="contact-box p-4 border rounded shadow-sm bg-light">
+            <h3 class="text-center contact-title mb-3">Contact Us</h3>
+            <p class="text-center text-muted mb-4">
+              We are always happy to collaborate with talented people and companies. Feel free to contact us!
+            </p>
 
-              <h3 class="text-center contact-title mb-3">Contact Us</h3>
-              <p class="text-center invite-text mb-4">
-                We are always happy to collaborate with talented people and companies.
-                Feel free to contact us!
-              </p>
+            <!-- 1. محل جدید برای نمایش پیام‌ها -->
+            <div id="message-alert" class="alert d-none" role="alert"></div>
 
-
-              <form>
-                <!-- Row 1 -->
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label class="form-label">Full Name</label>
-                    <input type="text" class="form-control" placeholder="Enter your name">
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label">Email Address</label>
-                    <input type="email" class="form-control" placeholder="example@email.com">
-                  </div>
+            <!-- onsubmit به تابع جاوااسکریپت متصل شده -->
+            <form onsubmit="return validateContactForm()">
+              <!-- Row 1 -->
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="contact-name" class="form-label">Full Name</label>
+                  <!-- 2. به تمام فیلدها id اضافه شد -->
+                  <input type="text" id="contact-name" class="form-control" placeholder="Enter your name">
                 </div>
-
-                <!-- Row 2 -->
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" placeholder="+98 912 000 0000">
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label">Company Name</label>
-                    <input type="text" class="form-control" placeholder="Your company">
-                  </div>
+                <div class="col-md-6">
+                  <label for="contact-email" class="form-label">Email Address</label>
+                  <input type="email" id="contact-email" class="form-control" placeholder="example@email.com">
                 </div>
-
-                <!-- Message -->
-                <div class="mb-3">
-                  <label class="form-label">Message</label>
-                  <textarea class="form-control" rows="3" placeholder="Let’s work together..."></textarea>
+              </div>
+              <!-- Row 2 -->
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="contact-phone" class="form-label">Phone Number</label>
+                  <input type="tel" id="contact-phone" class="form-control" placeholder="+98 912 000 0000">
                 </div>
-
-                <div class="d-grid col-8 mx-auto">
-                  <button type="submit" class="btn btn-teal btn-lg">
-                    Send Message
-                  </button>
+                <div class="col-md-6">
+                  <label for="contact-company" class="form-label">Company Name</label>
+                  <input type="text" id="contact-company" class="form-control" placeholder="Your company">
                 </div>
-              </form>
-
-            </div>
+              </div>
+              <!-- Message -->
+              <div class="mb-3">
+                <label for="contact-message" class="form-label">Message</label>
+                <textarea id="contact-message" class="form-control" rows="3" placeholder="Let’s work together..."></textarea>
+              </div>
+              <div class="d-grid col-8 mx-auto">
+                <button type="submit" class="btn btn-teal btn-lg">
+                  Send Message
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-
+    </div>
+  </section>
 
     </main>
 
@@ -1286,6 +1284,53 @@ function changeSeat(e,d){
 }
 
 window.onclick=()=>document.querySelectorAll('.picker').forEach(p=>p.classList.remove('active'));
+
+
+const conAlert = document.getElementById('message-alert');
+
+
+function showAlert(message, type) {
+      conAlert.textContent = message;
+      conAlert.className = `alert alert-${type}`;
+    }
+
+function clearForm() {
+      document.getElementById('contact-name').value = '';
+      document.getElementById('contact-email').value = '';
+      document.getElementById('contact-phone').value = '';
+      document.getElementById('contact-company').value = '';
+      document.getElementById('contact-message').value = '';
+    }    
+
+function validateContactForm() {
+
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const phone = document.getElementById('contact-phone').value;
+      const companyname = document.getElementById('contact-company').value;
+      const con_message = document.getElementById('contact-message').value;
+      
+
+      if (!name || !email || !phone || !companyname || !con_message) {
+        showAlert('All fields are required.', 'danger'); 
+        return false; 
+      }
+  
+      if (phone.length < 11) {
+        showAlert('Phone number must be at least 11 characters long.', 'danger');
+        return false;
+      }
+      if (!/^\d+$/.test(phone)) {
+        showAlert('Phone number must contain only numbers.', 'danger');
+        return false;
+      } 
+
+
+      showAlert('We sincerely thank you for your cooperation.', 'success');
+      clearForm();
+      
+      return false; 
+    }
     </script>
   </body>
 

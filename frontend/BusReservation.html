@@ -26,24 +26,38 @@
         }
 
         /* Header & Footer Styling (Light Theme) */
-        .navbar {
-            box-shadow: 0 2px 4px rgba(250, 32, 32, 0.05);
-            background-color: #fc9a58cc;
+            .navbar {
+        background: linear-gradient(90deg, #240577dc, #ff774dcc) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        padding-top: .75rem;
+        padding-bottom: .75rem;
         }
 
+
         .navbar-brand {
-            font-weight: 700;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: .2px;
+        }
+
+        .nav-link {
+        color: rgba(255, 255, 255, 0.8);
+        margin-right: .4rem;
         }
 
         .btn-teal {
-            background-color: #ff774dcc;
-            color: white;
+        background: linear-gradient(180deg, var(--accent), var(--accent-2));
+        color: #04211f;
+        border: none;
+        box-shadow: 0 6px 18px rgba(241, 32, 32, 0.12);
         }
 
-        .btn-teal:hover {
-            background-color: #fa5725cc;
-            color: white;
+        .btn-teal:active,
+        .btn-teal:focus {
+        outline: none;
+        box-shadow: 0 6px 22px rgba(9, 131, 118, .18);
         }
+
 
         .site-footer {
             border-top: 1px solid #e86219;
