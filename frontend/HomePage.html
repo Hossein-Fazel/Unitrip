@@ -15,7 +15,7 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #ffedd9;
@@ -83,6 +83,145 @@
       box-shadow: 0 6px 22px rgba(9, 131, 118, .18);
     }
 
+
+
+/* ---------- Search Wrapper ---------- */
+.search-wrapper{
+  margin-top:-60px; 
+  position:relative;
+  z-index:1000;
+  padding: 0 15px;
+}
+
+/* ---------- Capsule & Responsive Layout ---------- */
+.capsule{
+  background:#fff;
+  border-radius:100px;
+  padding:8px;
+  display:flex;
+  align-items:center;
+  max-width:1100px;
+  margin:auto;
+  width:100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* ---------- Fields ---------- */
+.fields{
+  display:flex;
+  flex:1;
+}
+.segment{
+  flex:1;
+  padding:6px 18px;
+  border-right:1px solid #eee;
+  position:relative;
+}
+.segment:last-child{border:none}
+.segment label{
+  font-size:10px;
+  font-weight:800;
+  color:var(--primary);
+  text-transform:uppercase;
+  display: block;
+}
+.segment input, .segment .fake-input{
+  border:none;
+  outline:none;
+  width:100%;
+  background:transparent;
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+}
+
+/* ---------- Mode Switch ---------- */
+ .mode-switch{
+  display:flex;
+  background:#f1f3f5;
+  border-radius:50px;
+  padding:4px;
+  margin-right:10px;
+}
+.mode-btn{
+  border:none;
+  background:transparent;
+  padding:10px 15px;
+  border-radius:40px;
+  font-weight:600;
+  font-size: 14px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center; 
+  gap:8px;
+  transition:.3s;
+  min-width: 120px
+}
+.mode-btn.active{
+  background:#fff;
+  color:#00569E;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ---------- Search Button ---------- */
+.search-btn {
+  background: #FDB713;
+  color: #fff;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.search-text {
+  display: none; 
+  font-weight: 600;
+}
+.search-btn:hover { transform: scale(1.05); }
+
+
+/* ---------- Picker ---------- */
+.picker{
+  position:absolute;
+  top:120%;
+  left:0;
+  width:260px;
+  background:#fff;
+  border-radius:15px;
+  padding:15px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  display:none;
+  z-index:2000;
+}
+.picker.active{display:block}
+.counter{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+.counter button{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  border:1px solid var(--primary);
+  background:#fff;
+  cursor:pointer;
+}
+
+.d-none{display:none}
+
+
+
+
+
     /* HERO */
     .hero {
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.06));
@@ -92,6 +231,7 @@
       position: relative;
       overflow: visible;
       border: 1px solid rgba(255, 255, 255, 0.03);
+      
     }
 
     .hero h1 {
@@ -105,6 +245,33 @@
       color: #cde9e2;
       margin-top: .4rem;
     }
+
+  .hero-slider, 
+.hero-slider .carousel-inner, 
+.hero-slider .carousel-item {
+  height: 350px !important; 
+}
+
+
+.hero-slider .carousel-item img {
+  height: 100% !important;
+  object-fit: cover !important; 
+  width: 100%;
+}
+
+
+.hero-slider .carousel-caption {
+  bottom: 0 !important;
+  top: 35% !important;
+  transform: translateY(-50%) !important;
+  height: min-content;
+}
+
+.btn-orange:hover, .btn-teal:hover {
+  transform: scale(1.05); 
+}
+
+
 
 
     .search-card {
@@ -122,57 +289,6 @@
       z-index: 40;
     }
 
-
-    .nav-search-form {
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 148, 26, 0.4);
-      border-radius: 20px;
-      padding: 2px 5px 2px 15px;
-      transition: all 0.3s ease;
-    }
-
-
-    .search-input {
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #333;
-      font-size: 0.85rem;
-      width: 120px;
-      transition: width 0.4s ease;
-    }
-
-
-    .search-input:focus {
-      width: 180px;
-    }
-
-
-    .search-btn {
-      background: #ff941a;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.3s;
-    }
-
-    .search-btn:hover {
-      background: #e68516;
-      transform: scale(1.1);
-    }
-
-    .nav-search-form:focus-within {
-      background: #fff;
-      border-color: #ff941a;
-      box-shadow: 0 0 10px rgba(255, 148, 26, 0.2);
-    }
 
     .input-lg {
       height: 56px;
@@ -206,6 +322,8 @@
       box-shadow: 0 12px 30px rgba(2, 36, 34, 0.22);
     }
 
+    
+
     /* city cards (white) */
     .city-card {
       width: 220px;
@@ -218,7 +336,7 @@
 
     .search-input {
       padding-left: 10px;
-      /* جا برای آیکون */
+     
     }
 
     .search-icon {
@@ -337,6 +455,8 @@
     }
 
 
+    /* responsiveness */
+
     @media (max-width: 768px) {
       .hero-full-width .carousel-item {
         height: 50vh;
@@ -344,17 +464,70 @@
       }
 
       .hero-full-width .carousel-caption h1 {
-        font-size: 2rem;
+        font-size: 1.2rem !important;
       }
 
       .hero-full-width .carousel-caption p {
         font-size: 1rem;
       }
+
+
+      .hero-slider, 
+  .hero-slider .carousel-inner, 
+  .hero-slider .carousel-item {
+    height: 250px !important; 
+  }
+
     }
 
+    @media (max-width: 1020px) {
+  .search-wrapper {
+    margin-top: -30px;
+  }
+  .capsule {
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 15px;
+  }
+  .mode-switch {
+    margin-bottom: 15px;
+    width: 100%;
+    margin-right: 0;
+  }
+  .mode-btn {
+    min-width: 0; 
+    flex: 1;      
+  }
+  .fields {
+    flex-direction: column;
+    width: 100%;
+  }
+  .segment {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    padding: 12px 5px;
+    width: 100%;
+  }
+  .search-btn {
+    width: 100%;     
+    border-radius: 12px; 
+    height: 50px;
+    margin-top: 15px;
+    margin-left: 0;
+  }
 
-    /* responsiveness */
-    @media (max-width: 992px) {
+  .search-text {
+    display: inline; 
+    font-size: 16px;
+  }
+
+  .search-btn i{
+    display: none;
+  }
+  .hero-slider .carousel-item { height: 35vh; }
+}
+
+  @media (max-width: 992px) {
       .hero h1 {
         font-size: 1.6rem;
       }
@@ -398,6 +571,12 @@
       font-size: 0.95rem;
       color: #666;
     }
+
+    .btn-orange, .btn-teal {
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+
   </style>
 </head>
 
@@ -406,7 +585,7 @@
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-md ">
     <div class="container">
-      <a class="navbar-brand search-input search-icon large" href="#">
+      <a class="navbar-brand  large" href="#">
         <img src="imgs/icon.png" alt="UniTrip Logo" height="40" class="me-5">
 
       </a>
@@ -416,17 +595,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navMenu">
+      <div class="collapse navbar-collapse" id="navMenu" >
         <ul class="navbar-nav ms-auto align-items-center">
-
-          <li class="nav-item ms-lg-3 me-lg-2 my-2 my-lg-0">
-            <form class="nav-search-form" role="search">
-              <input type="text" class="search-input" placeholder="Destination..." aria-label="Search">
-              <button type="submit" class="search-btn">
-                <i class="bi bi-search"></i>
-              </button>
-            </form>
-          </li>
           <li class="nav-item"><a class="nav-link " href="./signup.html">Signup/Login</a></li>
           <li class="nav-item"><a class="nav-link " href="#about-section">About</a></li>
           <li class="nav-item dropdown">
@@ -439,7 +609,7 @@
                     class="bi bi-bus-front-fill me-2"></i>Bus</button></li>
             </ul>
           </li>
-          <li class="nav-item ms-3 search-icon2"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item "><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -451,7 +621,7 @@
 
     <!-- FULL-WIDTH HERO SLIDER -->
     <section class="hero-full-width">
-      <div id="heroCarouselFull" class="carousel slide" data-bs-ride="carousel">
+      <div id="heroCarouselFull" class="carousel slide hero-slider" data-bs-ride="carousel">
         <!-- Indicators -->
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#heroCarouselFull" data-bs-slide-to="0" class="active"
@@ -463,21 +633,21 @@
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="4000">
             <img src="imgs/slider1.jpg" class="d-block w-100" alt="Luxury Resort">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption ">
               <h1>Find & Book Hotels</h1>
               <p>Smart bookings with best prices and instant confirmation.</p>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="4000">
             <img src="imgs/slider2.jpg" class="d-block w-100" alt="Bus Travel">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption ">
               <h1>Comfortable Bus Journeys</h1>
               <p>Travel across the country with our modern fleet.</p>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="4000">
             <img src="imgs/slider3.jpg" class="d-block w-100" alt="Travel Packages">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption">
               <h1>Amazing Travel Packages</h1>
               <p>Discover curated packages for your next adventure.</p>
             </div>
@@ -496,83 +666,106 @@
     </section>
 
 
+<div class="search-wrapper">
+  <div class="capsule">
+    <div class="mode-switch">
+      <button class="mode-btn active" id="btnHotel" onclick="switchMode('hotel')">
+        <i class="fa-solid fa-hotel"></i> Hotels
+      </button>
+      <button class="mode-btn" id="btnBus" onclick="switchMode('bus')">
+        <i class="fa-solid fa-bus"></i> Bus
+      </button>
+    </div>
+
+    <div class="fields" id="hotelFields">
+      <div class="segment">
+        <label>Destination</label>
+        <input type="text" placeholder="Where are you going?">
+      </div>
+      <div class="segment">
+        <label>Check-in</label>
+        <input type="date">
+      </div>
+      <div class="segment">
+        <label>Check-out</label>
+        <input type="date">
+      </div>
+      <div class="segment" onclick="togglePicker(event,'hotelPicker')">
+        <label>Guests</label>
+        <div class="fake-input" id="hotelSummary">1 Room, 2 Guests</div>
+        <div class="picker" id="hotelPicker">
+          <div class="counter">Rooms <div><button onclick="changeVal(event,'rooms',-1)">-</button> <span id="roomsVal">1</span> <button onclick="changeVal(event,'rooms',1)">+</button></div></div>
+          <div class="counter">Guests <div><button onclick="changeVal(event,'guests',-1)">-</button> <span id="guestsVal">2</span> <button onclick="changeVal(event,'guests',1)">+</button></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fields d-none" id="busFields">
+      <div class="segment"><label>From</label> <input placeholder="Origin"></div>
+      <div class="segment"><label>To</label> <input placeholder="Destination"></div>
+      <div class="segment"><label>Date</label><input type="date"></div>
+      <div class="segment" onclick="togglePicker(event,'busPicker')">
+        <label>Seats</label>
+        <div class="fake-input" id="busSummary">1 Seat</div>
+        <div class="picker" id="busPicker">
+          <div class="counter">Seats <div><button onclick="changeSeat(event,-1)">-</button> <span id="seatVal">1</span> <button onclick="changeSeat(event,1)">+</button></div></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="search-btn">
+      <i class="fa fa-search"></i> <span class="search-text">Search</span>
+    </button>
+  </div>
+</div>
+
+
+
+
     <main class="container">
 
-      <!-- Booking forms -->
-      <section id="booking" class="panel">
-        <div class="booking-card">
-          <div class="d-flex justify-content-between align-items-center mb-5">
-            <h4 class="mb-2 fw-bold">Book Now</h4>
-            <div>
-              <div class="btn-group" role="group" aria-label="service tabs">
-                <button id="tab-bus" type="button" class="btn btn-outline-dark btn-sm active"
-                  onclick="toggleTab('bus')">Bus</button>
-                <button id="tab-hotel" type="button" class="btn btn-outline-dark btn-sm"
-                  onclick="toggleTab('hotel')">Hotel</button>
+      <!-- Services -->
+      <section id="services" class="panel">
+        <h4 class="mb-4 fw-bold">Services</h4>
+        <div class="row g-3">
+          <div class="col-lg-4">
+            <div class="white-card p-4">
+              <h5>Best Hotel Deals</h5>
+              <p class="muted small">Reserve your stay with exclusive discounts</p>
+              <div class="mt-3">
+                <button class="btn btn-teal btn-sm" onclick="showService('hotel')"><i class="bi bi-building me-1"></i>
+                  Browse Hotels</button>
               </div>
             </div>
           </div>
 
-          <!-- BUS FORM -->
-          <div id="bus-form" class="white-card p-3">
-            <div class="row g-3 align-items-end">
-              <div class="col-md-3">
-                <label class="form-label small">Origin</label>
-                <input id="from" class="form-control" placeholder="City or station">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label small">Destination</label>
-                <input id="to" class="form-control" placeholder="City or station">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label small">Date</label>
-                <input id="date" type="date" class="form-control">
-              </div>
-              <div class="col-md-2">
-                <label class="form-label small">Passengers</label>
-                <input id="passengers" type="number" class="form-control" min="1" value="1">
-              </div>
-              <div class="col-md-1 d-grid">
-                <button class="btn btn-teal" onclick="searchBus()">Search</button>
+          <div class="col-lg-4">
+            <div class="white-card p-4">
+              <h5>Bus Tickets</h5>
+              <p class="muted small">Book bus tickets nationwide with seat selection.</p>
+              <div class="mt-3">
+                <button class="btn btn-teal btn-sm" onclick="showService('bus')"><i class="bi bi-bus-front me-1"></i>
+                  Find
+                    Bus</button>
               </div>
             </div>
           </div>
 
-          <!-- HOTEL FORM -->
-          <div id="hotel-form" class="white-card p-3 d-none mt-3">
-            <div class="row g-3 align-items-end">
-              <div class="col-md-4">
-                <label class="form-label small">Destination</label>
-                <input id="hotel-destination" class="form-control" placeholder="City or hotel name">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label small">Check-in</label>
-                <input id="hotel-date-from" type="date" class="form-control">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label small">Check-out</label>
-                <input id="hotel-date-to" type="date" class="form-control">
-              </div>
-              <div class="col-md-1">
-                <label class="form-label small">Nights</label>
-                <input id="hotel-days" min="0" class="form-control" placeholder="0" readonly>
-              </div>
-              <div class="col-md-1 d-grid">
-                <button class="btn btn-teal" onclick="searchHotel()">Search</button>
+          <div class="col-lg-4">
+            <div class="white-card p-4">
+              <h5>Travel Packages</h5>
+              <p class="muted small">All-in packages —  hotels and tours.</p>
+              <div class="mt-3">
+                <button class="btn btn-teal btn-sm">Explore Packages</button>
               </div>
             </div>
           </div>
-
-          <!-- Results -->
-          <div id="results" class="mt-3 results-list d-none">
-            <div class="card p-3">
-              <small class="muted">Search results appear here</small>
-              <div id="results-content" class="mt-2 scroll-box"></div>
-            </div>
-          </div>
-
         </div>
       </section>
+
+      
+        
+   <br><br>
 
       <!-- ABOUT & STATS SECTION -->
       <section id="about-section" class="panel my-5">
@@ -633,44 +826,7 @@
       </section>
 
 
-      <!-- Services -->
-      <section id="services" class="panel">
-        <h4 class="mb-4 fw-bold">Services</h4>
-        <div class="row g-3">
-          <div class="col-lg-4">
-            <div class="white-card p-4">
-              <h5>Hotel Booking</h5>
-              <p class="muted small">Reserve hotels with best rates and easy cancellation.</p>
-              <div class="mt-3">
-                <button class="btn btn-teal btn-sm" onclick="showService('hotel')"><i class="bi bi-building me-1"></i>
-                  Book Hotel</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="white-card p-4">
-              <h5>Bus Tickets</h5>
-              <p class="muted small">Book bus tickets nationwide with seat selection.</p>
-              <div class="mt-3">
-                <button class="btn btn-teal btn-sm" onclick="showService('bus')"><i class="bi bi-bus-front me-1"></i>
-                  Book
-                  Bus</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="white-card p-4">
-              <h5>Travel Packages</h5>
-              <p class="muted small">All-in packages — flights, hotels and tours.</p>
-              <div class="mt-3">
-                <button class="btn btn-teal btn-sm">Explore Packages</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       <!-- Best Destinations -->
       <section class="panel">
@@ -758,13 +914,14 @@
         </div>
       </section>
 
+       
 
       <!-- SHAREHOLDERS SECTION -->
       <section id="about-section" class="panel text-center">
         <h2 class="mb-4 fw-bold">Our Shareholders</h2>
         <div class="row g-4 justify-content-center">
           <!-- Shareholder 1 -->
-          <div class="col-lg-2 col-md-4">
+          <div class="col-lg-3 col-md-4">
             <div class="shareholder-card">
               <img src="imgs\medi.jpg" alt="Shareholder 1" class="shareholder-img">
               <div class="shareholder-info mt-3">
@@ -774,7 +931,7 @@
             </div>
           </div>
           <!-- Shareholder 2 -->
-          <div class="col-lg-2 col-md-4">
+          <div class="col-lg-3 col-md-4">
             <div class="shareholder-card">
               <img src="imgs\hossi.jpg" alt="Shareholder 2" class="shareholder-img ">
               <div class="shareholder-info mt-3">
@@ -784,7 +941,7 @@
             </div>
           </div>
           <!-- Shareholder 3 -->
-          <div class="col-lg-2 col-md-4">
+          <div class="col-lg-3 col-md-4">
             <div class="shareholder-card">
               <img src="imgs\sara.jpg" alt="Shareholder 2" class="shareholder-img ">
               <div class="shareholder-info mt-3">
@@ -795,7 +952,7 @@
           </div>
 
           <!-- Shareholder 4 -->
-          <div class="col-lg-2 col-md-4">
+          <div class="col-lg-3 col-md-4">
             <div class="shareholder-card">
               <img src="imgs\ali.jpg" alt="Shareholder 3" class="shareholder-img">
               <div class="shareholder-info mt-3">
@@ -811,7 +968,7 @@
 
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-md-12 col-md-11">
+          <div class="col-md-6 col-md-7">
             <div class="contact-box">
 
               <h3 class="text-center contact-title mb-3">Contact Us</h3>
@@ -851,7 +1008,7 @@
                   <textarea class="form-control" rows="3" placeholder="Let’s work together..."></textarea>
                 </div>
 
-                <div class="d-grid">
+                <div class="d-grid col-8 mx-auto">
                   <button type="submit" class="btn btn-teal btn-lg">
                     Send Message
                   </button>
@@ -990,24 +1147,6 @@
         return new Date(parts[0], parts[1] - 1, parts[2]);
       }
 
-      function calcNights() {
-
-        const from = document.getElementById('hotel-date-from').value;
-        const to = document.getElementById('hotel-date-to').value;
-
-        const fd = parseDate(from);
-        const td = parseDate(to);
-
-        let days = '';
-
-        if (fd && td) {
-          const diffMs = td.getTime() - fd.getTime();
-          days = Math.max(0, Math.round(diffMs / 86400000));
-        }
-
-        document.getElementById('hotel-days').value = days;
-        console.log("days:", days);
-      }
 
       // MAIN search triggered from hero search card
       function searchBusMain() {
@@ -1084,6 +1223,50 @@
         alert('Subscribed: ' + email);
         document.getElementById('newsletter').value = '';
       }
+
+
+
+
+
+      let rooms=1, guests=2, seats=1;
+
+const hotelFields = document.getElementById('hotelFields');
+const busFields = document.getElementById('busFields');
+const btnHotel = document.getElementById('btnHotel');
+const btnBus = document.getElementById('btnBus');
+
+function switchMode(m){
+  hotelFields.classList.toggle('d-none', m!=='hotel');
+  busFields.classList.toggle('d-none', m!=='bus');
+  btnHotel.classList.toggle('active', m==='hotel');
+  btnBus.classList.toggle('active', m==='bus');
+}
+
+function togglePicker(e,id){
+  e.stopPropagation();
+  document.querySelectorAll('.picker').forEach(p=> {
+      if(p.id !== id) p.classList.remove('active');
+  });
+  document.getElementById(id).classList.toggle('active');
+}
+
+function changeVal(e,type,d){
+  e.stopPropagation();
+  if(type==='rooms') rooms=Math.max(1,rooms+d);
+  if(type==='guests') guests=Math.max(1,guests+d);
+  document.getElementById('roomsVal').innerText=rooms;
+  document.getElementById('guestsVal').innerText=guests;
+  document.getElementById('hotelSummary').innerText=`${rooms} Room, ${guests} Guests`;
+}
+
+function changeSeat(e,d){
+  e.stopPropagation();
+  seats=Math.max(1,seats+d);
+  document.getElementById('seatVal').innerText=seats;
+  document.getElementById('busSummary').innerText=`${seats} Seat`;
+}
+
+window.onclick=()=>document.querySelectorAll('.picker').forEach(p=>p.classList.remove('active'));
     </script>
   </body>
 
