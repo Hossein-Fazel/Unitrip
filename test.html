@@ -1,0 +1,14 @@
+<hr class="my-4">
+<h5 class="mb-3">Passenger for Seat #${seatNumber}</h5>
+<div class="row g-3">
+    <div class="col-md-6"><label for="fullName_seat_${seatNumber}" class="form-label">Full Name</label><input
+            type="text" class="form-control" id="fullName_seat_${seatNumber}" required></div>
+    <div class="col-md-4"><label for="nationalId_seat_${seatNumber}" class="form-label">National ID</label><input
+            type="text" class="form-control" id="nationalId_seat_${seatNumber}" required></div>
+    <div class="col-md-2"><label for="gender_seat_${seatNumber}" class="form-label">Gender</label><select
+            class="form-select" id="gender_seat_${seatNumber}" required>
+            <option value="" selected disabled>...</option>
+            <option>Male</option>
+            <option>Female</option>
+        </select></div>
+</div>
