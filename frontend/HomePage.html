@@ -79,8 +79,6 @@
     }
 
 
-
-    /* ---------- Search Wrapper ---------- */
     .search-wrapper {
       margin-top: -60px;
       position: relative;
@@ -88,7 +86,7 @@
       padding: 0 15px;
     }
 
-    /* ---------- Capsule & Responsive Layout ---------- */
+
     .capsule {
       background: #fff;
       border-radius: 100px;
@@ -101,7 +99,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
-    /* ---------- Fields ---------- */
+
     .fields {
       display: flex;
       flex: 1;
@@ -137,7 +135,7 @@
       cursor: pointer;
     }
 
-    /* ---------- Mode Switch ---------- */
+
     .mode-switch {
       display: flex;
       background: #f1f3f5;
@@ -168,7 +166,7 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    /* ---------- Search Button ---------- */
+
     .search-btn {
       background: #FDB713;
       color: #fff;
@@ -194,7 +192,7 @@
     }
 
 
-    /* ---------- Picker ---------- */
+
     .picker {
       position: absolute;
       top: 120%;
@@ -232,7 +230,7 @@
       display: none
     }
 
-    /* HERO */
+
     .hero {
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.06));
       padding: 48px 0;
@@ -283,8 +281,6 @@
     }
 
 
-
-
     .search-card {
       background: var(--white-card);
       color: #0b2523;
@@ -312,7 +308,7 @@
       border-color: rgba(0, 201, 183, 0.35);
     }
 
-    /* panels */
+
     .panel {
       background: transparent;
       margin-top: 64px;
@@ -333,9 +329,6 @@
       box-shadow: 0 12px 30px rgba(2, 36, 34, 0.22);
     }
 
-
-
-    /* city cards (white) */
     .city-card {
       width: 220px;
       display: inline-block;
@@ -400,7 +393,7 @@
       color: var(--glass);
     }
 
-    /* small */
+    
     .muted {
       color: var(--muted);
     }
@@ -442,7 +435,7 @@
       box-shadow: 0 16px 32px rgb(164, 76, 8);
     }
 
-    /* AUTHENTICATION SECTION */
+  
     #contact-section .form-control {
       background-color: #f1f5f9;
     }
@@ -478,8 +471,6 @@
       color: rgba(255, 255, 255, 0.9);
     }
 
-
-    /* responsiveness */
 
     @media (max-width: 768px) {
       .hero-full-width .carousel-item {
@@ -698,12 +689,6 @@
     </section>
 
 
-          
-
-
-
-
-
     <main class="container">
 
        <div class="search-wrapper">
@@ -804,8 +789,6 @@
         </div>
       </section>
 
-
-
       <br><br>
 
       <!-- ABOUT & STATS SECTION -->
@@ -865,9 +848,6 @@
           </div>
         </div>
       </section>
-
-
-
 
       <!-- Best Destinations -->
       <section class="panel">
@@ -1126,7 +1106,6 @@
     </section>
 
 
-
     <!-- Footer -->
     <footer class="site-footer bg-light py-4 navbar-expand-lg"
       style="background: linear-gradient(90deg, #240577dc, #ff774dcc) !important;">
@@ -1134,19 +1113,17 @@
         <div class="col-sm-4 text-light"></div>
         <img src="imgs/logo2.png" alt="UniTrip Logo" height="30">
         <div class="row">
-          <!-- ستون اول -->
+        
           <div class="col-sm-4 text-align text-light">
             <p class="text-light small">Smart travel bookings — hotel & bus reservations in one place.</p>
           </div>
 
-          <!-- ستون دوم -->
           <div class="col-sm-4 text-light">
             <h6>Contact</h6>
             <p class="text-light small mb-1">Phone: +1 234 567 890</p>
             <p class="text-light small">Email: hello@unitrip.example</p>
           </div>
 
-          <!-- ستون سوم (اصلاح‌شده) -->
           <div class="col-sm-4 text-end text-light">
             <h6>Follow</h6>
             <a href="#" class="me-2 text-light"><i class="bi bi-instagram"></i></a>
@@ -1164,31 +1141,24 @@
     </div>
     </footer>
 
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      // Initial state
+
       document.addEventListener('DOMContentLoaded', () => {
-        // default view: bus tab active
         toggleTab('bus');
         document.getElementById('results').classList.add('d-none');
-        // auto-calc nights when hotel dates change
         document.getElementById('hotel-date-from').addEventListener('change', calcNights);
         document.getElementById('hotel-date-to').addEventListener('change', calcNights);
       });
 
       function toggleTab(type) {
-        // UI tab button states
         document.getElementById('tab-bus').classList.toggle('active', type === 'bus');
         document.getElementById('tab-hotel').classList.toggle('active', type === 'hotel');
 
-        // show/hide forms
         document.getElementById('bus-form').classList.toggle('d-none', type !== 'bus');
         document.getElementById('hotel-form').classList.toggle('d-none', type !== 'hotel');
 
-        // scroll into view
         document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
 
