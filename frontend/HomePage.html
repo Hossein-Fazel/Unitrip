@@ -698,7 +698,15 @@
     </section>
 
 
-    <div class="search-wrapper">
+          
+
+
+
+
+
+    <main class="container">
+
+       <div class="search-wrapper">
       <div class="capsule">
         <div class="mode-switch">
           <button class="mode-btn active" id="btnHotel" onclick="switchMode('hotel')">
@@ -757,20 +765,15 @@
       </div>
     </div>
 
-
-
-
-    <main class="container">
-
       <!-- Services -->
       <section id="services" class="panel">
         <h4 class="mb-4 fw-bold">Services</h4>
         <div class="row g-3">
           <div class="col-lg-4">
-            <div class="white-card p-4">
+            <div class="white-card p-4 h-100 d-flex flex-column">
               <h5>Best Hotel Deals</h5>
               <p class="muted small">Reserve your stay with exclusive discounts</p>
-              <div class="mt-3">
+              <div class="mt-auto">
                 <button class="btn btn-teal btn-sm" onclick="showService('hotel')"><i class="bi bi-building me-1"></i>
                   Browse Hotels</button>
               </div>
@@ -778,10 +781,10 @@
           </div>
 
           <div class="col-lg-4">
-            <div class="white-card p-4">
+            <div class="white-card p-4 h-100 d-flex flex-column">
               <h5>Bus Tickets</h5>
               <p class="muted small">Book bus tickets nationwide with seat selection.</p>
-              <div class="mt-3">
+              <div class="mt-auto">
                 <button class="btn btn-teal btn-sm" onclick="showService('bus')"><i class="bi bi-bus-front me-1"></i>
                   Find
                   Bus</button>
@@ -790,10 +793,10 @@
           </div>
 
           <div class="col-lg-4">
-            <div class="white-card p-4">
+            <div class="white-card p-4 h-100 d-flex flex-column">
               <h5>Travel Packages</h5>
               <p class="muted small">All-in packages — hotels and tours.</p>
-              <div class="mt-3">
+              <div class="mt-auto">
                 <button class="btn btn-teal btn-sm">Explore Packages</button>
               </div>
             </div>
@@ -1024,24 +1027,24 @@
                   We are always happy to collaborate with talented people and companies. Feel free to contact us!
                 </p>
 
-                <!-- 1. محل جدید برای نمایش پیام‌ها -->
+                
                 <div id="message-alert" class="alert d-none" role="alert"></div>
 
-                <!-- onsubmit به تابع جاوااسکریپت متصل شده -->
+               
                 <form onsubmit="return validateContactForm()">
-                  <!-- Row 1 -->
+                  
                   <div class="row mb-3">
                     <div class="col-md-6">
                       <label for="contact-name" class="form-label">Full Name</label>
-                      <!-- 2. به تمام فیلدها id اضافه شد -->
+                    
                       <input type="text" id="contact-name" class="form-control" placeholder="Enter your name">
                     </div>
                     <div class="col-md-6">
-                      <label for="contact-email" class="form-label">Email Address</label>
-                      <input type="email" id="contact-email" class="form-control" placeholder="example@email.com">
+                      <label for="contact-email" class="form-label" >Email Address</label>
+                      <input type="text" id="contact-email" class="form-control" placeholder="example@email.com" >
                     </div>
                   </div>
-                  <!-- Row 2 -->
+                 
                   <div class="row mb-3">
                     <div class="col-md-6">
                       <label for="contact-phone" class="form-label">Phone Number</label>
@@ -1052,7 +1055,7 @@
                       <input type="text" id="contact-company" class="form-control" placeholder="Your company">
                     </div>
                   </div>
-                  <!-- Message -->
+                 
                   <div class="mb-3">
                     <label for="contact-message" class="form-label">Message</label>
                     <textarea id="contact-message" class="form-control" rows="3"
@@ -1189,93 +1192,6 @@
         document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
 
-      // helper: parse date string YYYY-MM-DD
-      function parseDate(s) {
-        if (!s) return null;
-        const parts = s.split('-').map(Number);
-        return new Date(parts[0], parts[1] - 1, parts[2]);
-      }
-
-
-      // MAIN search triggered from hero search card
-      function searchBusMain() {
-        const from = document.getElementById('main-from').value || 'Any';
-        const to = document.getElementById('main-to').value || 'Any';
-        const date = document.getElementById('main-date').value || 'Any';
-        const passengers = document.getElementById('main-passengers').value || 1;
-        // prefill booking section and show bus tab
-        document.getElementById('from').value = from !== 'Any' ? from : '';
-        document.getElementById('to').value = to !== 'Any' ? to : '';
-        document.getElementById('date').value = date !== 'Any' ? date : '';
-        document.getElementById('passengers').value = passengers;
-        toggleTab('bus');
-        searchBus();
-      }
-
-      // Bus search (shows results)
-      function searchBus() {
-        const from = document.getElementById('from').value || 'Any';
-        const to = document.getElementById('to').value || 'Any';
-        const date = document.getElementById('date').value || 'Any';
-        const passengers = document.getElementById('passengers').value || 1;
-
-        const content = document.getElementById('results-content');
-        content.innerHTML = `
-        <h6 class="mb-2">Available Buses • ${from} → ${to} • ${date}</h6>
-        <div class="card p-3 mb-2">
-          <div class="d-flex justify-content-between">
-            <div><strong>VIP Comfort</strong><div class="muted small">Amenities: reclining seats, Wi-Fi</div></div>
-            <div class="text-end"><strong>$25</strong><div class="muted small">${passengers} pax</div></div>
-          </div>
-        </div>
-        <div class="card p-3 mb-2">
-          <div class="d-flex justify-content-between">
-            <div><strong>Standard Express</strong><div class="muted small">Direct route</div></div>
-            <div class="text-end"><strong>$15</strong><div class="muted small">${passengers} pax</div></div>
-          </div>
-        </div>
-        <hr style="border-color: rgba(255,255,255,0.04);" />
-        <h6 class="mb-2">Recommended Hotels near ${to}</h6>
-        <div class="card p-3 mb-2"><strong>Hotel A</strong> • 4★ • from $60/night</div>
-        <div class="card p-3 mb-2"><strong>Hotel B</strong> • 3★ • from $45/night</div>
-      `;
-        document.getElementById('results').classList.remove('d-none');
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      // Hotel search (shows results and uses nights)
-      function searchHotel() {
-        const dest = document.getElementById('hotel-destination').value || 'Any';
-        const from = document.getElementById('hotel-date-from').value || 'N/A';
-        const to = document.getElementById('hotel-date-to').value || 'N/A';
-        const nights = document.getElementById('hotel-days').value || 'N/A';
-
-        const content = document.getElementById('results-content');
-        content.innerHTML = `
-        <h6 class="mb-2">Hotels in ${dest}</h6>
-        <div class="card p-3 mb-2"><strong>Luxury Hotel</strong><div class="muted small">5★ • from $120/night</div></div>
-        <div class="card p-3 mb-2"><strong>Comfort Hotel</strong><div class="muted small">4★ • from $75/night</div></div>
-        <hr style="border-color: rgba(255,255,255,0.04);" />
-        <div class="muted small"><strong>Check-in:</strong> ${from} • <strong>Check-out:</strong> ${to} • <strong>Nights:</strong> ${nights}</div>
-      `;
-        document.getElementById('results').classList.remove('d-none');
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      // subscribe action
-      function subscribeNewsletter() {
-        const email = document.getElementById('newsletter').value || '';
-        if (!email || !email.includes('@')) {
-          alert('Please enter a valid email address.');
-          return;
-        }
-        alert('Subscribed: ' + email);
-        document.getElementById('newsletter').value = '';
-      }
-
-
-
-
 
       let rooms = 1, guests = 2, seats = 1;
 
@@ -1324,6 +1240,8 @@
       function showAlert(message, type) {
         conAlert.textContent = message;
         conAlert.className = `alert alert-${type}`;
+        
+      
       }
 
       function clearForm() {
@@ -1345,6 +1263,11 @@
 
         if (!name || !email || !phone || !companyname || !con_message) {
           showAlert('All fields are required.', 'danger');
+          return false;
+        }
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if ( !emailPattern.test(email)) {
+          showAlert('Please enter a valid email address.' , 'danger');
           return false;
         }
 
