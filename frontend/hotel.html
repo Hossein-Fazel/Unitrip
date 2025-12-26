@@ -85,57 +85,80 @@
     footer a {
       color: var(--glass);
     }
+   
     .hotel-card {
-      background-color: white;
-      border: 1px solid #eee;
-      border-radius: 15px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: row;
-      transition: all 0.3s ease;
-      position: relative;
-      height: 220px;
-      margin-bottom: 20px;
-    }
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* عکس بالا، محتوا پایین */
+    transition: all 0.3s ease;
+    height: 100%; /* هم‌قد کردن کارت‌ها */
+    
+   
+}
 
-    .hotel-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-    }
 
-    .hotel-img-wrapper {
-      width: 35%; 
-      min-width: 250px;
-      height: 100%;
-      position: relative;
-    }
 
-    .hotel-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.hotel-img-wrapper {
+    width: 100%;
+    height: 200px; /* ارتفاع مناسب برای چیدمان ۳ تایی */
+    position: relative;
+    overflow: hidden;
+}
 
-    .hotel-details {
-      flex: 1;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+.hotel-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
 
-    .rating-badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(255,255,255,0.9);
-      color: #ecff1a;
-      padding: 3px 10px;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 0.8rem;
-      z-index: 5;
-    }
+
+
+.hotel-details {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hotel-details .btn {
+    width: 100%; /* دکمه تمام عرض برای پر کردن فضا */
+    font-weight: 600;
+}
+
+.btn-action {
+    background: #ffb703; /* زرد پررنگ */
+    color: #000 !important; /* متن مشکی برای خوانایی بهتر */
+    font-weight: 700;
+    border: none;
+    transition: all 0.3s ease;
+    
+}
+
+.btn-action:hover {
+    background: #fb8500; /* تبدیل به نارنجی در هوور */
+    box-shadow: 0 5px 15px rgba(251, 133, 0, 0.4);
+    transform: translateY(-3px);
+}
+
+
+   .hotel-rating-inline {
+    background: #f8f9fa; 
+    padding: 5px 11px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+    
+}
+
+.hotel-rating-inline i {
+    font-size: 0.9rem;
+}
 
     
 
@@ -171,19 +194,28 @@
     
     .item-right { align-self: flex-end; flex-direction: row-reverse; text-align: right; }
 
-    .user-circle {
-      width: 65px; height: 65px; border-radius: 50%; border: 2px solid #ff941a;
-      display: flex; align-items: center; justify-content: center;
-      background: #ffffff; color: #ff941a; font-weight: bold; flex-shrink: 0;
-    }
     .review-text { font-style: italic; color: #5a4a42; font-size: 1rem; margin-bottom: 2px; }
-    .user-name { color: #ff941a; font-weight: bold; font-size: 0.9rem; }
+    .user-name { color: #4b2c72; font-weight: bold; font-size: 0.9rem; }
+.user-circle {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  overflow: hidden;          /* خیلی مهم */
+  flex-shrink: 0;
+  background: #fff;
+}
+
+.user-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* مهم‌ترین خط */
+}
 
    
 
     
 .reviews-box-container {
-    background-color:white;
+    background-color:#f4f0fa;
     border-radius: 40px;
     padding: 60px 20px;
     margin: 50px 0;
@@ -206,7 +238,7 @@
 .custom-carousel-control.next { right: 20px; }
 
 .custom-carousel-control i {
-    color: #ff941a;
+    color: #5b4576;
     font-size: 2.5rem; 
     font-weight: bold;
     cursor: pointer;
@@ -215,7 +247,7 @@
 
 .custom-carousel-control i:hover {
     transform: scale(1.2);
-    color: #ff774d;
+    color: #9266c8;
 }
 
 
@@ -239,28 +271,6 @@
         font-size: 0.7rem !important;
     }
 
-  
-    .user-circle {
-        width: 45px !important;
-        height: 45px !important;
-        font-size: 0.7rem !important;
-        flex-shrink: 0; 
-        overflow: hidden; 
-         padding: 0;
-    }
-
-    .user-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* این خط بسیار مهم است: باعث می‌شود عکس بدون تغییر شکل، دایره را پر کند */
-    display: block;
-}
-
-    
-    .review-row {
-        padding: 0 55px !important; 
-        gap: 30px !important; 
-    }
 
     
     .custom-carousel-control i {
@@ -317,108 +327,159 @@
 
     <main class="container mt-5">
 
+  <h3 class="fw-bold mb-5 text-center" ,  style="color:#4b2c72">Recommended Hotels</h3>
 
-    
-    <h3 class="fw-bold mb-5 text-center">Recommended Hotels</h3>
-
-    <div class="row g-4">
-      <div class="col-12">
+<div class="row g-4">
+    <div class="col-lg-4 col-md-6 col-12">
         <div class="hotel-card shadow-sm">
-          <div class="rating-badge shadow-sm">4.8 <i class="bi bi-star-fill"></i></div>
-          <div class="hotel-img-wrapper">
-            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/8c/39/cc/uninterrupted-city-view.jpg?w=900&h=500&s=1" alt="Hotel">
-          </div>
-          <div class="hotel-details">
-            <div>
-              <h5 class="fw-bold mb-1">Espinas Palace Hotel</h5>
-              <div class="mb-2"><i class="bi bi-geo-alt-fill text-danger small"></i> <span class="text-secondary small">Tehran, Iran</span></div>
-              <p class="text-muted small">A symbol of luxury in the heights of Tehran with breathtaking city views.</p>
+            <div class="hotel-img-wrapper">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/8c/39/cc/uninterrupted-city-view.jpg?w=900&h=500&s=1" alt="Hotel">
             </div>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="fw-bold fs-5">$300 <small class="fw-normal text-muted">/night</small></span>
-              <button class="btn btn-primary text-white rounded-pill px-4 shadow-sm">See More</button>
-            </div>
-          </div>
-        </div>
-      </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Espinas Palace Hotel</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary small"></i> <span class="text-primary small">Tehran, Iran</span></div>
+                    <p class="text-muted small">A symbol of luxury in the heights of Tehran with breathtaking city views.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$300 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">4.8</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
 
-      <div class="col-12">
-        <div class="hotel-card shadow-sm">
-          <div class="rating-badge shadow-sm">4.7 <i class="bi bi-star-fill"></i></div>
-          <div class="hotel-img-wrapper">
-            <img src="https://cdn.alibaba.ir/ostorage/hotel-accommodation-images/67065348666674792fcccb98_2022-07-11-28cb0936-71d1-47fa-b9ec-605b7d4a6be2.webp?" alt="Hotel">
-          </div>
-          <div class="hotel-details">
-            <div>
-              <h5 class="fw-bold mb-1">Toranj Marine Hotel</h5>
-              <div class="mb-2"><i class="bi bi-geo-alt-fill text-danger small"></i> <span class="text-secondary small">Kish Island, Iran</span></div>
-              <p class="text-muted small">Unique experience of staying on the Persian Gulf crystal waters.</p>
+                <div class="mt-3">
+                    <button class="btn btn-action text-white rounded-pill py-2 w-100 shadow-sm">See More</button>
+                </div>
             </div>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="fw-bold fs-5">$200 <small class="fw-normal text-muted">/night</small></span>
-              <button class="btn btn-warning text-white rounded-pill px-4 shadow-sm">See More</button>
-            </div>
-          </div>
         </div>
-      </div>
-
-      <div class="col-12">
-        <div class="hotel-card shadow-sm">
-          <div class="rating-badge shadow-sm">4.5 <i class="bi bi-star-fill"></i></div>
-          <div class="hotel-img-wrapper">
-            <img src="https://media.imna.ir/d/2020/09/16/4/1656664.jpg" alt="Hotel">
-          </div>
-          <div class="hotel-details">
-            <div>
-              <h5 class="fw-bold mb-1">Abbasi Historical Hotel</h5>
-              <div class="mb-2"><i class="bi bi-geo-alt-fill text-danger small"></i> <span class="text-secondary small">Isfahan, Iran</span></div>
-              <p class="text-muted small">The oldest hotel in the world, a masterpiece of Safavid architecture.</p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="fw-bold fs-5">$120 <small class="fw-normal text-muted">/night</small></span>
-              <button class="btn btn-warning text-white rounded-pill px-4 shadow-sm">See More</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-12">
-        <div class="hotel-card shadow-sm">
-          <div class="rating-badge shadow-sm">5.0 <i class="bi bi-star-fill"></i></div>
-          <div class="hotel-img-wrapper">
-            <img src="https://cdn-a-hid.cdnfl2.ir/upload/hotelimagesdomestic/667/17.jpg" alt="Hotel">
-          </div>
-          <div class="hotel-details">
-            <div>
-              <h5 class="fw-bold mb-1">Dariush Grand Hotel</h5>
-              <div class="mb-2"><br><i class="bi bi-geo-alt-fill text-danger small"></i> <span class="text-secondary small">Kish Island, Iran</span></div>
-              <p class="text-muted small"><br>Inspired by Persepolis, providing an authentic Persian royal experience.</p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="fw-bold fs-5">$220 <small class="fw-normal text-muted">/night</small></span>
-              <button class="btn btn-warning text-white rounded-pill px-4 shadow-sm">See More</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://cdn.alibaba.ir/ostorage/hotel-accommodation-images/67065348666674792fcccb98_2022-07-11-28cb0936-71d1-47fa-b9ec-605b7d4a6be2.webp?" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Toranj Marine Hotel</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary small"></i> <span class="text-primary small">Kish Island, Iran</span></div>
+                    <p class="text-muted small">Unique experience of staying on the Persian Gulf crystal waters.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$200 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">4.7</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white rounded-pill py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://media.imna.ir/d/2020/09/16/4/1656664.jpg" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Abbasi Historical Hotel</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary  small"></i> <span class="text-primary small">Isfahan, Iran</span></div>
+                    <p class="text-muted small">The oldest hotel in the world, a masterpiece of Safavid architecture.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$120 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">4.5</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white rounded-pill py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://cdn-a-hid.cdnfl2.ir/upload/hotelimagesdomestic/667/17.jpg" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Dariush Grand Hotel</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary small"></i> <span class="small text-primary">Kish Island, Iran</span></div>
+                    <p class="text-muted small">Inspired by Persepolis, providing a royal Persian experience.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$220 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">5.0</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white rounded-pill py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://cdn.alibaba.ir/ostorage/hotel-accommodation-images/67054135906add960f28e731_image_5ed7dff8-a8e6-493d-93ce-0ac1b311ec2f.webp" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Dariush Grand Hotel</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary small"></i> <span class="small text-primary">Kish Island, Iran</span></div>
+                    <p class="text-muted small">Inspired by Persepolis, providing a royal Persian experience.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$220 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">5.0</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white rounded-pill py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
    <div class="reviews-box-container shadow-sm">
-  <h4 class="text-center fw-bold mb-5" style="color: #ff791a;">User Experiences</h4>
+  <h4 class="text-center fw-bold mb-5" style="color: #4b2c72;">User Experiences</h4>
 
   <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
 
   <div class="carousel-inner">
     </div>
-</div>
     <div class="carousel-inner px-md-5">
       
       <div class="carousel-item active">
         <div class="review-row">
           <div class="review-item item-left">
             <div class="user-circle shadow-sm">
-              <img src="path-to-your-image.jpg" alt="Sara" class="user-img">
+                 <img src="imgs/sara.jpg" alt="Sara">
             </div>
             <div>
               <p class="review-text">"The booking process was incredibly smooth."</p>
@@ -427,7 +488,7 @@
           </div>
           <div class="review-item item-right">
             <div class="user-circle shadow-sm">
-              <img src="path-to-your-image.jpg" alt="Sara" class="user-img">
+                <img src="imgs/medi.jpg" alt="Sara">
             </div>
             <div>
               <p class="review-text">"Found a great deal for my family trip."</p>
@@ -441,7 +502,7 @@
         <div class="review-row">
           <div class="review-item item-left">
             <div class="user-circle shadow-sm">
-              <img src="path-to-your-image.jpg" alt="Sara" class="user-img">
+                <img src="imgs/ali.jpg" alt="Sara">
             </div>
             <div>
               <p class="review-text">"The customer support was very helpful."</p>
@@ -450,7 +511,7 @@
           </div>
           <div class="review-item item-right">
             <div class="user-circle shadow-sm">
-              <img src="path-to-your-image.jpg" alt="Sara" class="user-img">
+              <img src="imgs/hossi.jpg" alt="Sara">
             </div>
             <div>
               <p class="review-text">"Best prices compared to other websites."</p>
