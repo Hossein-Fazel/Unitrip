@@ -188,24 +188,37 @@
     
     .item-left { align-self: flex-start; }
     
-    .item-right { align-self: flex-end; flex-direction: row-reverse; text-align: right; }
+    .item-right {
+         align-self: flex-end; 
+         flex-direction: row-reverse;
+         text-align: right; 
+      }
 
-    .review-text { font-style: italic; color: #5a4a42; font-size: 1rem; margin-bottom: 2px; }
-    .user-name { color: #4b2c72; font-weight: bold; font-size: 0.9rem; }
-.user-circle {
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  overflow: hidden;          
-  flex-shrink: 0;
-  background: #fff;
-}
+    .review-text { font-style: italic;
+          color: #5a4a42; 
+          font-size: 1rem;
+          margin-bottom: 2px; 
+      }
+    .user-name { 
+        color: #4b2c72;
+        font-weight: bold; 
+        font-size: 0.9rem; 
+      }
 
-.user-circle img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         
-}
+    .user-circle {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      overflow: hidden;          
+      flex-shrink: 0;
+      background: #fff;
+    }
+
+    .user-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;         
+    }
 
     
 .reviews-box-container {
@@ -608,13 +621,13 @@
                  <img src="imgs/sara.jpg" alt="Sara">
             </div>
             <div>
-              <p class="review-text">"The booking process was incredibly smooth."</p>
+              <p class="review-text">"The hotels in Kish were very beautiful and the prices were reasonable."</p>
               <span class="user-name">Sara</span>
             </div>
           </div>
           <div class="review-item item-right">
             <div class="user-circle shadow-sm">
-                <img src="imgs/medi.jpg" alt="Sara">
+                <img src="imgs/medi.jpg" alt="Medisa">
             </div>
             <div>
               <p class="review-text">"Found a great deal for my family trip."</p>
@@ -628,7 +641,7 @@
         <div class="review-row">
           <div class="review-item item-left">
             <div class="user-circle shadow-sm">
-                <img src="imgs/ali.jpg" alt="Sara">
+                <img src="imgs/ali.jpg" alt="Ali">
             </div>
             <div>
               <p class="review-text">"The customer support was very helpful."</p>
@@ -637,7 +650,7 @@
           </div>
           <div class="review-item item-right">
             <div class="user-circle shadow-sm">
-              <img src="imgs/hossi.jpg" alt="Sara">
+              <img src="imgs/hossi.jpg" alt="Hossein">
             </div>
             <div>
               <p class="review-text">"Best prices compared to other websites."</p>
@@ -695,6 +708,7 @@
     </footer>
 
   </div> 
+  </body>
 
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
