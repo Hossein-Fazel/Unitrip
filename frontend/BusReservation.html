@@ -1,67 +1,106 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bus Reservation - Unitrip</title>
-    <!-- Bootstrap 5 LTR CSS -->
+    <link rel="icon" sizes="48x48" href="imgs/logo3.png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Google Fonts (Poppins) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-dark: #ffedd9;
+            --panel: #e4d6d6;
+            --card: #a01515;
+            --white-card: #ffffff;
+            --accent: #ff9879;
+            --accent-2: #ff774dcc;
+            --muted: #835b5b;
+            --glass: #240577dc;
+        }
+
         body {
+            background-image: url('imgs/bbg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            height: 100%;
             font-family: 'Poppins', sans-serif;
             background-color: #ebdac7cc;
             color: #212529;
         }
 
-        /* Header & Footer Styling (Light Theme) */
+        /* NAVBAR */
         .navbar {
-            box-shadow: 0 2px 4px rgba(250, 32, 32, 0.05);
-            background-color: #fc9a58cc;
+            background: linear-gradient(90deg, #240577dc, #ff774dcc) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding-top: .75rem;
+            padding-bottom: .75rem;
         }
+
+
         .navbar-brand {
             font-weight: 700;
+            color: #fff;
+            letter-spacing: .2px;
         }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            margin-right: .4rem;
+        }
+
         .btn-teal {
-            background-color: #ff774dcc;
-            color: white;
+            background: linear-gradient(180deg, var(--accent), var(--accent-2));
+            color: #04211f;
+            border: none;
+            box-shadow: 0 6px 18px rgba(241, 32, 32, 0.12);
         }
-        .btn-teal:hover {
-            background-color: #fa5725cc;
-            color: white;
+
+        .btn-teal:active,
+        .btn-teal:focus {
+            outline: none;
+            box-shadow: 0 6px 22px rgba(9, 131, 118, .18);
         }
+
         .site-footer {
             border-top: 1px solid #e86219;
             padding-top: 2rem;
             padding-bottom: 2rem;
             color: #6c757d;
         }
-        .site-footer h5, .site-footer h6 {
+
+        .site-footer h5,
+        .site-footer h6 {
             color: #212529;
         }
+
         .site-footer a {
             color: #ff774dcc;
             font-size: 1.2rem;
             transition: color 0.3s;
         }
+
         .site-footer a:hover {
             color: #00a693;
         }
 
-        /* Main Content Styling (Light Theme) */
+
         .card {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             border: none;
             border-radius: 0.75rem;
         }
-        
+
         .trip-info-header {
             font-size: 0.9rem;
             font-weight: 600;
         }
+
         .trip-info-header .city {
             font-size: 1.1rem;
             color: #212529;
@@ -74,7 +113,7 @@
             margin: 2rem auto 0 auto;
             height: 250px;
         }
-        
+
         .bus-floor-plan {
             position: absolute;
             top: 0;
@@ -83,7 +122,7 @@
             height: 100%;
             z-index: 1;
         }
-        
+
         .seat-column {
             position: absolute;
             z-index: 2;
@@ -91,7 +130,11 @@
             flex-direction: column;
             gap: 10px;
         }
-        .seat-row { display: flex; gap: 10px; }
+
+        .seat-row {
+            display: flex;
+            gap: 10px;
+        }
 
         .seat {
             width: 40px;
@@ -106,12 +149,13 @@
             font-size: 0.9rem;
             transition: all 0.2s ease-in-out;
         }
-        
+
         .seat.available {
             background-color: #fff;
             border: 1px solid #ced4da;
             cursor: pointer;
         }
+
         .seat.available:hover {
             border-color: #0d6efd;
             transform: translateY(-2px);
@@ -129,13 +173,13 @@
             border: 1px solid #aadaff;
             cursor: not-allowed;
         }
-        
+
         .seat.taken-female {
             background-color: #ffc0cb;
             border: 1px solid #ffc0cb;
             cursor: not-allowed;
         }
-        
+
         .seat-legend {
             margin-top: 1.5rem;
             padding-top: 1.5rem;
@@ -146,35 +190,91 @@
             gap: 2rem;
         }
 
-        .legend-item { display: flex; align-items: center; gap: 0.75rem; }
-        .legend-color { width: 25px; height: 25px; border-radius: 6px; }
-        .form-label { font-weight: 600; }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 6px;
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .bus-layout-container {
+                margin: 0 auto;
+                margin-top: 100px;
+                margin-bottom: 150px;
+                transform: rotate(90deg);
+            }
+
+            .bus-floor-plan {
+                transform: scale(1.4, 1);
+            }
+
+            .seat {
+                transform: rotate(-90deg);
+            }
+
+            .seat.available:hover {
+                transform: rotate(-90deg) translateY(-2px);
+            }
+
+            .seat.selected {
+                transform: rotate(-90deg);
+            }
+
+            .seat-legend {
+                border-top: 1px solid #e9ecef;
+                padding-top: 1.5rem;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <a class="navbar-brand ms-3 text-muted" href="#">Unitrip</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navMenu">
-          <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-            <li class="nav-item dropdown">
-              <button class="btn btn-teal btn-sm dropdown-toggle ms-2" data-bs-toggle="dropdown" aria-expanded="false">Book</button>
-              <ul class="dropdown-menu dropdown-menu-end p-2">
-                <li><button class="dropdown-item"><i class="bi bi-building-fill me-2"></i>Hotel</button></li>
-                <li><button class="dropdown-item"><i class="bi bi-bus-front-fill me-2"></i>Bus</button></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <nav class="navbar navbar-expand-md ">
+        <div class="container">
+            <a class="navbar-brand  large" href="#">
+                <img src="imgs/logo2.png" alt="UniTrip Logo" height="50" class="me-5">
 
+            </a>
+
+            <button class="navbar-toggler btn btn-outline-light" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link " href="./signup.html">Sign In</a></li>
+                    <li class="nav-item"><a class="nav-link " href="./HomePage.html#about-section">About</a></li>
+                    <li class="nav-item dropdown">
+                        <button class="btn btn-teal btn-md dropdown-toggle ms-2" data-bs-toggle="dropdown"
+                            aria-expanded="false">Book</button>
+                        <ul class="dropdown-menu dropdown-menu-end p-2">
+                            <li><button class="dropdown-item " onclick="window.location.href='hotel.html' "><i
+                                        class="bi bi-building-fill me-2"></i>Hotel</button></li>
+                            <li><button class="dropdown-item" onclick="window.location.href='BusReservation.html'"><i
+                                        class="bi bi-bus-front-fill me-2"></i>Bus</button></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item "><a class="nav-link" href="./HomePage.html#contact-us">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <main class="container my-5">
         <div class="card">
             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
@@ -189,77 +289,214 @@
             </div>
             <div class="card-body p-4">
                 <div class="bus-layout-container">
-                    <svg class="bus-floor-plan" viewBox="0 0 950 250" preserveAspectRatio="none"><rect x="5" y="5" width="940" height="240" rx="60" fill="#dde2e8" stroke="#c8ced5" stroke-width="3"/><path d="M 50 80 L 10 125 L 50 170 Z" fill="#c8ced5" /><circle cx="50" cy="125" r="15" fill="#f4f6f9" stroke="#c8ced5" stroke-width="2" /></svg>
-                    <div class="seat-column" style="top: 30px; left: 8%;"><div class="seat-row"><div class="seat available">1</div></div><div class="seat-row"><div class="seat available">2</div></div></div>
-                    <div class="seat-column" style="top: 170px; left: 8%;"><div class="seat-row"><div class="seat taken-male">3</div></div></div>
-                    <div class="seat-column" style="top: 30px; left: 18%;"><div class="seat-row"><div class="seat available">4</div></div><div class="seat-row"><div class="seat available">5</div></div></div>
-                    <div class="seat-column" style="top: 170px; left: 18%;"><div class="seat-row"><div class="seat available">6</div></div></div>
-                    <div class="seat-column" style="top: 30px; left: 28%;"><div class="seat-row"><div class="seat taken-male">7</div></div><div class="seat-row"><div class="seat taken-male">8</div></div></div>
-                    <div class="seat-column" style="top: 170px; left: 28%;"><div class="seat-row"><div class="seat taken-male">9</div></div></div>
-                    <div class="seat-column" style="top: 30px; left: 38%;"><div class="seat-row"><div class="seat taken-male">10</div></div><div class="seat-row"><div class="seat taken-male">11</div></div></div>
-                    <div class="seat-column" style="top: 170px; left: 38%;"><div class="seat-row"><div class="seat taken-male">12</div></div></div>
-                    <div class="seat-column" style="top: 170px; left: 48%;"><div class="seat-row"><div class="seat available">13</div></div></div>
-                    <div class="seat-column" style="top: 30px; left: 58%;"><div class="seat-row"><div class="seat taken-female">14</div></div><div class="seat-row"><div class="seat taken-male">15</div></div></div>
-                    <div class="seat-column" style="top: 170px; left: 58%;"><div class="seat-row"><div class="seat taken-female">16</div></div></div>
-                    <div class="seat-column" style="top: 30px; left: 68%;"><div class="seat-row"><div class="seat taken-male">17</div></div><div class="seat-row"><div class="seat taken-male">18</div></div></div>
-                    <div class="seat-column" style="top: 170px; left: 68%;"><div class="seat-row"><div class="seat available">19</div></div></div>
-                    <div class="seat-column" style="top: 30px; left: 78%;"><div class="seat-row"><div class="seat available">20</div></div><div class="seat-row"><div class="seat available">21</div></div></div>
-                    <div class="seat-column" style="top: 170px; left: 78%;"><div class="seat-row"><div class="seat available">22</div></div></div>
-                    <div class="seat-column" style="top: 30px; left: 88%;"><div class="seat-row"><div class="seat available">23</div></div><div class="seat-row"><div class="seat available">24</div></div></div>
-                    <div class="seat-column" style="top: 170px; left: 88%;"><div class="seat-row"><div class="seat available">25</div></div></div>
+                    <svg class="bus-floor-plan" viewBox="0 0 950 250" preserveAspectRatio="none">
+                        <rect x="5" y="5" width="940" height="240" rx="60" fill="#dde2e8" stroke="#c8ced5"
+                            stroke-width="3" />
+                        <path d="M 50 80 L 10 125 L 50 170 Z" fill="#c8ced5" />
+                        <circle cx="50" cy="125" r="15" fill="#f4f6f9" stroke="#c8ced5" stroke-width="2" />
+                    </svg>
+                    <div class="seat-column" style="top: 30px; left: 8%;">
+                        <div class="seat-row">
+                            <div class="seat available">1</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat available">2</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 170px; left: 8%;">
+                        <div class="seat-row">
+                            <div class="seat taken-male">3</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 30px; left: 18%;">
+                        <div class="seat-row">
+                            <div class="seat available">4</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat available">5</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 170px; left: 18%;">
+                        <div class="seat-row">
+                            <div class="seat available">6</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 30px; left: 28%;">
+                        <div class="seat-row">
+                            <div class="seat taken-male">7</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat taken-male">8</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 170px; left: 28%;">
+                        <div class="seat-row">
+                            <div class="seat taken-male">9</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 30px; left: 38%;">
+                        <div class="seat-row">
+                            <div class="seat taken-male">10</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat taken-male">11</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 170px; left: 38%;">
+                        <div class="seat-row">
+                            <div class="seat taken-male">12</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 170px; left: 48%;">
+                        <div class="seat-row">
+                            <div class="seat available">13</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 30px; left: 58%;">
+                        <div class="seat-row">
+                            <div class="seat taken-female">14</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat taken-male">15</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 170px; left: 58%;">
+                        <div class="seat-row">
+                            <div class="seat taken-female">16</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 30px; left: 68%;">
+                        <div class="seat-row">
+                            <div class="seat taken-male">17</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat taken-male">18</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 170px; left: 68%;">
+                        <div class="seat-row">
+                            <div class="seat available">19</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 30px; left: 78%;">
+                        <div class="seat-row">
+                            <div class="seat available">20</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat available">21</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 170px; left: 78%;">
+                        <div class="seat-row">
+                            <div class="seat available">22</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 30px; left: 88%;">
+                        <div class="seat-row">
+                            <div class="seat available">23</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat available">24</div>
+                        </div>
+                    </div>
+                    <div class="seat-column" style="top: 170px; left: 88%;">
+                        <div class="seat-row">
+                            <div class="seat available">25</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="seat-legend"><div class="legend-item"><div class="legend-color" style="background: #fff; border: 1px solid #ced4da;"></div><span>Available</span></div><div class="legend-item"><div class="legend-color" style="background: #4caf50;"></div><span>Your Selection</span></div><div class="legend-item"><div class="legend-color" style="background: #aadaff;"></div><span>Booked (Male)</span></div><div class="legend-item"><div class="legend-color" style="background: #ffc0cb;"></div><span>Booked (Female)</span></div></div>
+                <div class="seat-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #fff; border: 1px solid #ced4da;"></div>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #4caf50;"></div><span>Your Selection</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #aadaff;"></div><span>Booked (Male)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ffc0cb;"></div><span>Booked (Female)</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Passenger Info Form Card -->
         <div id="passenger-info-form" class="card mt-4" style="display: none;">
-            <div class="card-header bg-white py-3"><h4 class="mb-0">Passenger Information</h4></div>
+            <div class="card-header bg-white py-3">
+                <h4 class="mb-0">Passenger Information</h4>
+            </div>
             <div class="card-body">
                 <form id="booking-form">
                     <h5 class="mb-3">Primary Passenger</h5>
                     <div class="row g-3">
-                      <div class="col-md-6">
-                       <label for="fullName" class="form-label">Full Name</label>
-                       <input type="text" class="form-control" id="fullName" required>
-                     </div>
-                     <div class="col-md-6">
-                        <label for="nationalId" class="form-label">National ID</label>
-                        <input type="text" class="form-control" id="nationalId" required>
+                        <div class="col-md-6"><label for="fullName" class="form-label">Full Name</label><input
+                                type="text" class="form-control" id="fullName" required></div>
+                        <div class="col-md-6"><label for="nationalId" class="form-label">National ID</label><input
+                                type="text" class="form-control" id="nationalId" required></div>
+                        <div class="col-md-4"><label for="mobile" class="form-label">Mobile Number</label><input
+                                type="tel" class="form-control" id="mobile" required></div>
+                        <div class="col-md-4"><label for="birthDate" class="form-label">Date of Birth</label><input
+                                type="date" class="form-control" id="birthDate" required></div>
+                        <div class="col-md-4"><label for="gender" class="form-label">Gender</label><select
+                                class="form-select" id="gender" required>
+                                <option value="" selected disabled>Select...</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select></div>
                     </div>
-                    <div class="col-md-4"><label for="mobile" class="form-label">Mobile Number</label>
-                        <input type="tel" class="form-control" id="mobile" required>
+                    <div id="additional-passengers" class="mt-3"></div>
+                    <div class="col-12 mt-4">
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Total Price: <span id="total-price" class="fw-bold"
+                                    style="color:#ef4056;">$0</span></h5><button type="submit"
+                                class="btn btn-primary btn-lg px-5">Reserve</button>
+                        </div>
                     </div>
-                    <div class="col-md-4"><label for="birthDate" class="form-label">Date of Birth</label>
-                        <input type="date" class="form-control" id="birthDate" required>
-                    </div>
-                     <div class="col-md-4"><label for="gender" class="form-label">Gender</label>
-                        <select class="form-select" id="gender" required>
-                            <option value="" selected disabled>Select...</option>
-                            <option>Male</option><option>Female</option>
-                        </select>
-                      </div>
-                     </div>
-                   </div>
-                     <div id="additional-passengers" class="mt-3"></div>
-                     <div class="col-12 mt-4"><hr><div class="d-flex justify-content-between align-items-center"><h5 class="mb-0">Total Price: <span id="total-price" class="fw-bold" style="color:#ef4056;">$0</span></h5><button type="submit" class="btn btn-primary btn-lg px-5">Reserve</button></div></div>
                 </form>
             </div>
         </div>
     </main>
-
     <!-- Footer -->
     <footer class="site-footer container">
-        <div class="row"><div class="col-md-4"><h5>Unitrip</h5><p class="small muted">Smart travel bookings — hotel & bus reservations in one place.</p></div><div class="col-md-4"><h6>Contact</h6><p class="small muted mb-1">Phone: +1 234 567 890</p><p class="small muted">Email: hello@unitrip.example</p></div><div class="col-md-4 text-md-end"><h6>Follow</h6><a href="#" class="me-2"><i class="bi bi-instagram"></i></a><a href="#" class="me-2"><i class="bi bi-telegram"></i></a><a href="#" class="me-2"><i class="bi bi-facebook"></i></a></div></div>
+        <div class="row">
+            <div class="col-md-4">
+                <h5>Unitrip</h5>
+                <p class="small muted">Smart travel bookings — hotel & bus reservations in one place.</p>
+            </div>
+            <div class="col-md-4">
+                <h6>Contact</h6>
+                <p class="small muted mb-1">Phone: +1 234 567 890</p>
+                <p class="small muted">Email: hello@unitrip.example</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <h6>Follow</h6><a href="#" class="me-2"><i class="bi bi-instagram"></i></a><a href="#" class="me-2"><i
+                        class="bi bi-telegram"></i></a><a href="#" class="me-2"><i class="bi bi-facebook"></i></a>
+            </div>
+        </div>
     </footer>
 
-    <!-- Success Modal -->
     <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header border-0"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-center py-4"><i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i><h4 class="modal-title mt-3">Booking Successful!</h4><p class="text-muted mt-2">Your reservation for <span id="modal-seat-count"></span> seat(s) with a total of <strong id="modal-total-price"></strong> has been confirmed.</p></div><div class="modal-footer border-0 justify-content-center"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button></div></div></div>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button></div>
+                <div class="modal-body text-center py-4"><i class="bi bi-check-circle-fill text-success"
+                        style="font-size: 4rem;"></i>
+                    <h4 class="modal-title mt-3">Booking Successful!</h4>
+                    <p class="text-muted mt-2">Your reservation for <span id="modal-seat-count"></span> seat(s) with a
+                        total of <strong id="modal-total-price"></strong> has been confirmed.</p>
+                </div>
+                <div class="modal-footer border-0 justify-content-center"><button type="button" class="btn btn-primary"
+                        data-bs-dismiss="modal">Done</button></div>
+            </div>
+        </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
         document.addEventListener('DOMContentLoaded', function () {
             const passengerForm = document.getElementById('passenger-info-form');
             const bookingForm = document.getElementById('booking-form');
@@ -267,68 +504,69 @@
             const additionalPassengersContainer = document.getElementById('additional-passengers');
             const SEAT_PRICE = 45;
             const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-
             const seatClickHandler = (event) => {
                 event.target.classList.toggle('selected');
                 updateSelectionState();
             };
-            
             document.querySelectorAll('.seat.available').forEach(seat => {
                 seat.addEventListener('click', seatClickHandler);
             });
-
             function updateSelectionState() {
                 const selectedSeats = document.querySelectorAll('.seat.selected');
                 const selectedCount = selectedSeats.length;
-                
                 passengerForm.style.display = selectedCount > 0 ? 'block' : 'none';
                 totalPriceElement.textContent = `$${selectedCount * SEAT_PRICE}`;
                 additionalPassengersContainer.innerHTML = '';
-
                 if (selectedCount > 1) {
                     for (let i = 1; i < selectedCount; i++) {
                         const seat = selectedSeats[i];
                         const seatNumber = seat.textContent;
-                        const passengerFieldsHTML = `<hr class="my-4"><h5 class="mb-3">Passenger for Seat #${seatNumber}</h5><div class="row g-3"><div class="col-md-6"><label for="fullName_seat_${seatNumber}" class="form-label">Full Name</label><input type="text" class="form-control" id="fullName_seat_${seatNumber}" required></div><div class="col-md-4"><label for="nationalId_seat_${seatNumber}" class="form-label">National ID</label><input type="text" class="form-control" id="nationalId_seat_${seatNumber}" required></div><div class="col-md-2"><label for="gender_seat_${seatNumber}" class="form-label">Gender</label><select class="form-select" id="gender_seat_${seatNumber}" required><option value="" selected disabled>...</option><option>Male</option><option>Female</option></select></div></div>`;
+                        const passengerFieldsHTML = `<hr class="my-4">
+                            <h5 class="mb-3">Passenger for Seat #${seatNumber}</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6"><label for="fullName_seat_${seatNumber}" class="form-label">Full Name</label><input
+                                        type="text" class="form-control" id="fullName_seat_${seatNumber}" required></div>
+                                <div class="col-md-4"><label for="nationalId_seat_${seatNumber}" class="form-label">National ID</label><input
+                                        type="text" class="form-control" id="nationalId_seat_${seatNumber}" required></div>
+                                <div class="col-md-2"><label for="gender_seat_${seatNumber}" class="form-label">Gender</label><select
+                                        class="form-select" id="gender_seat_${seatNumber}" required>
+                                        <option value="" selected disabled>...</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select></div>
+                        </div>`;
                         additionalPassengersContainer.innerHTML += passengerFieldsHTML;
                     }
                 }
             }
-
             bookingForm.addEventListener('submit', function (event) {
-                event.preventDefault(); 
-
+                event.preventDefault();
                 const selectedSeats = document.querySelectorAll('.seat.selected');
-                
                 const genders = [];
-                genders.push(document.getElementById('gender').value); 
+                genders.push(document.getElementById('gender').value);
                 for (let i = 1; i < selectedSeats.length; i++) {
                     const seatNumber = selectedSeats[i].textContent;
                     genders.push(document.getElementById(`gender_seat_${seatNumber}`).value);
                 }
-                
                 document.getElementById('modal-seat-count').textContent = selectedSeats.length;
                 document.getElementById('modal-total-price').textContent = totalPriceElement.textContent;
                 successModal.show();
-                
                 selectedSeats.forEach((seat, index) => {
                     seat.classList.remove('selected', 'available');
                     seat.removeEventListener('click', seatClickHandler);
-
                     if (genders[index] === 'Male') {
                         seat.classList.add('taken-male');
                     } else {
                         seat.classList.add('taken-female');
                     }
                 });
-
                 passengerForm.style.display = 'none';
                 additionalPassengersContainer.innerHTML = '';
                 bookingForm.reset();
             });
-            
             updateSelectionState();
         });
     </script>
 </body>
+
 </html>

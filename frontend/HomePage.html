@@ -10,54 +10,48 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>UniTrip - Travel & Booking</title>
-  <link rel="icon" sizes="16x16" href="imgs\icon.png">
+  <link rel="icon" sizes="48x48" href="imgs/logo3.png">
 
- 
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #ffedd9;
       --panel: #e4d6d6;
       --card: #a01515;
       --white-card: #ffffff;
-      --accent: #f7ddbf;
-      /* bright teal */
-      --accent-2: #ff6c03cc;
+      --accent: #ff9879;
+      --accent-2: #ff774dcc;
       --muted: #835b5b;
-       --glass: #ff9f72; 
+      --glass: #240577dc;
     }
 
     html,
     body {
       margin: 0;
-  
-      background-image: url('imgs/bbg.jpg');
-      background-size: cover; 
-      background-position: center; 
-      background-attachment: fixed;
-      background-repeat: no-repeat; 
-      height: 100%;
-    }
 
-    body {
-      margin: 0;
-      
+      background-image: url('imgs/bbg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      height: 100%;
       color: #5f2d24;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: 'Montserrat', sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
     /* NAVBAR */
     .navbar {
-      background: linear-gradient(90deg, #ff941acc, #ff774dcc) !important;
+      background: linear-gradient(90deg, #240577dc, #ff774dcc) !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       padding-top: .75rem;
       padding-bottom: .75rem;
     }
-    
+
 
     .navbar-brand {
       font-weight: 700;
@@ -83,7 +77,159 @@
       box-shadow: 0 6px 22px rgba(9, 131, 118, .18);
     }
 
-    /* HERO */
+
+    .search-wrapper {
+      margin-top: -60px;
+      position: relative;
+      z-index: 1000;
+      padding: 0 15px;
+    }
+
+
+    .capsule {
+      background: #fff;
+      border-radius: 100px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      max-width: 1100px;
+      margin: auto;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .fields {
+      display: flex;
+      flex: 1;
+    }
+
+    .segment {
+      flex: 1;
+      padding: 6px 18px;
+      border-right: 1px solid #eee;
+      position: relative;
+    }
+
+    .segment:last-child {
+      border: none
+    }
+
+    .segment label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .segment input,
+    .segment .fake-input {
+      border: none;
+      outline: none;
+      width: 100%;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+
+    .mode-switch {
+      display: flex;
+      background: #f1f3f5;
+      border-radius: 50px;
+      padding: 4px;
+      margin-right: 10px;
+    }
+
+    .mode-btn {
+      border: none;
+      background: transparent;
+      padding: 10px 15px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: .3s;
+      min-width: 120px
+    }
+
+    .mode-btn.active {
+      background: #fff;
+      color: #00569E;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .search-btn {
+      background: #FDB713;
+      color: #fff;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .search-text {
+      display: none;
+      font-weight: 600;
+    }
+
+    .search-btn:hover {
+      transform: scale(1.05);
+    }
+
+
+
+    .picker {
+      position: absolute;
+      top: 120%;
+      left: 0;
+      width: 260px;
+      background: #fff;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .25);
+      display: none;
+      z-index: 2000;
+    }
+
+    .picker.active {
+      display: block
+    }
+
+    .counter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .counter button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--primary);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .d-none {
+      display: none
+    }
+
+
     .hero {
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.06));
       padding: 48px 0;
@@ -92,6 +238,7 @@
       position: relative;
       overflow: visible;
       border: 1px solid rgba(255, 255, 255, 0.03);
+
     }
 
     .hero h1 {
@@ -106,7 +253,33 @@
       margin-top: .4rem;
     }
 
-    /* hero search card (white) */
+    .hero-slider,
+    .hero-slider .carousel-inner,
+    .hero-slider .carousel-item {
+      height: 350px !important;
+    }
+
+
+    .hero-slider .carousel-item img {
+      height: 100% !important;
+      object-fit: cover !important;
+      width: 100%;
+    }
+
+
+    .hero-slider .carousel-caption {
+      bottom: 0 !important;
+      top: 35% !important;
+      transform: translateY(-50%) !important;
+      height: min-content;
+    }
+
+    .btn-orange:hover,
+    .btn-teal:hover {
+      transform: scale(1.05);
+    }
+
+
     .search-card {
       background: var(--white-card);
       color: #0b2523;
@@ -122,25 +295,6 @@
       z-index: 40;
     }
 
-  .search-container {
-    position: relative;
-    }
-
-  .search-input {
-    height: 50px;
-    border-radius: 30px;
-    padding-left: 35px;
-    border: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-
-  .search-icon {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    color: #888;
-  }
 
     .input-lg {
       height: 56px;
@@ -153,7 +307,7 @@
       border-color: rgba(0, 201, 183, 0.35);
     }
 
-    /* panels */
+
     .panel {
       background: transparent;
       margin-top: 64px;
@@ -174,7 +328,6 @@
       box-shadow: 0 12px 30px rgba(2, 36, 34, 0.22);
     }
 
-    /* city cards (white) */
     .city-card {
       width: 220px;
       display: inline-block;
@@ -182,6 +335,29 @@
       border-radius: 10px;
       overflow: hidden;
       vertical-align: top;
+    }
+
+    .search-input {
+      padding-left: 10px;
+
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+      pointer-events: none;
+    }
+
+    .search-icon2 {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+      pointer-events: none;
     }
 
     .city-card img {
@@ -216,14 +392,14 @@
       color: var(--glass);
     }
 
-    /* small */
+    
     .muted {
       color: var(--muted);
     }
 
     .shareholder-card {
       background: var(--white-card);
-      border-radius: 12px;
+      border-radius: 24px;
       padding: 24px;
       color: #07201f;
       box-shadow: 0 8px 24px rgba(2, 36, 34, 0.18);
@@ -245,7 +421,20 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    /* AUTHENTICATION SECTION */
+    .about-us-card {
+      background: var(--white-card);
+      border-radius: 24px;
+      color: #07201f;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+    }
+
+    .about-us-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 32px rgb(164, 76, 8);
+    }
+
+  
     #contact-section .form-control {
       background-color: #f1f5f9;
     }
@@ -281,6 +470,7 @@
       color: rgba(255, 255, 255, 0.9);
     }
 
+
     @media (max-width: 768px) {
       .hero-full-width .carousel-item {
         height: 50vh;
@@ -288,16 +478,78 @@
       }
 
       .hero-full-width .carousel-caption h1 {
-        font-size: 2rem;
+        font-size: 1.2rem !important;
       }
 
       .hero-full-width .carousel-caption p {
         font-size: 1rem;
       }
+
+
+      .hero-slider,
+      .hero-slider .carousel-inner,
+      .hero-slider .carousel-item {
+        height: 250px !important;
+      }
+
     }
 
+    @media (max-width: 1020px) {
+      .search-wrapper {
+        margin-top: -30px;
+      }
 
-    /* responsiveness */
+      .capsule {
+        flex-direction: column;
+        border-radius: 20px;
+        padding: 15px;
+      }
+
+      .mode-switch {
+        margin-bottom: 15px;
+        width: 100%;
+        margin-right: 0;
+      }
+
+      .mode-btn {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .fields {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .segment {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding: 12px 5px;
+        width: 100%;
+      }
+
+      .search-btn {
+        width: 100%;
+        border-radius: 12px;
+        height: 50px;
+        margin-top: 15px;
+        margin-left: 0;
+      }
+
+      .search-text {
+        display: inline;
+        font-size: 16px;
+      }
+
+      .search-btn i {
+        display: none;
+      }
+
+      .hero-slider .carousel-item {
+        height: 35vh;
+      }
+    }
+
     @media (max-width: 992px) {
       .hero h1 {
         font-size: 1.6rem;
@@ -325,35 +577,56 @@
         margin-bottom: 12px;
       }
     }
-    
-        .contact-box {
-            background: #fff;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
 
-        .contact-title {
-            font-weight: bold;
-            color: #4a4a4a;
-        }
+    .contact-box {
+      background: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
 
-        .invite-text {
-            font-size: 0.95rem;
-            color: #666;
-        }
-  
+    .contact-title {
+      font-weight: bold;
+      color: #4a4a4a;
+    }
+
+    .invite-text {
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .btn-orange,
+    .btn-teal {
+      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    }
+
+
+    .segment.error input {
+       border-color: #e63946;
+   }
+
+    .error-msg {
+        color: #e63946;
+        font-size: 12px;
+        margin-top: 4px;
+        display: block;
+      }
+
+    .segment.success input {
+      border-color: #2a9d8f;
+    }
+
   </style>
 </head>
 
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-md ">
     <div class="container">
-      <a class="navbar-brand large" href="#">
-        <img src="imgs/logo5.png" alt="UniTrip Logo" height="80" class="me-2">
-        
+      <a class="navbar-brand  large" href="#">
+        <img src="imgs/logo2.png" alt="UniTrip Logo" height="50" class="me-5">
+
       </a>
 
       <button class="navbar-toggler btn btn-outline-light" type="button" data-bs-toggle="collapse"
@@ -363,19 +636,19 @@
 
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link " href="#contact-section">Signup/Login</a></li>
+          <li class="nav-item"><a class="nav-link " href="./signup.html">Sign In</a></li>
           <li class="nav-item"><a class="nav-link " href="#about-section">About</a></li>
           <li class="nav-item dropdown">
             <button class="btn btn-teal btn-md dropdown-toggle ms-2" data-bs-toggle="dropdown"
               aria-expanded="false">Book</button>
             <ul class="dropdown-menu dropdown-menu-end p-2">
-              <li><button class="dropdown-item " onclick="showService('hotel') "><i
+              <li><button class="dropdown-item " onclick="window.location.href='hotel.html' "><i
                     class="bi bi-building-fill me-2"></i>Hotel</button></li>
-              <li><button class="dropdown-item" onclick="showService('bus')"><i
+              <li><button class="dropdown-item" onclick="window.location.href='BusReservation.html'"><i
                     class="bi bi-bus-front-fill me-2"></i>Bus</button></li>
             </ul>
           </li>
-          <li class="nav-item ms-3"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item "><a class="nav-link" href="#contact-us">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -385,10 +658,9 @@
 
   <body>
 
-    <!-- FULL-WIDTH HERO SLIDER -->
+    <!-- SLIDER -->
     <section class="hero-full-width">
-      <div id="heroCarouselFull" class="carousel slide" data-bs-ride="carousel">
-        <!-- Indicators -->
+      <div id="heroCarouselFull" class="carousel slide hero-slider" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#heroCarouselFull" data-bs-slide-to="0" class="active"
             aria-current="true" aria-label="Slide 1"></button>
@@ -399,27 +671,27 @@
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="4000">
             <img src="imgs/slider1.jpg" class="d-block w-100" alt="Luxury Resort">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption ">
               <h1>Find & Book Hotels</h1>
               <p>Smart bookings with best prices and instant confirmation.</p>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="4000">
             <img src="imgs/slider2.jpg" class="d-block w-100" alt="Bus Travel">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption ">
               <h1>Comfortable Bus Journeys</h1>
               <p>Travel across the country with our modern fleet.</p>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="4000">
             <img src="imgs/slider3.jpg" class="d-block w-100" alt="Travel Packages">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption">
               <h1>Amazing Travel Packages</h1>
               <p>Discover curated packages for your next adventure.</p>
             </div>
           </div>
         </div>
-        <!-- Controls -->
+        
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarouselFull" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
@@ -431,189 +703,109 @@
       </div>
     </section>
 
+
     <main class="container">
-      <!-- Spacer so search card doesn't overlap content -->
-      <div style="height:48px"></div>
 
-    <!--search box-->  
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <div class="search-container">
-              <input type="text" class="form-control search-input" placeholder="Search...">
-              <i class="fas fa-search search-icon"></i>
+       <div class="search-wrapper">
+      <div class="capsule">
+        <div class="mode-switch">
+          <button class="mode-btn active" id="btnHotel" onclick="switchMode('hotel')">
+            <i class="fa-solid fa-hotel"></i> Hotels
+          </button>
+          <button class="mode-btn" id="btnBus" onclick="switchMode('bus')">
+            <i class="fa-solid fa-bus"></i> Bus
+          </button>
+        </div>
+
+        <div class="fields" id="hotelFields">
+          <div class="segment">
+            <label>Destination</label>
+            <input type="text" id="hotelDestination" placeholder="Where are you going?">
+            <span class="error-msg"></span>
+          </div>
+          <div class="segment">
+            <label>Check-in</label>
+            <input id="checkin" type="date">
+            <span class="error-msg"></span>
+          </div>
+          <div class="segment">
+            <label>Check-out</label>
+            <input id="checkout" type="date" >
+            <span class="error-msg"></span>
+          </div>
+          <div class="segment" onclick="togglePicker(event,'hotelPicker')">
+            <label>Guests</label>
+            <div class="fake-input" id="hotelSummary">1 Room, 2 Guests</div>
+            <div class="picker" id="hotelPicker">
+              <div class="counter">Rooms <div><button onclick="changeVal(event,'rooms',-1)">-</button> <span
+                    id="roomsVal">1</span> <button onclick="changeVal(event,'rooms',1)">+</button></div>
+              </div>
+              <div class="counter">Guests <div><button onclick="changeVal(event,'guests',-1)">-</button> <span
+                    id="guestsVal">2</span> <button onclick="changeVal(event,'guests',1)">+</button></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Booking forms -->
-      <section id="booking" class="panel">
-        <div class="booking-card">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="mb-2 fw-bold">Book Now</h4>
-            <div>
-              <div class="btn-group" role="group" aria-label="service tabs">
-                <button id="tab-bus" type="button" class="btn btn-outline-dark btn-sm active"
-                  onclick="toggleTab('bus')">Bus</button>
-                <button id="tab-hotel" type="button" class="btn btn-outline-dark btn-sm"
-                  onclick="toggleTab('hotel')">Hotel</button>
+        <div class="fields d-none" id="busFields">
+          <div class="segment"><label>From</label> <input id="busFrom" placeholder="Origin">
+            <span class="error-msg"></span>
+          </div>
+          <div class="segment"><label>To</label> <input id="busTo" placeholder="Destination">
+            <span class="error-msg"></span>
+          </div>
+          <div class="segment"><label>Date</label><input  id="busDate" type="date">
+            <span class="error-msg"></span>
+          </div>
+          <div class="segment" onclick="togglePicker(event,'busPicker')">
+            <label>Seats</label>
+            <div class="fake-input" id="busSummary">1 Seat</div>
+            <div class="picker" id="busPicker">
+              <div class="counter">Seats <div><button onclick="changeSeat(event,-1)">-</button> <span
+                    id="seatVal">1</span> <button onclick="changeSeat(event,1)">+</button></div>
               </div>
             </div>
           </div>
-
-          <!-- BUS FORM -->
-          <div id="bus-form" class="white-card p-3">
-            <div class="row g-3 align-items-end">
-              <div class="col-md-3">
-                <label class="form-label small">Origin</label>
-                <input id="from" class="form-control" placeholder="City or station">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label small">Destination</label>
-                <input id="to" class="form-control" placeholder="City or station">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label small">Date</label>
-                <input id="date" type="date" class="form-control">
-              </div>
-              <div class="col-md-2">
-                <label class="form-label small">Passengers</label>
-                <input id="passengers" type="number" class="form-control" min="1" value="1">
-              </div>
-              <div class="col-md-1 d-grid">
-                <button class="btn btn-teal" onclick="searchBus()">Search</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- HOTEL FORM -->
-          <div id="hotel-form" class="white-card p-3 d-none mt-3">
-            <div class="row g-3 align-items-end">
-              <div class="col-md-4">
-                <label class="form-label small">Destination</label>
-                <input id="hotel-destination" class="form-control" placeholder="City or hotel name">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label small">Check-in</label>
-                <input id="hotel-date-from" type="date" class="form-control">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label small">Check-out</label>
-                <input id="hotel-date-to" type="date" class="form-control">
-              </div>
-              <div class="col-md-1">
-                <label class="form-label small">Nights</label>
-                <input id="hotel-days" min="0" class="form-control" placeholder="0" readonly>
-              </div>
-              <div class="col-md-1 d-grid">
-                <button class="btn btn-teal" onclick="searchHotel()">Search</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Results -->
-          <div id="results" class="mt-3 results-list d-none">
-            <div class="card p-3">
-              <small class="muted">Search results appear here</small>
-              <div id="results-content" class="mt-2 scroll-box"></div>
-            </div>
-          </div>
-
         </div>
-      </section>
 
-      <!-- ABOUT & STATS SECTION -->
-      <section id="about-section" class="panel my-5">
-    <div class="white-card p-5">
-      <div class="row align-items-center">
-
-      <!-- ABOUT TEXT -->
-      <div class="col-lg-7 mb-4 mb-lg-0">
-        <h3 class="fw-bold mb-3">About UniTrip</h3>
-        <p class="muted">
-          UniTrip is a smart travel booking platform designed to make your journey
-          planning fast, simple, and secure. We provide integrated services for
-          hotel reservations and bus ticket bookings, all in one place.
-        </p>
-        <p class="muted">
-          Our mission is to deliver the best travel experience through reliable
-          partners, transparent pricing, and 24/7 user support.
-        </p>
+        <button class="search-btn">
+          <i class="fa fa-search"></i> <span class="search-text">Search</span>
+        </button>
       </div>
-
-      <!-- STATS -->
-      <div class="col-lg-5">
-        <div class="row g-3 text-center">
-
-          <div class="col-6">
-            <div class="shareholder-card">
-              <h3 class="fw-bold text-warning">120+</h3>
-              <p class="muted small mb-0">Destinations</p>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <div class="shareholder-card">
-              <h3 class="fw-bold text-warning">850+</h3>
-              <p class="muted small mb-0">Hotels</p>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <div class="shareholder-card">
-              <h3 class="fw-bold text-warning">300+</h3>
-              <p class="muted small mb-0">Bus Routes</p>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <div class="shareholder-card">
-              <h3 class="fw-bold text-warning">50K+</h3>
-              <p class="muted small mb-0">Users</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
     </div>
-  </div>
-      </section>
-
 
       <!-- Services -->
       <section id="services" class="panel">
         <h4 class="mb-4 fw-bold">Services</h4>
         <div class="row g-3">
           <div class="col-lg-4">
-            <div class="white-card p-4">
-              <h5>Hotel Booking</h5>
-              <p class="muted small">Reserve hotels with best rates and easy cancellation.</p>
-              <div class="mt-3">
+            <div class="white-card p-4 h-100 d-flex flex-column">
+              <h5>Best Hotel Deals</h5>
+              <p class="muted small">Reserve your stay with exclusive discounts</p>
+              <div class="mt-auto">
                 <button class="btn btn-teal btn-sm" onclick="showService('hotel')"><i class="bi bi-building me-1"></i>
-                  Book Hotel</button>
+                  Browse Hotels</button>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4">
-            <div class="white-card p-4">
+            <div class="white-card p-4 h-100 d-flex flex-column">
               <h5>Bus Tickets</h5>
               <p class="muted small">Book bus tickets nationwide with seat selection.</p>
-              <div class="mt-3">
+              <div class="mt-auto">
                 <button class="btn btn-teal btn-sm" onclick="showService('bus')"><i class="bi bi-bus-front me-1"></i>
-                  Book
+                  Find
                   Bus</button>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4">
-            <div class="white-card p-4">
+            <div class="white-card p-4 h-100 d-flex flex-column">
               <h5>Travel Packages</h5>
-              <p class="muted small">All-in packages — flights, hotels and tours.</p>
-              <div class="mt-3">
+              <p class="muted small">All-in packages — hotels and tours.</p>
+              <div class="mt-auto">
                 <button class="btn btn-teal btn-sm">Explore Packages</button>
               </div>
             </div>
@@ -621,7 +813,67 @@
         </div>
       </section>
 
-      <!-- Best Destinations -->
+      <br><br>
+
+      <!-- ABOUT  -->
+      <section id="about-section" class="panel my-5">
+        <div class="white-card p-5">
+          <div class="row align-items-center">
+
+            
+            <div class="col-lg-7 mb-4 mb-lg-0">
+              <h3 class="fw-bold mb-3">About UniTrip</h3>
+              <p class="muted">
+                UniTrip is a smart travel booking platform designed to make your journey
+                planning fast, simple, and secure. We provide integrated services for
+                hotel reservations and bus ticket bookings, all in one place.
+              </p>
+              <p class="muted">
+                Our mission is to deliver the best travel experience through reliable
+                partners, transparent pricing, and 24/7 user support.
+              </p>
+            </div>
+
+            
+            <div class="col-lg-5">
+              <div class="row g-3 text-center">
+
+                <div class="col-6">
+                  <div class="shareholder-card">
+                    <h3 class="fw-bold text-warning">120+</h3>
+                    <p class="muted small mb-0">Destinations</p>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="shareholder-card">
+                    <h3 class="fw-bold text-warning">850+</h3>
+                    <p class="muted small mb-0">Hotels</p>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="shareholder-card">
+                    <h3 class="fw-bold text-warning">300+</h3>
+                    <p class="muted small mb-0">Bus Routes</p>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="shareholder-card">
+                    <h3 class="fw-bold text-warning">50K+</h3>
+                    <p class="muted small mb-0">Users</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+     
       <section class="panel">
         <h4 class="mb-4 fw-bold">Popular Destinations</h4>
         <div class="py-2" style="overflow-x:auto; white-space:nowrap;">
@@ -708,123 +960,133 @@
       </section>
 
 
-    <!-- SHAREHOLDERS SECTION -->
-    <section id="about-section" class="panel text-center">
-      <h2 class="mb-4 fw-bold">Our Shareholders</h2>
-      <div class="row g-4 justify-content-center">
-        <!-- Shareholder 1 -->
-        <div class="col-lg-2 col-md-4">
-          <div class="shareholder-card">
-            <img src="imgs\medi.jpg" alt="Shareholder 1" class="shareholder-img">
-            <div class="shareholder-info mt-3">
-              <h5>Medisa Khabazi</h5>
-              <p class="small muted">front-end designer</p>
-            </div>
+
+      <section id="about-section" class="panel text-center">
+        <h2 class="mb-4 fw-bold">Our Shareholders</h2>
+        <div class="row g-4 justify-content-center">
+         
+          <div class="col-lg-3 col-md-4 col-md-6">
+            <a href="https://github.com/medissakhabazi" style="text-decoration:none; border:none;">
+              <div class="shareholder-card">
+                <img src="imgs\medi.jpg" alt="Shareholder 1" class="shareholder-img">
+                <div class="shareholder-info mt-3">
+                  <h5>Medisa Khabazi</h5>
+                  <p class="small muted">front-end designer</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          
+          <div class="col-lg-3 col-md-4 col-md-6">
+            <a href="https://github.com/Hossein-Fazel" style="text-decoration:none; border:none;">
+              <div class="shareholder-card">
+                <img src="imgs\hossi.jpg" alt="Shareholder 2" class="shareholder-img ">
+                <div class="shareholder-info mt-3">
+                  <h5>Hossein Fazel</h5>
+                  <p class="small muted">back-end developer</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          
+          <div class="col-lg-3 col-md-4 col-md-6">
+            <a href="https://github.com/sarasvra" style="text-decoration:none; border:none;">
+              <div class="shareholder-card">
+                <img src="imgs\sara.jpg" alt="Shareholder 2" class="shareholder-img ">
+                <div class="shareholder-info mt-3">
+                  <h5>sara Rashedi</h5>
+                  <p class="small muted">back-end developer</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+         
+          <div class="col-lg-3 col-md-4 col-md-6">
+            <a href="https://github.com/AAzizkhani" style="text-decoration:none; border:none;">
+              <div class="shareholder-card">
+                <img src="imgs\ali.jpg" alt="Shareholder 3" class="shareholder-img">
+                <div class="shareholder-info mt-3">
+                  <h5>Ali Azizkhani</h5>
+                  <p class="small muted">front-end designer</p>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
-        <!-- Shareholder 2 -->
-        <div class="col-lg-2 col-md-4">
-          <div class="shareholder-card">
-            <img src="imgs\hossi.jpg" alt="Shareholder 2" class="shareholder-img ">
-            <div class="shareholder-info mt-3">
-              <h5>Hossein Fazel</h5>
-              <p class="small muted">back-end developer</p>
-            </div>
-          </div>
-        </div>
-        <!-- Shareholder 3 -->
-        <div class="col-lg-2 col-md-4">
-          <div class="shareholder-card">
-            <img src="imgs\sara.jpg" alt="Shareholder 2" class="shareholder-img ">
-            <div class="shareholder-info mt-3">
-              <h5>sara Rashedi</h5>
-              <p class="small muted">back-end developer</p>
-            </div>
-          </div>
-        </div>
+      </section>
 
-        <!-- Shareholder 4 -->
-        <div class="col-lg-2 col-md-4">
-          <div class="shareholder-card">
-            <img src="imgs\ali.jpg" alt="Shareholder 3" class="shareholder-img">
-            <div class="shareholder-info mt-3">
-              <h5>Ali Azizkhani</h5>
-              <p class="small muted">front-end designer</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      <br><br><br>
 
-    <br><br><br>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-md-11">
-            <div class="contact-box">
-
+      <section id="contact-us" class="panel my-5">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-7">
+              <div class="contact-box p-4 border rounded shadow-sm bg-light">
                 <h3 class="text-center contact-title mb-3">Contact Us</h3>
-                <p class="text-center invite-text mb-4">
-                    We are always happy to collaborate with talented people and companies.
-                    Feel free to contact us!
+                <p class="text-center text-muted mb-4">
+                  We are always happy to collaborate with talented people and companies. Feel free to contact us!
                 </p>
 
-                <form>
-                    <!-- Row 1 -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Full Name</label>
-                            <input type="text" class="form-control" placeholder="Enter your name">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" class="form-control" placeholder="example@email.com">
-                        </div>
-                    </div>
+                
+                <div id="message-alert" class="alert d-none" role="alert"></div>
 
-                    <!-- Row 2 -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="+98 912 000 0000">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Company Name</label>
-                            <input type="text" class="form-control" placeholder="Your company">
-                        </div>
+               
+                <form onsubmit="return validateContactForm()">
+                  
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="contact-name" class="form-label">Full Name</label>
+                    
+                      <input type="text" id="contact-name" class="form-control" placeholder="Enter your name">
                     </div>
-
-                    <!-- Message -->
-                    <div class="mb-3">
-                        <label class="form-label">Message</label>
-                        <textarea class="form-control" rows="3" placeholder="Let’s work together..."></textarea>
+                    <div class="col-md-6">
+                      <label for="contact-email" class="form-label" >Email Address</label>
+                      <input type="text" id="contact-email" class="form-control" placeholder="example@email.com" >
                     </div>
-
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-teal btn-lg">
-                            Send Message
-                        </button>
+                  </div>
+                 
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="contact-phone" class="form-label">Phone Number</label>
+                      <input type="tel" id="contact-phone" class="form-control" placeholder="+98 912 000 0000">
                     </div>
+                    <div class="col-md-6">
+                      <label for="contact-company" class="form-label">Company Name</label>
+                      <input type="text" id="contact-company" class="form-control" placeholder="Your company">
+                    </div>
+                  </div>
+                 
+                  <div class="mb-3">
+                    <label for="contact-message" class="form-label">Message</label>
+                    <textarea id="contact-message" class="form-control" rows="3"
+                      placeholder="Let’s work together..."></textarea>
+                  </div>
+                  <div class="d-grid col-8 mx-auto">
+                    <button type="submit" class="btn btn-teal btn-lg">
+                      Send Message
+                    </button>
+                  </div>
                 </form>
-
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
+      </section>
 
-    
-  </main>
+    </main>
 
 
-    <!-- ABOUT SECTION -->
+   
     <section id="about-section" class="container py-5">
       <h3 class="mb-4 fw-bold">About Us</h3>
 
       <div class="row g-4">
 
         <div class="col-md-3 col-12">
-          <div class="card h-100 shadow-sm">
-            <img src="https://picsum.photos/300/200?travel1" class="card-img-top">
+          <div class="card about-us-card h-100 shadow-sm">
+            <img src="./imgs/about1.png" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">Our Mission</h5>
               <p class="card-text">We provide the easiest way to book buses, hotels, and trips.</p>
@@ -833,8 +1095,8 @@
         </div>
 
         <div class="col-md-3 col-12">
-          <div class="card h-100 shadow-sm">
-            <img src="https://picsum.photos/300/200?travel2" class="card-img-top">
+          <div class="card about-us-card h-100 shadow-sm">
+            <img src="./imgs/about2.png" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">Our Team</h5>
               <p class="card-text">A passionate team helping millions travel smarter.</p>
@@ -843,8 +1105,8 @@
         </div>
 
         <div class="col-md-3 col-12">
-          <div class="card h-100 shadow-sm">
-            <img src="https://picsum.photos/300/200?travel3" class="card-img-top">
+          <div class="card about-us-card h-100 shadow-sm">
+            <img src="./imgs/about3.png" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">Why Choose Us?</h5>
               <p class="card-text">Fast booking, best prices, secure payments.</p>
@@ -853,8 +1115,8 @@
         </div>
 
         <div class="col-md-3 col-12">
-          <div class="card h-100 shadow-sm">
-            <img src="https://picsum.photos/300/200?travel4" class="card-img-top">
+          <div class="card about-us-card h-100 shadow-sm">
+            <img src="./imgs/about4.png" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">24/7 Support</h5>
               <p class="card-text">We are here anytime to assist your travel needs.</p>
@@ -866,172 +1128,289 @@
     </section>
 
 
-  
- <!-- Footer -->
-<footer class="site-footer bg-light py-4 navbar-expand-lg" style="background: linear-gradient(90deg, #ff941acc, #ff774dcc) !important;">
-  <div class="container">
-    <div class="row">
-      
-      <!-- ستون اول -->
-      <div class="col-md-4">
-        <h5>uniTrip</h5>
-        <p class="text-muted small">Smart travel bookings — hotel & bus reservations in one place.</p>
-      </div>
+    <!-- Footer -->
+    <footer class="site-footer bg-light py-4 navbar-expand-lg"
+      style="background: linear-gradient(90deg, #240577dc, #ff774dcc) !important;">
+      <div class="container">
+        <div class="col-sm-4 text-light"></div>
+        <img src="imgs/logo2.png" alt="UniTrip Logo" height="30">
+        <div class="row">
+        
+          <div class="col-sm-4 text-align text-light">
+            <p class="text-light small">Smart travel bookings — hotel & bus reservations in one place.</p>
+          </div>
 
-      <!-- ستون دوم -->
-      <div class="col-md-4">
-        <h6>Contact</h6>
-        <p class="text-muted small mb-1">Phone: +1 234 567 890</p>
-        <p class="text-muted small">Email: hello@unitrip.example</p>
-      </div>
+          <div class="col-sm-4 text-light">
+            <h6>Contact</h6>
+            <p class="text-light small mb-1">Phone: +1 234 567 890</p>
+            <p class="text-light small">Email: hello@unitrip.example</p>
+          </div>
 
-      <!-- ستون سوم (اصلاح‌شده) -->
-      <div class="col-md-4 text-end">
-        <h6>Follow</h6>
-        <a href="#" class="me-2 text-muted"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="me-2 text-muted"><i class="bi bi-telegram"></i></a>
-        <a href="#" class="me-2 text-muted"><i class="bi bi-facebook"></i></a>
-      </div>
+          <div class="col-sm-4 text-end text-light">
+            <h6>Follow</h6>
+            <a href="#" class="me-2 text-light"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="me-2 text-light"><i class="bi bi-telegram"></i></a>
+            <a href="#" class="me-2 text-light"><i class="bi bi-facebook"></i></a>
+          </div>
 
-    </div>
-  </div>
-</footer>
+        </div>
+      </div>
+    </footer>
 
 
 
     </div>
-  </div>
-</footer>
+    </div>
+    </footer>
 
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      // Initial state
+        
+
+
       document.addEventListener('DOMContentLoaded', () => {
-        // default view: bus tab active
-        toggleTab('bus');
-        document.getElementById('results').classList.add('d-none');
-        // auto-calc nights when hotel dates change
-        document.getElementById('hotel-date-from').addEventListener('change', calcNights);
-        document.getElementById('hotel-date-to').addEventListener('change', calcNights);
-      });
-      
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const todayStr = `${yyyy}-${mm}-${dd}`;
+
+       document.getElementById('checkin').setAttribute('min', todayStr);
+       document.getElementById('checkout').setAttribute('min', todayStr);
+       document.getElementById('busDate').setAttribute('min', todayStr);
+
+           toggleTab('bus');
+        });
+
+
       function toggleTab(type) {
-        // UI tab button states
         document.getElementById('tab-bus').classList.toggle('active', type === 'bus');
         document.getElementById('tab-hotel').classList.toggle('active', type === 'hotel');
-        
-        // show/hide forms
+
         document.getElementById('bus-form').classList.toggle('d-none', type !== 'bus');
         document.getElementById('hotel-form').classList.toggle('d-none', type !== 'hotel');
 
-        // scroll into view
         document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-      
-      // helper: parse date string YYYY-MM-DD
-      function parseDate(s) {
-        if (!s) return null;
-        const parts = s.split('-').map(Number);
-        return new Date(parts[0], parts[1] - 1, parts[2]);
+
+
+      let rooms = 1, guests = 2, seats = 1;
+
+      const hotelFields = document.getElementById('hotelFields');
+      const busFields = document.getElementById('busFields');
+      const btnHotel = document.getElementById('btnHotel');
+      const btnBus = document.getElementById('btnBus');
+
+      function switchMode(m) {
+        hotelFields.classList.toggle('d-none', m !== 'hotel');
+        busFields.classList.toggle('d-none', m !== 'bus');
+        btnHotel.classList.toggle('active', m === 'hotel');
+        btnBus.classList.toggle('active', m === 'bus');
       }
+
+      function togglePicker(e, id) {
+        e.stopPropagation();
+        document.querySelectorAll('.picker').forEach(p => {
+          if (p.id !== id) p.classList.remove('active');
+        });
+        document.getElementById(id).classList.toggle('active');
+      }
+
+      function changeVal(e, type, d) {
+        e.stopPropagation();
+        if (type === 'rooms') rooms = Math.max(1, rooms + d);
+        if (type === 'guests') guests = Math.max(1, guests + d);
+        document.getElementById('roomsVal').innerText = rooms;
+        document.getElementById('guestsVal').innerText = guests;
+        document.getElementById('hotelSummary').innerText = `${rooms} Room, ${guests} Guests`;
+      }
+
+      function changeSeat(e, d) {
+        e.stopPropagation();
+        seats = Math.max(1, seats + d);
+        document.getElementById('seatVal').innerText = seats;
+        document.getElementById('busSummary').innerText = `${seats} Seat`;
+      }
+
+      window.onclick = () => document.querySelectorAll('.picker').forEach(p => p.classList.remove('active'));
+
+
+      const conAlert = document.getElementById('message-alert');
+
+
+      function showAlert(message, type) {
+        conAlert.textContent = message;
+        conAlert.className = `alert alert-${type}`;
+
+        setTimeout(() => {
+         conAlert.textContent = '';
+         conAlert.className = ''; }, 3000)  
       
-      function calcNights() {
+      }
 
-        const from = document.getElementById('hotel-date-from').value;
-        const to = document.getElementById('hotel-date-to').value;
+      function clearForm() {
+        document.getElementById('contact-name').value = '';
+        document.getElementById('contact-email').value = '';
+        document.getElementById('contact-phone').value = '';
+        document.getElementById('contact-company').value = '';
+        document.getElementById('contact-message').value = '';
+      }
 
-        const fd = parseDate(from);
-        const td = parseDate(to);
+      function validateContactForm() {
 
-        let days = '';
+        const name = document.getElementById('contact-name').value;
+        const email = document.getElementById('contact-email').value;
+        const phone = document.getElementById('contact-phone').value;
+        const companyname = document.getElementById('contact-company').value;
+        const con_message = document.getElementById('contact-message').value;
 
-        if (fd && td) {
-          const diffMs = td.getTime() - fd.getTime();
-          days = Math.max(0, Math.round(diffMs / 86400000));
+
+        if (!name || !email || !phone || !companyname || !con_message) {
+          showAlert('All fields are required.', 'danger');
+          return false;
+        }
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if ( !emailPattern.test(email)) {
+          showAlert('Please enter a valid email address.' , 'danger');
+          return false;
         }
 
-        document.getElementById('hotel-days').value = days;
-        console.log("days:", days);
-      }
-
-      // MAIN search triggered from hero search card
-      function searchBusMain() {
-        const from = document.getElementById('main-from').value || 'Any';
-        const to = document.getElementById('main-to').value || 'Any';
-        const date = document.getElementById('main-date').value || 'Any';
-        const passengers = document.getElementById('main-passengers').value || 1;
-        // prefill booking section and show bus tab
-        document.getElementById('from').value = from !== 'Any' ? from : '';
-        document.getElementById('to').value = to !== 'Any' ? to : '';
-        document.getElementById('date').value = date !== 'Any' ? date : '';
-        document.getElementById('passengers').value = passengers;
-        toggleTab('bus');
-        searchBus();
-      }
-
-      // Bus search (shows results)
-      function searchBus() {
-        const from = document.getElementById('from').value || 'Any';
-        const to = document.getElementById('to').value || 'Any';
-        const date = document.getElementById('date').value || 'Any';
-        const passengers = document.getElementById('passengers').value || 1;
-
-        const content = document.getElementById('results-content');
-        content.innerHTML = `
-        <h6 class="mb-2">Available Buses • ${from} → ${to} • ${date}</h6>
-        <div class="card p-3 mb-2">
-          <div class="d-flex justify-content-between">
-            <div><strong>VIP Comfort</strong><div class="muted small">Amenities: reclining seats, Wi-Fi</div></div>
-            <div class="text-end"><strong>$25</strong><div class="muted small">${passengers} pax</div></div>
-          </div>
-        </div>
-        <div class="card p-3 mb-2">
-          <div class="d-flex justify-content-between">
-            <div><strong>Standard Express</strong><div class="muted small">Direct route</div></div>
-            <div class="text-end"><strong>$15</strong><div class="muted small">${passengers} pax</div></div>
-          </div>
-        </div>
-        <hr style="border-color: rgba(255,255,255,0.04);" />
-        <h6 class="mb-2">Recommended Hotels near ${to}</h6>
-        <div class="card p-3 mb-2"><strong>Hotel A</strong> • 4★ • from $60/night</div>
-        <div class="card p-3 mb-2"><strong>Hotel B</strong> • 3★ • from $45/night</div>
-      `;
-        document.getElementById('results').classList.remove('d-none');
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      // Hotel search (shows results and uses nights)
-      function searchHotel() {
-        const dest = document.getElementById('hotel-destination').value || 'Any';
-        const from = document.getElementById('hotel-date-from').value || 'N/A';
-        const to = document.getElementById('hotel-date-to').value || 'N/A';
-        const nights = document.getElementById('hotel-days').value || 'N/A';
-
-        const content = document.getElementById('results-content');
-        content.innerHTML = `
-        <h6 class="mb-2">Hotels in ${dest}</h6>
-        <div class="card p-3 mb-2"><strong>Luxury Hotel</strong><div class="muted small">5★ • from $120/night</div></div>
-        <div class="card p-3 mb-2"><strong>Comfort Hotel</strong><div class="muted small">4★ • from $75/night</div></div>
-        <hr style="border-color: rgba(255,255,255,0.04);" />
-        <div class="muted small"><strong>Check-in:</strong> ${from} • <strong>Check-out:</strong> ${to} • <strong>Nights:</strong> ${nights}</div>
-      `;
-        document.getElementById('results').classList.remove('d-none');
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      // subscribe action
-      function subscribeNewsletter() {
-        const email = document.getElementById('newsletter').value || '';
-        if (!email || !email.includes('@')) {
-          alert('Please enter a valid email address.');
-          return;
+        if (phone.length < 11) {
+          showAlert('Phone number must be at least 11 characters long.', 'danger');
+          return false;
         }
-        alert('Subscribed: ' + email);
-        document.getElementById('newsletter').value = '';
+        if (!/^\d+$/.test(phone)) {
+          showAlert('Phone number must contain only numbers.', 'danger');
+          return false;
+        }
+
+
+        showAlert('We sincerely thank you for your cooperation.', 'success');
+        clearForm();
+
+        return false;
       }
+
+      function showError(input, msg) {
+      const segment = input.closest('.segment');
+       segment.classList.add('error');
+       segment.classList.remove('success');
+       segment.querySelector('.error-msg').innerText = msg;
+      }
+
+    function clearError(input) {
+          const segment = input.closest('.segment');
+          if (!segment) return;  
+
+        segment.classList.remove('error');
+        segment.classList.add('success');
+        const err = segment.querySelector('.error-msg');
+        if (err) err.innerText = '';
+     }
+
+      function fail(input, message) {
+        showError(input, message);
+        input.focus();
+        return false;
+      }
+
+
+
+      function validateHotel() {
+        const dest = document.getElementById('hotelDestination');
+        const checkin = document.getElementById('checkin');
+        const checkout = document.getElementById('checkout');
+
+        if (!dest.value.trim()) {
+          return fail(dest, 'Please enter destination');
+        }
+
+        if (!checkin.value) {
+          return fail(checkin, 'Select check-in date');
+        }
+
+        if (!checkout.value) {
+          return fail(checkout, 'Select check-out date');
+        }
+
+        if (checkout.value <= checkin.value) {
+          return fail(checkout, 'Check-out must be after check-in');
+        }
+
+        return true;
+      }
+
+      function validateBus() {
+        const from = document.getElementById('busFrom');
+        const to = document.getElementById('busTo');
+        const date = document.getElementById('busDate');
+
+        if (!from.value.trim()) {
+          return fail(from, 'Enter origin');
+        }
+
+        if (!to.value.trim()) {
+          return fail(to, 'Enter destination');
+        }
+
+        if (!date.value) {
+          return fail(date, 'Select travel date');
+        }
+
+        return true;
+      }
+
+      function resetSearchForm(type) {
+
+        if (type === 'hotel') {
+          document.getElementById('hotelDestination').value = '';
+          document.getElementById('checkin').value = '';
+          document.getElementById('checkout').value = '';
+
+          rooms = 1;
+          guests = 2;
+          document.getElementById('roomsVal').innerText = rooms;
+          document.getElementById('guestsVal').innerText = guests;
+          document.getElementById('hotelSummary').innerText = '1 Room, 2 Guests';
+        }
+
+        if (type === 'bus') {
+          document.getElementById('busFrom').value = '';
+          document.getElementById('busTo').value = '';
+          document.getElementById('busDate').value = '';
+
+          seats = 1;
+          document.getElementById('seatVal').innerText = seats;
+          document.getElementById('busSummary').innerText = '1 Seat';
+        }
+        clearError(input);
+      }
+
+
+
+      document.querySelector('.search-btn').addEventListener('click', () => {
+        const isHotel = btnHotel.classList.contains('active');
+        const isValid = isHotel ? validateHotel() : validateBus();
+
+        if (!isValid) return;
+
+        
+
+        resetSearchForm(isHotel ? 'hotel' : 'bus');
+      });
+
+
+      document.addEventListener('input', e => {
+        const input = e.target;
+        if (input.closest('.segment') && input.value.trim()) {
+          clearError(input);
+        }
+      });
+
+
+
+
     </script>
   </body>
 
