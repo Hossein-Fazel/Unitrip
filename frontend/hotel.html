@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Travel & Booking — Dark SnappTrip Style</title>
+  <link rel="icon" sizes="16x16" href="imgs/logo3.png">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+     :root {
+      --bg-dark: #ffedd9;
+      --panel: #e4d6d6;
+      --card: #a01515;
+      --white-card: #ffffff;
+      --accent: #ff9879;
+      --accent-2: #ff774dcc;
+      --muted: #835b5b;
+      --glass: #240577dc;
+    }
+
+    html,
+    body {
+      margin: 0;
+
+      background-image: url('imgs/bbg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      height: 100%;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: linear-gradient(90deg, #240577dc, #ff774dcc) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+    }
+
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .2px;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.8);
+      margin-right: .4rem;
+    }
+
+
+     .btn-teal {
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      color: #04211f;
+      border: none;
+      box-shadow: 0 6px 18px rgba(241, 32, 32, 0.12);
+    }
+
+    .btn-teal:active,
+    .btn-teal:focus {
+      outline: none;
+      box-shadow: 0 6px 22px rgba(9, 131, 118, .18);
+    }
+
+   footer.site-footer {
+      margin-top: 32px;
+      background: transparent;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+      padding-top: 28px;
+      padding-bottom: 28px;
+      color: #211515;
+    }
+
+    footer a {
+      color: var(--glass);
+    }
+   
+    .hotel-card {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; 
+    transition: all 0.3s ease;
+    height: 100%;
+    
+   
+}
+
+
+.hotel-img-wrapper {
+    width: 100%;
+    height: 200px; 
+    position: relative;
+    overflow: hidden;
+}
+
+.hotel-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+
+.hotel-details {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hotel-details .btn {
+    width: 100%; 
+    font-weight: 600;
+}
+
+.btn-action {
+    background: #ffb703; 
+    color: #000 !important; 
+    font-weight: 700;
+    border: none;
+    transition: all 0.3s ease;
+    
+}
+
+.btn-action:hover {
+    background: #fb8500; 
+    box-shadow: 0 5px 15px rgba(251, 133, 0, 0.4);
+    transform: translateY(-3px);
+}
+
+
+   .hotel-rating-inline {
+    background: #f8f9fa; 
+    padding: 5px 11px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+    
+}
+
+.hotel-rating-inline i {
+    font-size: 0.9rem;
+}
+
+    
+
+    /* Responsive for Mobile */
+    @media (max-width: 768px) {
+      .hotel-card {
+        flex-direction: column;
+        height: auto;
+      }
+      .hotel-img-wrapper {
+        width: 100%;
+        height: 200px;
+      }
+      .rating-badge { right: 10px; left: auto; }
+    }
+
+    .review-row {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 40px; 
+}
+
+    .review-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      max-width: 500px;
+    }
+
+    
+    .item-left { align-self: flex-start; }
+    
+    .item-right {
+         align-self: flex-end; 
+         flex-direction: row-reverse;
+         text-align: right; 
+      }
+
+    .review-text { font-style: italic;
+          color: #5a4a42; 
+          font-size: 1rem;
+          margin-bottom: 2px; 
+      }
+    .user-name { 
+        color: #4b2c72;
+        font-weight: bold; 
+        font-size: 0.9rem; 
+      }
+
+    .user-circle {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      overflow: hidden;          
+      flex-shrink: 0;
+      background: #fff;
+    }
+
+    .user-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;         
+    }
+
+    
+.reviews-box-container {
+    background-color:#f4f0fa;
+    border-radius: 40px;
+    padding: 60px 20px;
+    margin: 50px 0;
+    position: relative; 
+    overflow: visible; 
+}
+
+.custom-carousel-control {
+    position: absolute;
+    top: 28%; 
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    z-index: 10;
+    padding: 0;
+    width: auto;
+}
+
+.custom-carousel-control.prev { left: 20px; } 
+.custom-carousel-control.next { right: 20px; }
+
+.custom-carousel-control i {
+    color: #5b4576;
+    font-size: 2.5rem; 
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.custom-carousel-control i:hover {
+    transform: scale(1.2);
+    color: #9266c8;
+}
+
+
+.carousel-inner {
+    overflow: hidden;
+}
+
+.carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+
+@media (max-width: 768px) {
+   
+    .review-text {
+        font-size: 0.75rem !important; 
+        line-height: 1.2;
+    }
+
+    .user-name {
+        font-size: 0.7rem !important;
+    }
+
+
+    
+    .custom-carousel-control i {
+        font-size: 1.8rem !important;
+    }
+
+  
+    .review-item {
+        max-width: 85% !important;
+    }
+}
+
+.search-container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 2px 5px 2px 15px;
+    transition: all 0.3s ease;
+}
+
+.search-container:focus-within {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.search-input {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+}
+
+.search-btn:hover {
+    color: #ff774d; 
+}
+
+.mobile-search-item {
+    padding: 10px 15px;
+    width: 100%;
+}
+
+  </style>
+</head>
+<body>
+
+  
+  <div class="d-flex flex-column min-vh-100">
+
+   <!-- NAVBAR -->
+ <nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="imgs/logo2.png" alt="UniTrip Logo" height="50">
+    </a>
+
+    <div class="d-none d-md-flex me-auto ps-3"> 
+      <form class="search-container d-flex align-items-center" style="width: 300px;">
+        <input class="form-control search-input" type="search" placeholder="City or Hotel..." >
+        <button class="search-btn" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
+    </div>
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item d-md-none w-100 my-2">
+          <form class="search-container d-flex align-items-center">
+            <input class="form-control search-input" type="search" placeholder="City or Hotel...">
+            <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
+          </form>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="./signup.html">Sign In</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about-section">About</a></li>
+        <li class="nav-item dropdown">
+          <button class="btn btn-teal dropdown-toggle ms-md-2" data-bs-toggle="dropdown">Book</button>
+            <ul class="dropdown-menu dropdown-menu-end p-2">
+              <li><button class="dropdown-item " onclick="window.location.href='hotel.html' "><i
+                    class="bi bi-building-fill me-2"></i>Hotel</button></li>
+              <li><button class="dropdown-item" onclick="window.location.href='BusReservation.html'"><i
+                    class="bi bi-bus-front-fill me-2"></i>Bus</button></li>
+            </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#contact-us">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <main class="container mt-5">
+
+  <h3 class="fw-bold mb-5 text-center" ,  style="color:#4b2c72">Recommended Hotels</h3>
+
+<div class="row g-4">
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/8c/39/cc/uninterrupted-city-view.jpg?w=900&h=500&s=1" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Espinas Palace Hotel</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary small"></i> <span class="text-primary small">Tehran</span></div>
+                    <p class="text-muted small">A symbol of luxury in the heights of Tehran with breathtaking city views.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$300 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">4.8</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white  py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://cdn.alibaba.ir/ostorage/hotel-accommodation-images/67065348666674792fcccb98_2022-07-11-28cb0936-71d1-47fa-b9ec-605b7d4a6be2.webp?" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Toranj Marine Hotel</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary small"></i> <span class="text-primary small">Kish Island</span></div>
+                    <p class="text-muted small">Unique experience of staying on the Persian Gulf crystal waters.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$200 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">4.7</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white  py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://media.imna.ir/d/2020/09/16/4/1656664.jpg" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Abbasi Historical Hotel</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary  small"></i> <span class="text-primary small">Isfahan</span></div>
+                    <p class="text-muted small">The oldest hotel in the world, a masterpiece of Safavid architecture.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$120 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">4.5</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white  py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://cdn-a-hid.cdnfl2.ir/upload/hotelimagesdomestic/667/17.jpg" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Dariush Hotel</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary small"></i> <span class="small text-primary">Kish Island</span></div>
+                    <p class="text-muted small">Inspired by Persepolis, providing a royal Persian experience.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$220 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">5.0</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white  py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8u-Jf7NdZmxLY_bni6s8UjCYYKpM3UGOD2A&s" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Perspolice</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary small"></i> <span class="small text-primary">Shiraz</span></div>
+                    <p class="text-muted small">This five-star hotel offers world-class amenities, exquisite dining, and breathtaking views of the city skyline.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$280 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">4.3</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white  py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kq5E2qPjvcEAj8g-SjMMLzAJu50rBFOLkLTBUOq0VLLLQ4m2RGX3DRi3p4xlkurLjNA&usqp=CAU" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Venus Plus</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary  small"></i> <span class="text-primary small">Mazandaran</span></div>
+                    <p class="text-muted small">A beautiful experience in the heart of nature.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$120 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">4.1</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white  py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXxOmt6lqgenN8i6ibe8_phWvBtrKEhlN8fZno3x-KpfheOJaXAUlHiLH1tYYfupgP3q4&usqp=CAU" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Piroozy</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary small"></i> <span class="text-primary small">Isfehan</span></div>
+                    <p class="text-muted small">Unique experience of staying on Isfehan.</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$190 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">4.8</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white  py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="col-lg-4 col-md-6 col-12">
+        <div class="hotel-card shadow-sm">
+            <div class="hotel-img-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4R-4VTHgpD4q07BN9Xu4G0Jidt00AwWj6lL7PnPYp7FrYauVBlTi58nhzJYlSduO77LA&usqp=CAU" alt="Hotel">
+            </div>
+            <div class="hotel-details">
+                <div>
+                    <h5 class="fw-bold mb-1">Vida Hotel</h5>
+                    <div class="mb-2"><i class="bi bi-geo-alt-fill text-primary small"></i> <span class="small text-primary">Kish Island</span></div>
+                    <p class="text-muted small">A pleasant and unforgettable trip to the beautiful Kish island .</p>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold fs-5">$330 <small class="fw-normal text-muted" style="font-size: 0.8rem;">/night</small></span>
+                    <div class="hotel-rating-inline">
+                        <span class="fw-bold small">5.0</span>
+                        <i class="bi bi-star-fill text-warning ms-1 small"></i>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-action text-white  py-2 w-100 shadow-sm">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br><br>
+
+   <div class="reviews-box-container shadow-sm">
+  <h4 class="text-center fw-bold mb-5" style="color: #4b2c72;">User Experiences</h4>
+
+  <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+
+  <div class="carousel-inner">
+    </div>
+    <div class="carousel-inner px-md-5">
+      
+      <div class="carousel-item active">
+        <div class="review-row">
+          <div class="review-item item-left">
+            <div class="user-circle shadow-sm">
+                 <img src="imgs/sara.jpg" alt="Sara">
+            </div>
+            <div>
+              <p class="review-text">"The hotels in Kish were very beautiful and the prices were reasonable."</p>
+              <span class="user-name">Sara</span>
+            </div>
+          </div>
+          <div class="review-item item-right">
+            <div class="user-circle shadow-sm">
+                <img src="imgs/medi.jpg" alt="Medisa">
+            </div>
+            <div>
+              <p class="review-text">"Found a great deal for my family trip."</p>
+              <span class="user-name">Medisa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="review-row">
+          <div class="review-item item-left">
+            <div class="user-circle shadow-sm">
+                <img src="imgs/ali.jpg" alt="Ali">
+            </div>
+            <div>
+              <p class="review-text">"The customer support was very helpful."</p>
+              <span class="user-name">Ali</span>
+            </div>
+          </div>
+          <div class="review-item item-right">
+            <div class="user-circle shadow-sm">
+              <img src="imgs/hossi.jpg" alt="Hossein">
+            </div>
+            <div>
+              <p class="review-text">"Best prices compared to other websites."</p>
+              <span class="user-name">Hossein</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="custom-carousel-control prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+    <i class="bi bi-chevron-left"></i>
+</button>
+<button class="custom-carousel-control next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+    <i class="bi bi-chevron-right"></i>
+</button>
+
+    
+  </div>
+</div>
+    
+
+  </main>
+
+   
+    <!-- Footer -->
+    <footer class="site-footer bg-light py-4 navbar-expand-lg"
+      style="background: linear-gradient(90deg, #240577dc, #ff774dcc) !important;">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-4 text-light">
+            <h5>UniTrip</h5>
+            <p class="text-light small">Smart travel bookings — hotel & bus reservations in one place.</p>
+          </div>
+
+         
+          <div class="col-md-4 text-light">
+            <h6>Contact</h6>
+            <p class="text-light small mb-1">Phone: +1 234 567 890</p>
+            <p class="text-light small">Email: hello@unitrip.example</p>
+          </div>
+
+         
+          <div class="col-md-4 text-end text-light">
+            <h6>Follow</h6>
+            <a href="#" class="me-2 text-light"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="me-2 text-light"><i class="bi bi-telegram"></i></a>
+            <a href="#" class="me-2 text-light"><i class="bi bi-facebook"></i></a>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+  </div> 
+  </body>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function showService(type) {
+      toggleTab(type);
+    }
+
+    function toggleTab(type) {
+      const tabBus = document.getElementById('tab-bus');
+      const tabHotel = document.getElementById('tab-hotel');
+      if (tabBus) tabBus.classList.toggle('active', type === 'bus');
+      if (tabHotel) tabHotel.classList.toggle('active', type === 'hotel');
+
+      const busForm = document.getElementById('bus-form');
+      const hotelForm = document.getElementById('hotel-form');
+      if (busForm) busForm.classList.toggle('d-none', type !== 'bus');
+      if (hotelForm) hotelForm.classList.toggle('d-none', type !== 'hotel');
+
+      const title = document.getElementById('service-title');
+      if (title) {
+        title.innerText = type === 'bus' ? 'Bus Booking' : 'Hotel Booking';
+      }
+
+      const bookingSection = document.getElementById('booking');
+      if (bookingSection) {
+        bookingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+  </script>
+</body>
+</html>
