@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: unitrip-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/internal/infrastructure/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./backend/internal/infrastructure/database/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+
+volumes:
+  postgres_data:
