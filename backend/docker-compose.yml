@@ -1,7 +1,7 @@
 services:
   postgres:
-    image: postgres:16
-    container_name: unitrip-postgres
+    image: postgres:16-alpine
+    container_name: unitrip-database
     restart: unless-stopped
 
     environment:
@@ -14,8 +14,8 @@ services:
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./backend/internal/infrastructure/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      - ./backend/internal/infrastructure/database/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+      - ./internal/infrastructure/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./internal/infrastructure/database/seed.sql:/docker-entrypoint-initdb.d/seed.sql
 
 volumes:
   postgres_data:
