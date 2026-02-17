@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"unitrip/cmd"
+)
 
 func main() {
-	fmt.Println("say hello to clean architecture")
+	log.Print(cmd.Run())
 }

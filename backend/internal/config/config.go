@@ -4,6 +4,6 @@ type Config struct {
 	DatabaseName     string
 	DatabaseUser     string
 	DatabasePassword string
-	DatabasePort     int
+	DatabasePort     string
 	DatabaseHost     string
 }
