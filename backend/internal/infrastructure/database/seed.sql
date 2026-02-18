@@ -3,14 +3,14 @@
 INSERT INTO cities (name) VALUES ('Tehran'), ('Isfahan'), ('Shiraz'), ('Mashhad'), ('Yazd'), ('Kerman'), ('Tabriz'), ('Hamedan');
 
 -- Users
-INSERT INTO users (full_name, phone, email, password_hash) VALUES
-('Ali Rezaei', '09123456789', 'ali.rezaei@example.com', 'hash123'),
-('Sara Mohammadi', '09129876543', 'sara.mohammadi@example.com', 'hash456'),
-('Hasan Karimi', '09121112233', 'hasan.karimi@example.com', 'hash789'),
-('Maryam Ghasemi', '09131234567', 'maryam.ghasemi@example.com', 'hash101112'),
-('Reza Davoodi', '09147654321', 'reza.davoodi@example.com', 'hash131415'),
-('Fatemeh Najafi', '09151112222', 'fatemeh.najafi@example.com', 'hash161718'),
-('Babak Zandi', '09188118811', 'babak.zandi@example.com', 'hash192021');
+INSERT INTO users (full_name, username, phone, email, password_hash) VALUES
+('Ali Rezaei','ali123', '09123456789', 'ali.rezaei@example.com', 'hash123'),
+('Sara Mohammadi', 'sara123', '09129876543', 'sara.mohammadi@example.com', 'hash456'),
+('Hasan Karimi', 'hasan123', '09121112233', 'hasan.karimi@example.com', 'hash789'),
+('Maryam Ghasemi', 'maryam123', '09131234567', 'maryam.ghasemi@example.com', 'hash101112'),
+('Reza Davoodi', 'reza123', '09147654321', 'reza.davoodi@example.com', 'hash131415'),
+('Fatemeh Najafi', 'fatemeh123', '09151112222', 'fatemeh.najafi@example.com', 'hash161718'),
+('Babak Zandi', 'babak123', '09188118811', 'babak.zandi@example.com', 'hash192021');
 
 -- Hotels
 INSERT INTO hotels (name, city_id, address) VALUES
@@ -87,3 +87,39 @@ INSERT INTO reservations (user_id, reservation_type, buyer_full_name, buyer_phon
 INSERT INTO hotel_reservations (reservation_id, room_id, check_in, check_out) VALUES (7, 11, '2026-05-10', '2026-05-12');
 INSERT INTO payments (reservation_id, amount, status, paid_at) VALUES (7, 5600000, 'PAID', CURRENT_TIMESTAMP);
 INSERT INTO reviews (user_id, target_type, target_id, rating, comment) VALUES (7, 'HOTEL', 6, 5, 'Great location.');
+
+UPDATE users SET role = 'ADMIN' WHERE id IN (1, 2);
+
+INSERT INTO wallet_transactions (wallet_id, amount, transaction_type)
+VALUES
+(1, 500000000, 'DEPOSIT'),
+(2, 800000000, 'DEPOSIT'),
+(3, 100000000, 'DEPOSIT'),
+(4, 300000000, 'DEPOSIT'),
+(5, 600000000, 'DEPOSIT'),
+(6, 200000000, 'DEPOSIT'),
+(7, 400000000, 'DEPOSIT');
+
+-- Wallet payment for Scenario 1: Successful bus reservation (Reservation ID = 1)
+INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
+VALUES (1, 900000, 'PAYMENT', 1);
+
+-- Wallet payment for Scenario 2: Successful hotel reservation (Reservation ID = 2)
+INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
+VALUES (2, 12000000, 'PAYMENT', 2);
+
+-- Wallet payment for Scenario 4: Successful bus reservation (Reservation ID = 4)
+INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
+VALUES (4, 450000, 'PAYMENT', 4);
+
+-- Wallet payment for Scenario 6: Successful hotel reservation (Reservation ID = 5)
+INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
+VALUES (1, 7000000, 'PAYMENT', 5);
+
+-- Wallet payment for Scenario 9: Successful hotel reservation (Reservation ID = 7)
+INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
+VALUES (7, 5600000, 'PAYMENT', 7);
+
+-- Refund for Scenario 3: Unpaid bus reservation was cancelled (Reservation ID = 3)
+INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
+VALUES (3, 300000, 'REFUND', 3);
