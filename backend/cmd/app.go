@@ -1,32 +1,19 @@
 package cmd
 
 import (
-	"database/sql"
 	"log"
-	"sync"
+	"time"
 
+	"unitrip/internal/adapter/http"
+	"unitrip/internal/adapter/repository"
 	"unitrip/internal/config"
 	"unitrip/internal/infrastructure/database"
+	"unitrip/internal/infrastructure/jwt"
+	"unitrip/internal/infrastructure/web"
+	"unitrip/internal/usecase"
 )
 
-type Container struct {
-	db *sql.DB
-
-	mutex sync.RWMutex
-}
-
-func NewContainer() *Container {
-	return &Container{}
-}
-
-func (c *Container) SetUp(db *sql.DB) {
-	c.mutex.Lock()
-	defer c.mutex.Unlock()
-	c.db = db
-}
-
 func Run() error {
-
 	conf, err := config.New()
 	if err != nil {
 		return err
@@ -34,11 +21,18 @@ func Run() error {
 
 	db := database.NewDB(conf)
 	if db == nil {
-		log.Println("db is nil ...")
+		log.Fatalln("db is nil ...")
 	}
-	container := NewContainer()
 
-	container.SetUp(db)
+	jwtService := jwt.NewJWTService(conf.SecretKey, 24*time.Hour)
 
-	return nil
+	userRepo := repository.NewUserRepo(db)
+	userService := usecase.NewUserService(userRepo)
+	userHandler := http.NewUserHandler(userService, jwtService)
+
+	ginEngine := web.NewRouter()
+	web.RegisterRoutes(ginEngine, userHandler)
+
+	log.Printf("Starting server on port %s", conf.WebPort)
+	return ginEngine.Run(":" + conf.WebPort)
 }
