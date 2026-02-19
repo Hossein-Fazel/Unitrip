@@ -6,4 +6,8 @@ type Config struct {
 	DatabasePassword string
 	DatabasePort     string
 	DatabaseHost     string
+
+	WebPort string
+
+	SecretKey string
 }
