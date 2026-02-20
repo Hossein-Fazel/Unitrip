@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"errors"
 	"unitrip/internal/entity"
 	"unitrip/internal/usecase"
 )
@@ -17,6 +18,10 @@ func NewUserRepo(db *sql.DB) usecase.UserRepo {
 }
 
 func (u *user) Save(user *entity.User) (*entity.User, error) {
+	if u.db == nil {
+		return nil, errors.New("database connection is nil")
+	}
+
 	query := `
 		INSERT INTO users (username, email, password_hash, role)
 		VALUES ($1, $2, $3, $4)
@@ -39,6 +44,10 @@ func (u *user) Save(user *entity.User) (*entity.User, error) {
 }
 
 func (u *user) Exist(user *entity.User) (bool, error) {
+	if u.db == nil {
+		return false, errors.New("database connection is nil")
+	}
+
 	var exists bool
 
 	query := `
@@ -54,4 +63,67 @@ func (u *user) Exist(user *entity.User) (bool, error) {
 	}
 
 	return exists, nil
+}
+
+func (u *user) GetUserByEmail(email string) (*entity.User, error) {
+	if u.db == nil {
+		return nil, errors.New("database connection is nil")
+	}
+
+	query := `
+		SELECT id, username, email, password_hash, role, created_at
+		FROM users
+		WHERE email = $1
+	`
+	var user entity.User
+
+	err := u.db.QueryRow(query, email).Scan(
+		&user.ID,
+		&user.Username,
+		&user.Email,
+		&user.Password,
+		&user.Role,
+		&user.CreatedAt,
+	)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, usecase.ErrUserNotFound
+		}
+		return nil, err
+	}
+
+	return &user, nil
+
+}
+
+func (u *user) GetUserByUsername(username string) (*entity.User, error) {
+	if u.db == nil {
+		return nil, errors.New("database connection is nil")
+	}
+
+	query := `
+		SELECT id, username, email, password_hash, role, created_at
+		FROM users
+		WHERE username = $1
+	`
+	var user entity.User
+
+	err := u.db.QueryRow(query, username).Scan(
+		&user.ID,
+		&user.Username,
+		&user.Email,
+		&user.Password,
+		&user.Role,
+		&user.CreatedAt,
+	)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, usecase.ErrUserNotFound
+		}
+		return nil, err
+	}
+
+	return &user, nil
 }
