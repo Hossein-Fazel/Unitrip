@@ -4,13 +4,13 @@ import (
 	"net/http"
 	"strings"
 
-	jwt "unitrip/internal/adapter/http"
+	httpAdapter "unitrip/internal/adapter/http"
 	"unitrip/internal/entity"
 
 	"github.com/gin-gonic/gin"
 )
 
-func AuthMiddleware(jwtService jwt.JWTService) gin.HandlerFunc {
+func AuthMiddleware(jwtService httpAdapter.JWTService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
 		if authHeader == "" {
