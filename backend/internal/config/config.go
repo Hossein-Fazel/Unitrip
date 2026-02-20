@@ -10,4 +10,7 @@ type Config struct {
 	WebPort string
 
 	SecretKey string
+
+	AdminUsername string
+	AdminPassword string
 }
