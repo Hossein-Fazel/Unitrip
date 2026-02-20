@@ -5,6 +5,8 @@ import (
 	"strings"
 
 	jwt "unitrip/internal/adapter/http"
+	"unitrip/internal/entity"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -35,5 +37,25 @@ func AuthMiddleware(jwtService jwt.JWTService) gin.HandlerFunc {
 		c.Set("role", claims.Role)
 
 		c.Next()
+	}
+}
+
+func AdminOnly() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		roleVal, exists := c.Get("role")
+		if !exists {
+			c.JSON(http.StatusForbidden, gin.H{"error": "forbidden"})
+			c.Abort()
+			return
+		}
+
+		role, ok := roleVal.(entity.UserRole)
+		if ok && role == entity.RoleAdmin {
+			c.Next()
+			return
+		}
+
+		c.JSON(http.StatusForbidden, gin.H{"error": "admin only"})
+		c.Abort()
 	}
 }
