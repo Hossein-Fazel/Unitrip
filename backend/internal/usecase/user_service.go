@@ -28,7 +28,7 @@ func (a *user) Signup(user *entity.User) (*entity.User, error) {
 	if err != nil {
 		return nil, fmt.Errorf("%w:%v", ErrInternal, err)
 	}
-	if exist == true {
+	if exist {
 		return nil, ErrUserAlreadyExist
 	}
 

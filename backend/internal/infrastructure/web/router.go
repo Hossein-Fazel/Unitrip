@@ -19,8 +19,8 @@ func NewRouter() *gin.Engine {
 }
 
 func RegisterRoutes(router *gin.Engine, userHandler http.AuthHandler) {
-	userGroup := router.Group("/user")
-	registerAuthRoutes(userGroup, userHandler)
+	authGroup := router.Group("/auth")
+	registerAuthRoutes(authGroup, userHandler)
 }
 
 
