@@ -4,20 +4,17 @@ import (
 	"errors"
 	"time"
 
+	"unitrip/internal/adapter/http"
+
 	"github.com/golang-jwt/jwt/v5"
 )
-
-type JWTService interface {
-	GenerateToken(userID, role string) (string, error)
-	ValidateToken(token string) (string, string, error) // userID, role
-}
 
 type jwtService struct {
 	secretKey string
 	ttl       time.Duration
 }
 
-func NewJWTService(secretKey string, ttl time.Duration) JWTService {
+func NewJWTService(secretKey string, ttl time.Duration) http.JWTService {
 	return &jwtService{
 		secretKey: secretKey,
 		ttl:       ttl,

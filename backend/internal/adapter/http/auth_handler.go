@@ -4,7 +4,6 @@ import (
 	"errors"
 	"regexp"
 	"unitrip/internal/entity"
-	"unitrip/internal/infrastructure/jwt"
 	"unitrip/internal/usecase"
 
 	"net/http"
@@ -19,10 +18,10 @@ type AuthHandler interface {
 
 type auth struct {
 	userService usecase.User
-	jwtService  jwt.JWTService
+	jwtService  JWTService
 }
 
-func NewAuthHandler(userService usecase.User, jwtService jwt.JWTService) AuthHandler {
+func NewAuthHandler(userService usecase.User, jwtService JWTService) AuthHandler {
 	return &auth{
 		userService: userService,
 		jwtService:  jwtService,
