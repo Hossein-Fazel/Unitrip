@@ -48,7 +48,7 @@ func (a *auth) Signup(c *gin.Context) {
 	}
 
 	// generate token for this user
-	jwtToken, err := a.jwtService.GenerateToken(user.Username, user.Role)
+	jwtToken, err := a.jwtService.GenerateToken(user)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "could not generate token"})
 		return
@@ -93,7 +93,7 @@ func (a *auth) Login(c *gin.Context) {
 	}
 
 	// generate token for this user
-	jwtToken, err := a.jwtService.GenerateToken(user.Username, user.Role)
+	jwtToken, err := a.jwtService.GenerateToken(user)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "could not generate token"})
 		return

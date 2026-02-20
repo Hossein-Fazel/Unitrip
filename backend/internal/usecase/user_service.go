@@ -25,7 +25,7 @@ func NewUserService(userRepo UserRepo) User {
 
 func (u *user) Signup(user *entity.User) (*entity.User, error) {
 	user.Password = hashPassword(user.Password)
-	user.Role = "USER"
+	user.Role = entity.RoleUser
 
 	exist, err := u.userRepo.Exist(user)
 	if err != nil {
@@ -75,7 +75,7 @@ func (u *user) CreateAdmin(username, password string) (*entity.User, error) {
 	adminUser := &entity.User{
 		Username: username,
 		Password: hashPassword(password),
-		Role:     "ADMIN",
+		Role:     entity.RoleAdmin,
 	}
 
 	exist, err := u.userRepo.Exist(adminUser)

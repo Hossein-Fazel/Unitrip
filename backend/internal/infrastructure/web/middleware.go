@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	jwt "unitrip/internal/adapter/http"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,15 +24,15 @@ func AuthMiddleware(jwtService jwt.JWTService) gin.HandlerFunc {
 			return
 		}
 
-		username, role, err := jwtService.ValidateToken(parts[1])
+		claims, err := jwtService.ValidateToken(parts[1])
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid or expired token"})
 			c.Abort()
 			return
 		}
 
-		c.Set("username", username)
-		c.Set("role", role)
+		c.Set("user_id", claims.UserID)
+		c.Set("role", claims.Role)
 
 		c.Next()
 	}
