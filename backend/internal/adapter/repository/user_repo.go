@@ -88,7 +88,7 @@ func (u *user) GetUserByEmail(email string) (*entity.User, error) {
 
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, usecase.ErrUserNotFound
+			return nil, usecase.ErrNotFound
 		}
 		return nil, err
 	}
@@ -120,7 +120,7 @@ func (u *user) GetUserByUsername(username string) (*entity.User, error) {
 
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, usecase.ErrUserNotFound
+			return nil, usecase.ErrNotFound
 		}
 		return nil, err
 	}

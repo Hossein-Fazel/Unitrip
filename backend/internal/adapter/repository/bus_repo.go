@@ -17,7 +17,7 @@ func NewBusRepo(db *sql.DB) usecase.BusRepo {
 	}
 }
 
-func (r *bus) GetAll() ([]*entity.Bus, error) {
+func (b *bus) GetAll() ([]*entity.Bus, error) {
 	query := `
 		SELECT
 			b.id,
@@ -33,7 +33,7 @@ func (r *bus) GetAll() ([]*entity.Bus, error) {
 		JOIN cities c2 ON c2.id = b.dest_city_id
 	`
 
-	rows, err := r.db.Query(query)
+	rows, err := b.db.Query(query)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ func (r *bus) GetAll() ([]*entity.Bus, error) {
 	return buses, nil
 }
 
-func (r *bus) GetByID(id int64) (*entity.Bus, error) {
+func (b *bus) GetByID(id int64) (*entity.Bus, error) {
 	query := `
 		SELECT
 			b.id,
@@ -90,7 +90,7 @@ func (r *bus) GetByID(id int64) (*entity.Bus, error) {
 	var source entity.City
 	var dest entity.City
 
-	err := r.db.QueryRow(query, id).Scan(
+	err := b.db.QueryRow(query, id).Scan(
 		&bus.ID,
 		&bus.Schedule.TravelDate,
 		&bus.Schedule.TravelTime,
@@ -102,7 +102,7 @@ func (r *bus) GetByID(id int64) (*entity.Bus, error) {
 	if err != nil {
 		switch {
 		case errors.Is(err, sql.ErrNoRows):
-			return nil, usecase.ErrBusNotFound
+			return nil, usecase.ErrNotFound
 		default:
 			return nil, err
 		}
@@ -116,7 +116,7 @@ func (r *bus) GetByID(id int64) (*entity.Bus, error) {
 	return &bus, nil
 }
 
-func (r *bus) Create(bus *entity.Bus) (*entity.Bus, error) {
+func (b *bus) Create(bus *entity.Bus) (*entity.Bus, error) {
 	query := `
 		INSERT INTO buses (
 			source_city_id,
@@ -129,7 +129,7 @@ func (r *bus) Create(bus *entity.Bus) (*entity.Bus, error) {
 		RETURNING id
 	`
 
-	err := r.db.QueryRow(
+	err := b.db.QueryRow(
 		query,
 		bus.Route.Source.ID,
 		bus.Route.Dest.ID,
@@ -170,8 +170,8 @@ func (r *bus) Update(bus *entity.Bus) error {
 	return err
 }
 
-func (r *bus) Delete(id int64) error {
+func (b *bus) Delete(id int64) error {
 	query := `DELETE FROM buses WHERE id = $1`
-	_, err := r.db.Exec(query, id)
+	_, err := b.db.Exec(query, id)
 	return err
 }

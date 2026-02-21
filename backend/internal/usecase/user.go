@@ -57,8 +57,8 @@ func (u *user) Login(inputUser *entity.User) (*entity.User, error) {
 
 	if err != nil {
 		switch {
-		case errors.Is(err, ErrUserNotFound):
-			return nil, err
+		case errors.Is(err, ErrNotFound):
+			return nil, fmt.Errorf("%w:%v", ErrNotFound, "user not found")
 		default:
 			return nil, fmt.Errorf("%w:%v", ErrInternal, err)
 		}

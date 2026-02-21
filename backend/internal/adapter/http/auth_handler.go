@@ -84,7 +84,7 @@ func (a *auth) Login(c *gin.Context) {
 				Error: usecase.ErrInternal.Error(),
 			})
 
-		case errors.Is(err, usecase.ErrPasswordWrong), errors.Is(err, usecase.ErrUserNotFound) :
+		case errors.Is(err, usecase.ErrPasswordWrong), errors.Is(err, usecase.ErrNotFound) :
 			c.JSON(http.StatusUnauthorized, ErrorResponse{
 				Error: "invalid credentials",
 			})
