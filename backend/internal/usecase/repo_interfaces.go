@@ -17,4 +17,6 @@ type BusRepo interface {
 	Create(bus *entity.Bus) (*entity.Bus, error)
 	Update(bus *entity.Bus) error
 	Delete(id int64) error
+	GenerateSeats(id int64, n int) error
+	GetSeatsByID(id int64) ([]*entity.Seat, error)
 }

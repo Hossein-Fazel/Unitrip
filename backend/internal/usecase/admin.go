@@ -48,7 +48,13 @@ func (u *admin) CreateBus(bus *entity.Bus) (*entity.Bus, error) {
 	if err != nil {
 		return nil, err
 	}
-	return u.busRepo.GetByID(bus.ID)
+	
+	err = u.busRepo.GenerateSeats(bus.ID, 25)
+	if err != nil {
+		return nil, err
+	}
+
+	return bus, nil
 }
 
 func (u *admin) UpdateBus(bus *entity.Bus) error {

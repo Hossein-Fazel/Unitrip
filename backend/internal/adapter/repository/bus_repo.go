@@ -198,3 +198,45 @@ func (b *bus) Delete(id int64) error {
 	_, err := b.db.Exec(query, id)
 	return err
 }
+
+func (b *bus) GenerateSeats(id int64, n int) error {
+	query := `
+		INSERT INTO bus_seats (bus_id, seat_no)
+		SELECT $1, generate_series(1, $2)
+	`
+	_, err := b.db.Exec(query, id, n)
+	return err
+}
+
+func (b *bus) GetSeatsByID(id int64) ([]*entity.Seat, error) {
+	query := `
+		SELECT id, bus_id, seat_no, status
+		FROM bus_seats
+		WHERE bus_id = $1
+		ORDER BY seat_no
+	`
+
+	rows, err := b.db.Query(query, id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var seats []*entity.Seat
+	for rows.Next() {
+		seat := &entity.Seat{}
+		if err := rows.Scan(
+			&seat.SeatNo,
+			&seat.Status,
+		); err != nil {
+			return nil, err
+		}
+		seats = append(seats, seat)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return seats, nil
+}
