@@ -4,7 +4,6 @@ import (
 	"errors"
 	"regexp"
 	"unitrip/internal/entity"
-	"unitrip/internal/infrastructure/jwt"
 	"unitrip/internal/usecase"
 
 	"net/http"
@@ -19,10 +18,10 @@ type AuthHandler interface {
 
 type auth struct {
 	userService usecase.User
-	jwtService  jwt.JWTService
+	jwtService  JWTService
 }
 
-func NewAuthHandler(userService usecase.User, jwtService jwt.JWTService) AuthHandler {
+func NewAuthHandler(userService usecase.User, jwtService JWTService) AuthHandler {
 	return &auth{
 		userService: userService,
 		jwtService:  jwtService,
@@ -49,7 +48,7 @@ func (a *auth) Signup(c *gin.Context) {
 	}
 
 	// generate token for this user
-	jwtToken, err := a.jwtService.GenerateToken(user.Username, user.Role)
+	jwtToken, err := a.jwtService.GenerateToken(user)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "could not generate token"})
 		return
@@ -85,7 +84,7 @@ func (a *auth) Login(c *gin.Context) {
 				Error: usecase.ErrInternal.Error(),
 			})
 
-		case errors.Is(err, usecase.ErrPasswordWrong), errors.Is(err, usecase.ErrUserNotFound) :
+		case errors.Is(err, usecase.ErrPasswordWrong), errors.Is(err, usecase.ErrNotFound) :
 			c.JSON(http.StatusUnauthorized, ErrorResponse{
 				Error: "invalid credentials",
 			})
@@ -94,7 +93,7 @@ func (a *auth) Login(c *gin.Context) {
 	}
 
 	// generate token for this user
-	jwtToken, err := a.jwtService.GenerateToken(user.Username, user.Role)
+	jwtToken, err := a.jwtService.GenerateToken(user)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "could not generate token"})
 		return

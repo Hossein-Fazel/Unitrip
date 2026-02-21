@@ -87,10 +87,12 @@ func (u *user) GetUserByEmail(email string) (*entity.User, error) {
 	)
 
 	if err != nil {
-		if err == sql.ErrNoRows {
-			return nil, usecase.ErrUserNotFound
+		switch {
+		case errors.Is(err, sql.ErrNoRows):
+			return nil, usecase.ErrNotFound
+		default:
+			return nil, err
 		}
-		return nil, err
 	}
 
 	return &user, nil
@@ -119,10 +121,12 @@ func (u *user) GetUserByUsername(username string) (*entity.User, error) {
 	)
 
 	if err != nil {
-		if err == sql.ErrNoRows {
-			return nil, usecase.ErrUserNotFound
+		switch {
+		case errors.Is(err, sql.ErrNoRows):
+			return nil, usecase.ErrNotFound
+		default:
+			return nil, err
 		}
-		return nil, err
 	}
 
 	return &user, nil

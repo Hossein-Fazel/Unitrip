@@ -12,5 +12,8 @@ func New() (*Config, error) {
 
 	config.WebPort = GetEnv("WEB_PORT", "8080")
 	config.SecretKey = GetEnv("SECRET_KEY", "")
+
+	config.AdminUsername = GetEnv("ADMIN_USERNAME", "admin")
+	config.AdminPassword = GetEnv("ADMIN_PASSWORD", "admin")
 	return &config, nil
 }
