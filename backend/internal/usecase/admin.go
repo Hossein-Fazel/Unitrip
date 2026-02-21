@@ -10,7 +10,7 @@ type Admin interface {
 	GetBusByID(id int64) (*entity.Bus, error)
 	CreateBus(bus *entity.Bus) (*entity.Bus, error)
 	UpdateBus(bus *entity.Bus) error
-	DeleteBus(id int64) error 
+	DeleteBus(id int64) error
 }
 
 type admin struct {
