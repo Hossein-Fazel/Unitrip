@@ -9,4 +9,5 @@ var (
 	ErrUserSaveFailed   = errors.New("failed to save user")
 	ErrInvalidRequest   = errors.New("Invalid request")
 	ErrPasswordWrong    = errors.New("password wrong")
+	ErrBusNotFound      = errors.New("bus not found")
 )

@@ -10,3 +10,11 @@ type UserRepo interface {
 	GetUserByEmail(email string) (*entity.User, error)
 	GetUserByUsername(username string) (*entity.User, error)
 }
+
+type BusRepo interface {
+	GetAll() ([]*entity.Bus, error)
+	GetByID(id int64) (*entity.Bus, error)
+	Create(bus *entity.Bus) (*entity.Bus, error)
+	Update(bus *entity.Bus) error
+	Delete(id int64) error
+}
