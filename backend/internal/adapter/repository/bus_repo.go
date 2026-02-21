@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
+	"time"
 	"unitrip/internal/entity"
 	"unitrip/internal/usecase"
 )
@@ -46,12 +47,14 @@ func (b *bus) GetAll() ([]*entity.Bus, error) {
 		var source entity.City
 		var dest entity.City
 
+		var dateStr, timeStr string
+
 		err := rows.Scan(
 			&bus.ID,
 			&source.ID,
 			&dest.ID,
-			&bus.Schedule.TravelDate,
-			&bus.Schedule.TravelTime,
+			&dateStr,
+			&timeStr,
 			&bus.Price,
 			&source.ID, &source.Name,
 			&dest.ID, &dest.Name,
@@ -59,6 +62,12 @@ func (b *bus) GetAll() ([]*entity.Bus, error) {
 		if err != nil {
 			return nil, err
 		}
+
+		dt, _ := time.Parse(
+			"2006-01-02 15:04:05",
+			dateStr+" "+timeStr,
+		)
+		bus.Schedule = dt
 
 		bus.Route = entity.Route{
 			Source: source,
@@ -90,10 +99,12 @@ func (b *bus) GetByID(id int64) (*entity.Bus, error) {
 	var source entity.City
 	var dest entity.City
 
+	var dateStr, timeStr string
+
 	err := b.db.QueryRow(query, id).Scan(
 		&bus.ID,
-		&bus.Schedule.TravelDate,
-		&bus.Schedule.TravelTime,
+		&dateStr,
+		&timeStr,
 		&bus.Price,
 		&source.ID, &source.Name,
 		&dest.ID, &dest.Name,
@@ -107,6 +118,12 @@ func (b *bus) GetByID(id int64) (*entity.Bus, error) {
 			return nil, err
 		}
 	}
+
+	dt, _ := time.Parse(
+		"2006-01-02 15:04:05",
+		dateStr+" "+timeStr,
+	)
+	bus.Schedule = dt
 
 	bus.Route = entity.Route{
 		Source: source,
@@ -129,12 +146,15 @@ func (b *bus) Create(bus *entity.Bus) (*entity.Bus, error) {
 		RETURNING id
 	`
 
+	date := bus.Schedule.Format("2006-01-02")
+	time := bus.Schedule.Format("15:04:05")
+
 	err := b.db.QueryRow(
 		query,
 		bus.Route.Source.ID,
 		bus.Route.Dest.ID,
-		bus.Schedule.TravelDate,
-		bus.Schedule.TravelTime,
+		date,
+		time,
 		bus.Price,
 	).Scan(&bus.ID)
 
@@ -157,12 +177,15 @@ func (r *bus) Update(bus *entity.Bus) error {
 		WHERE id = $6
 	`
 
+	date := bus.Schedule.Format("2006-01-02")
+	time := bus.Schedule.Format("15:04:05")
+
 	_, err := r.db.Exec(
 		query,
 		bus.Route.Source.ID,
 		bus.Route.Dest.ID,
-		bus.Schedule.TravelDate,
-		bus.Schedule.TravelTime,
+		date,
+		time,
 		bus.Price,
 		bus.ID,
 	)

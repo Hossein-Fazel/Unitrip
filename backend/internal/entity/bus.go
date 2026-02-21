@@ -5,7 +5,7 @@ import "time"
 type Bus struct {
 	ID        int64
 	Route     Route
-	Schedule  Schedule
+	Schedule  time.Time
 	Price     float64
 	Seats     []Seat
 	Rating    Rating
@@ -15,11 +15,6 @@ type Bus struct {
 type Route struct {
 	Source City
 	Dest   City
-}
-
-type Schedule struct {
-	TravelDate time.Time
-	TravelTime time.Time
 }
 
 type Seat struct {
@@ -46,5 +41,5 @@ func (b Bus) AvailableSeatsCount() int {
 }
 
 func (b Bus) IsAvailable() bool {
-	return time.Now().Before(b.Schedule.TravelDate)
+	return time.Now().Before(b.Schedule)
 }
