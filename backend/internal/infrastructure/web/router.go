@@ -18,13 +18,25 @@ func NewRouter() *gin.Engine {
 	return engine
 }
 
-func RegisterRoutes(router *gin.Engine, userHandler http.AuthHandler) {
+func RegisterRoutes(router *gin.Engine, userHandler http.AuthHandler, adminHandler http.AdminHandler, jwtService http.JWTService) {
 	authGroup := router.Group("/auth")
+	adminGroup := router.Group("/admin")
 	registerAuthRoutes(authGroup, userHandler)
+	registerAdminRoutes(adminGroup, adminHandler, jwtService)
 }
 
 
 func registerAuthRoutes(group *gin.RouterGroup, authHandler http.AuthHandler) {
 	group.POST("/signup", authHandler.Signup)
 	group.POST("/login", authHandler.Login)
+}
+
+func registerAdminRoutes(group *gin.RouterGroup, adminHandler http.AdminHandler, jwtService http.JWTService) {
+	group.Use(AuthMiddleware(jwtService), AdminOnly())
+	busGroup := group.Group("/buses")
+	busGroup.GET("", adminHandler.GetAllBuses)
+	busGroup.GET("/:id", adminHandler.GetBusByID)
+	busGroup.POST("", adminHandler.CreateBus)
+	busGroup.PUT("/:id", adminHandler.UpdateBus)
+	busGroup.DELETE("/:id", adminHandler.DeleteBus)
 }

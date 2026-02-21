@@ -6,7 +6,7 @@ type Bus struct {
 	ID        int64
 	Route     Route
 	Schedule  Schedule
-	Price     int64
+	Price     float64
 	Seats     []Seat
 	Rating    Rating
 	CreatedAt time.Time
