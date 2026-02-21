@@ -33,10 +33,11 @@ func Run() error {
 	// Repositories
 	userRepo := repository.NewUserRepo(db)
 	busRepo := repository.NewBusRepo(db)
+	cityRepo := repository.NewCityRepo(db)
 
 	// Services
 	userService := usecase.NewUserService(userRepo)
-	adminService := usecase.NewAdminService(busRepo)
+	adminService := usecase.NewAdminService(busRepo, cityRepo)
 
 	// Create admin account
 	_, err = userService.CreateAdmin(conf.AdminUsername, conf.AdminPassword)

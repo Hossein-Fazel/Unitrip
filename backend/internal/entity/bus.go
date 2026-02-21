@@ -4,17 +4,17 @@ import "time"
 
 type Bus struct {
 	ID        int64
-	Route     Route
+	Route     *Route
 	Schedule  time.Time
 	Price     float64
-	Seats     []Seat
-	Rating    Rating
+	Seats     []*Seat
+	Rating    *Rating
 	CreatedAt time.Time
 }
 
 type Route struct {
-	Source City
-	Dest   City
+	Source *City
+	Dest   *City
 }
 
 type Seat struct {

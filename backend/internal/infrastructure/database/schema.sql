@@ -11,7 +11,7 @@ CREATE TABLE users (
 
 CREATE TABLE wallets (
     id SERIAL PRIMARY KEY,
-    user_id INT UNIQUE REFERENCES users(id),
+    user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
     balance NUMERIC(12,2) NOT NULL DEFAULT 0,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -34,7 +34,7 @@ CREATE TABLE cities (
 CREATE TABLE hotels (
     id           SERIAL PRIMARY KEY,
     name         VARCHAR(100) NOT NULL,
-    city_id      INT REFERENCES cities(id),
+    city_id      INT REFERENCES cities(id) ON DELETE CASCADE ON UPDATE CASCADE,
     address      TEXT,
     rating_avg   NUMERIC(2,1) DEFAULT 0,
     rating_count INT DEFAULT 0
@@ -42,7 +42,7 @@ CREATE TABLE hotels (
 
 CREATE TABLE rooms (
     id        SERIAL PRIMARY KEY,
-    hotel_id  INT REFERENCES hotels(id),
+    hotel_id  INT REFERENCES hotels(id) ON DELETE CASCADE ON UPDATE CASCADE,
     room_type VARCHAR(50),
     price     NUMERIC(10,2),
     capacity  INT,
@@ -51,8 +51,8 @@ CREATE TABLE rooms (
 
 CREATE TABLE buses (
     id             SERIAL PRIMARY KEY,
-    source_city_id INT REFERENCES cities(id),
-    dest_city_id   INT REFERENCES cities(id),
+    source_city_id INT REFERENCES cities(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    dest_city_id   INT REFERENCES cities(id) ON DELETE CASCADE ON UPDATE CASCADE,
     travel_date    DATE NOT NULL,
     travel_time    TIME NOT NULL,
     price          NUMERIC(10,2),
@@ -62,14 +62,14 @@ CREATE TABLE buses (
 
 CREATE TABLE bus_seats (
     id        SERIAL PRIMARY KEY,
-    bus_id    INT REFERENCES buses(id),
+    bus_id    INT REFERENCES buses(id) ON DELETE CASCADE ON UPDATE CASCADE,
     seat_no   INT NOT NULL,
     status    VARCHAR(10) NOT NULL DEFAULT 'AVAILABLE' CHECK (status IN ('AVAILABLE','PENDING','BOOKED'))
 );
 
 CREATE TABLE reservations (
     id                  SERIAL PRIMARY KEY,
-    user_id             INT REFERENCES users(id),
+    user_id             INT REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
     reservation_type    VARCHAR(10) NOT NULL CHECK (reservation_type IN ('BUS','HOTEL')),
     buyer_full_name     VARCHAR(100) NOT NULL,
     buyer_phone         VARCHAR(20) NOT NULL,
@@ -80,22 +80,22 @@ CREATE TABLE reservations (
 
 CREATE TABLE hotel_reservations (
     id             SERIAL PRIMARY KEY,
-    reservation_id INT REFERENCES reservations(id),
-    room_id        INT REFERENCES rooms(id),
+    reservation_id INT REFERENCES reservations(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    room_id        INT REFERENCES rooms(id) ON DELETE CASCADE ON UPDATE CASCADE,
     check_in       DATE,
     check_out      DATE
 );
 
 CREATE TABLE bus_reservations (
     id             SERIAL PRIMARY KEY,
-    reservation_id INT UNIQUE REFERENCES reservations(id),
-    bus_id         INT REFERENCES buses(id)
+    reservation_id INT UNIQUE REFERENCES reservations(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    bus_id         INT REFERENCES buses(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE passengers (
     id             SERIAL PRIMARY KEY,
-    reservation_id INT REFERENCES reservations(id),
-    seat_id        INT REFERENCES bus_seats(id),
+    reservation_id INT REFERENCES reservations(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    seat_id        INT REFERENCES bus_seats(id) ON DELETE CASCADE ON UPDATE CASCADE,
     full_name      VARCHAR(100) NOT NULL,
     national_code  VARCHAR(10) NOT NULL,
     gender         VARCHAR(10) CHECK (gender IN ('MALE','FEMALE'))
@@ -103,7 +103,7 @@ CREATE TABLE passengers (
 
 CREATE TABLE payments (
     id             SERIAL PRIMARY KEY,
-    reservation_id INT REFERENCES reservations(id),
+    reservation_id INT REFERENCES reservations(id) ON DELETE CASCADE ON UPDATE CASCADE,
     amount         NUMERIC(10,2),
     status         VARCHAR(20),
     paid_at        TIMESTAMP
@@ -111,7 +111,7 @@ CREATE TABLE payments (
 
 CREATE TABLE reviews (
     id          SERIAL PRIMARY KEY,
-    user_id     INT REFERENCES users(id),
+    user_id     INT REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
     target_type VARCHAR(10) NOT NULL CHECK (target_type IN ('HOTEL','BUS')),
     target_id   INT NOT NULL,
     rating      INT NOT NULL CHECK (rating BETWEEN 1 AND 5),

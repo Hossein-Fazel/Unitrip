@@ -179,10 +179,10 @@ func generateBus(busRequest BusRequest) (*entity.Bus, error) {
 	var bus entity.Bus
 
 	route := entity.Route{
-		Source: entity.City{Name: busRequest.SourceCity},
-		Dest:   entity.City{Name: busRequest.DestCity},
+		Source: &entity.City{Name: busRequest.SourceCity},
+		Dest:   &entity.City{Name: busRequest.DestCity},
 	}
-	bus.Route = route
+	bus.Route = &route
 	bus.Price = busRequest.Price
 
 	layout := "2006-01-02 15:04"

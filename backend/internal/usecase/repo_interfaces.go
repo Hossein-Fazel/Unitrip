@@ -20,3 +20,8 @@ type BusRepo interface {
 	GenerateSeats(id int64, n int) error
 	GetSeatsByID(id int64) ([]*entity.Seat, error)
 }
+
+type CityRepo interface {
+	Create(city *entity.City) (*entity.City, error)
+	GetByName(name string) (*entity.City, error)
+}
