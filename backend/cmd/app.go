@@ -37,7 +37,7 @@ func Run() error {
 
 	// Services
 	userService := usecase.NewUserService(userRepo)
-	adminService := usecase.NewAdminService(busRepo, cityRepo)
+	busService := usecase.NewBusService(busRepo, cityRepo)
 
 	// Create admin account
 	_, err = userService.CreateAdmin(conf.AdminUsername, conf.AdminPassword)
@@ -47,11 +47,11 @@ func Run() error {
 
 	// Handlers
 	userHandler := http.NewAuthHandler(userService, jwtService)
-	adminHandler := http.NewAdminHandler(adminService)
+	busHandler := http.NewBusHandler(busService)
 
 	// Gin
 	ginEngine := web.NewRouter()
-	web.RegisterRoutes(ginEngine, userHandler, adminHandler, jwtService)
+	web.RegisterRoutes(ginEngine, userHandler, busHandler, jwtService)
 
 	// Run app
 	log.Printf("Starting server on port %s", conf.WebPort)

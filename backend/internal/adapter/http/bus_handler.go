@@ -11,24 +11,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type AdminHandler interface {
-	GetAllBuses(c *gin.Context)
-	GetBusByID(c *gin.Context)
-	CreateBus(c *gin.Context)
-	UpdateBus(c *gin.Context)
-	DeleteBus(c *gin.Context)
+type BusHandler interface {
+	List(c *gin.Context)
+	GetByID(c *gin.Context)
+	Create(c *gin.Context)
+	Update(c *gin.Context)
+	Delete(c *gin.Context)
 }
 
-type admin struct {
-	adminService usecase.Admin
+type bus struct {
+	busService usecase.Bus
 }
 
-func NewAdminHandler(adminService usecase.Admin) AdminHandler {
-	return &admin{adminService: adminService}
+func NewBusHandler(busService usecase.Bus) BusHandler {
+	return &bus{busService: busService}
 }
 
-func (h *admin) GetAllBuses(c *gin.Context) {
-	buses, err := h.adminService.GetAllBuses()
+func (h *bus) List(c *gin.Context) {
+	buses, err := h.busService.List()
 	if err != nil {
 		if errors.Is(err, usecase.ErrNotFound) {
 			c.JSON(http.StatusNotFound, ErrorResponse{Error: "no buses found"})
@@ -40,7 +40,7 @@ func (h *admin) GetAllBuses(c *gin.Context) {
 	c.JSON(http.StatusOK, generateBusesResponse(buses))
 }
 
-func (h *admin) GetBusByID(c *gin.Context) {
+func (h *bus) GetByID(c *gin.Context) {
 	idParam := c.Param("id")
 	id, err := strconv.ParseInt(idParam, 10, 64)
 
@@ -49,7 +49,7 @@ func (h *admin) GetBusByID(c *gin.Context) {
 		return
 	}
 
-	bus, err := h.adminService.GetBusByID(id)
+	bus, err := h.busService.GetByID(id)
 	if err != nil {
 		if errors.Is(err, usecase.ErrNotFound) {
 			c.JSON(http.StatusNotFound, ErrorResponse{Error: "bus not found"})
@@ -61,7 +61,7 @@ func (h *admin) GetBusByID(c *gin.Context) {
 	c.JSON(http.StatusOK, generateBusResponse(bus))
 }
 
-func (h *admin) CreateBus(c *gin.Context) {
+func (h *bus) Create(c *gin.Context) {
 	var request BusRequest
 	if err := c.ShouldBindJSON(&request); err != nil {
 		c.JSON(http.StatusBadRequest, ErrorResponse{Error: err.Error()})
@@ -73,7 +73,7 @@ func (h *admin) CreateBus(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, ErrorResponse{Error: err.Error()})
 		return
 	}
-	_, err = h.adminService.CreateBus(inputBus)
+	_, err = h.busService.Create(inputBus)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: err.Error()})
 		return
@@ -83,7 +83,7 @@ func (h *admin) CreateBus(c *gin.Context) {
 	})
 }
 
-func (h *admin) UpdateBus(c *gin.Context) {
+func (h *bus) Update(c *gin.Context) {
 	idParam := c.Param("id")
 	id, err := strconv.ParseInt(idParam, 10, 64)
 
@@ -105,7 +105,7 @@ func (h *admin) UpdateBus(c *gin.Context) {
 	}
 
 	input.ID = id
-	if err := h.adminService.UpdateBus(input); err != nil {
+	if err := h.busService.Update(input); err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: err.Error()})
 		return
 	}
@@ -115,7 +115,7 @@ func (h *admin) UpdateBus(c *gin.Context) {
 	})
 }
 
-func (h *admin) DeleteBus(c *gin.Context) {
+func (h *bus) Delete(c *gin.Context) {
 	idParam := c.Param("id")
 	id, err := strconv.ParseInt(idParam, 10, 64)
 
@@ -124,7 +124,7 @@ func (h *admin) DeleteBus(c *gin.Context) {
 		return
 	}
 	
-	if err := h.adminService.DeleteBus(id); err != nil {
+	if err := h.busService.Delete(id); err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: err.Error()})
 		return
 	}
