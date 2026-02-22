@@ -2,6 +2,7 @@ package web
 
 import (
 	"unitrip/internal/adapter/http"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -18,25 +19,22 @@ func NewRouter() *gin.Engine {
 	return engine
 }
 
-func RegisterRoutes(router *gin.Engine, userHandler http.AuthHandler, adminHandler http.AdminHandler, jwtService http.JWTService) {
+func RegisterRoutes(router *gin.Engine, userHandler http.AuthHandler, busHandler http.BusHandler, jwtService http.JWTService) {
 	authGroup := router.Group("/auth")
-	adminGroup := router.Group("/admin")
+	busGroup := router.Group("/bus")
 	registerAuthRoutes(authGroup, userHandler)
-	registerAdminRoutes(adminGroup, adminHandler, jwtService)
+	registerBusRoutes(busGroup, busHandler, jwtService)
 }
-
 
 func registerAuthRoutes(group *gin.RouterGroup, authHandler http.AuthHandler) {
 	group.POST("/signup", authHandler.Signup)
 	group.POST("/login", authHandler.Login)
 }
 
-func registerAdminRoutes(group *gin.RouterGroup, adminHandler http.AdminHandler, jwtService http.JWTService) {
-	group.Use(AuthMiddleware(jwtService), AdminOnly())
-	busGroup := group.Group("/buses")
-	busGroup.GET("", adminHandler.GetAllBuses)
-	busGroup.GET("/:id", adminHandler.GetBusByID)
-	busGroup.POST("", adminHandler.CreateBus)
-	busGroup.PUT("/:id", adminHandler.UpdateBus)
-	busGroup.DELETE("/:id", adminHandler.DeleteBus)
+func registerBusRoutes(group *gin.RouterGroup, busHandler http.BusHandler, jwtService http.JWTService) {
+	group.GET("", busHandler.List)
+	group.GET("/:id", busHandler.GetByID)
+	group.POST("", AuthMiddleware(jwtService), AdminOnly(), busHandler.Create)
+	group.PUT("/:id", AuthMiddleware(jwtService), AdminOnly(), busHandler.Update)
+	group.DELETE("/:id", AuthMiddleware(jwtService), AdminOnly(), busHandler.Delete)
 }

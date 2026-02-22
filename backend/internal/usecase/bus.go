@@ -6,28 +6,28 @@ import (
 	"unitrip/internal/entity"
 )
 
-type Admin interface {
-	GetAllBuses() ([]*entity.Bus, error)
-	GetBusByID(id int64) (*entity.Bus, error)
-	CreateBus(bus *entity.Bus) (*entity.Bus, error)
-	UpdateBus(bus *entity.Bus) error
-	DeleteBus(id int64) error
+type Bus interface {
+	List() ([]*entity.Bus, error)
+	GetByID(id int64) (*entity.Bus, error)
+	Create(bus *entity.Bus) (*entity.Bus, error)
+	Update(bus *entity.Bus) error
+	Delete(id int64) error
 }
 
-type admin struct {
+type bus struct {
 	busRepo  BusRepo
 	cityRepo CityRepo
 }
 
-func NewAdminService(busRepo BusRepo, cityRepo CityRepo) Admin {
-	return &admin{
-		busRepo: busRepo,
+func NewBusService(busRepo BusRepo, cityRepo CityRepo) Bus {
+	return &bus{
+		busRepo:  busRepo,
 		cityRepo: cityRepo,
 	}
 }
 
-func (a *admin) GetAllBuses() ([]*entity.Bus, error) {
-	buses, err := a.busRepo.GetAll()
+func (b *bus) List() ([]*entity.Bus, error) {
+	buses, err := b.busRepo.GetAll()
 	if err != nil {
 		return nil, err
 	}
@@ -35,8 +35,8 @@ func (a *admin) GetAllBuses() ([]*entity.Bus, error) {
 		return nil, fmt.Errorf("%w:%v", ErrNotFound, "buses not found")
 	}
 
-	for _, bus := range(buses) {
-		seats, err := a.busRepo.GetSeatsByID(bus.ID)
+	for _, bus := range buses {
+		seats, err := b.busRepo.GetSeatsByID(bus.ID)
 		if err != nil {
 			return nil, err
 		}
@@ -46,8 +46,8 @@ func (a *admin) GetAllBuses() ([]*entity.Bus, error) {
 	return buses, nil
 }
 
-func (a *admin) GetBusByID(id int64) (*entity.Bus, error) {
-	bus, err := a.busRepo.GetByID(id)
+func (b *bus) GetByID(id int64) (*entity.Bus, error) {
+	bus, err := b.busRepo.GetByID(id)
 	if err != nil {
 		switch {
 		case errors.Is(err, ErrNotFound):
@@ -57,19 +57,19 @@ func (a *admin) GetBusByID(id int64) (*entity.Bus, error) {
 		}
 	}
 
-	seats, err := a.busRepo.GetSeatsByID(bus.ID)
+	seats, err := b.busRepo.GetSeatsByID(bus.ID)
 	if err != nil {
 		return nil, err
 	}
 
 	bus.Seats = seats
-	
+
 	return bus, nil
 }
 
-func (a *admin) CreateBus(bus *entity.Bus) (*entity.Bus, error) {
+func (b *bus) Create(bus *entity.Bus) (*entity.Bus, error) {
 	var err error
-	bus.Route.Source, err = a.cityRepo.GetByName(bus.Route.Source.Name)
+	bus.Route.Source, err = b.cityRepo.GetByName(bus.Route.Source.Name)
 	if err != nil {
 		switch {
 		case errors.Is(err, ErrNotFound):
@@ -79,7 +79,7 @@ func (a *admin) CreateBus(bus *entity.Bus) (*entity.Bus, error) {
 		}
 	}
 
-	bus.Route.Dest, err = a.cityRepo.GetByName(bus.Route.Dest.Name)
+	bus.Route.Dest, err = b.cityRepo.GetByName(bus.Route.Dest.Name)
 	if err != nil {
 		switch {
 		case errors.Is(err, ErrNotFound):
@@ -89,12 +89,12 @@ func (a *admin) CreateBus(bus *entity.Bus) (*entity.Bus, error) {
 		}
 	}
 
-	bus, err = a.busRepo.Create(bus)
+	bus, err = b.busRepo.Create(bus)
 	if err != nil {
 		return nil, err
 	}
 
-	err = a.busRepo.GenerateSeats(bus.ID, 25)
+	err = b.busRepo.GenerateSeats(bus.ID, 25)
 	if err != nil {
 		return nil, err
 	}
@@ -102,9 +102,9 @@ func (a *admin) CreateBus(bus *entity.Bus) (*entity.Bus, error) {
 	return bus, nil
 }
 
-func (a *admin) UpdateBus(bus *entity.Bus) error {
+func (b *bus) Update(bus *entity.Bus) error {
 	var err error
-	bus.Route.Source, err = a.cityRepo.GetByName(bus.Route.Source.Name)
+	bus.Route.Source, err = b.cityRepo.GetByName(bus.Route.Source.Name)
 	if err != nil {
 		switch {
 		case errors.Is(err, ErrNotFound):
@@ -114,7 +114,7 @@ func (a *admin) UpdateBus(bus *entity.Bus) error {
 		}
 	}
 
-	bus.Route.Dest, err = a.cityRepo.GetByName(bus.Route.Dest.Name)
+	bus.Route.Dest, err = b.cityRepo.GetByName(bus.Route.Dest.Name)
 	if err != nil {
 		switch {
 		case errors.Is(err, ErrNotFound):
@@ -123,9 +123,9 @@ func (a *admin) UpdateBus(bus *entity.Bus) error {
 			return fmt.Errorf("%w:%v", ErrInternal, err.Error())
 		}
 	}
-	return a.busRepo.Update(bus)
+	return b.busRepo.Update(bus)
 }
 
-func (a *admin) DeleteBus(id int64) error {
-	return a.busRepo.Delete(id)
+func (b *bus) Delete(id int64) error {
+	return b.busRepo.Delete(id)
 }
