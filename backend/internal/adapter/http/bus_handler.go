@@ -123,7 +123,7 @@ func (h *bus) Delete(c *gin.Context) {
 		c.JSON(http.StatusNotFound, ErrorResponse{Error: "invalid parameter"})
 		return
 	}
-	
+
 	if err := h.busService.Delete(id); err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: err.Error()})
 		return
@@ -167,6 +167,7 @@ func generateBusResponse(bus *entity.Bus) DetailedBusResponse {
 
 	for _, seat := range bus.Seats {
 		busResponse.Seats = append(busResponse.Seats, Seat{
+			ID:     seat.ID,
 			SeatNo: seat.SeatNo,
 			Status: seat.Status,
 		})

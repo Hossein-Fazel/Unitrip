@@ -134,9 +134,6 @@ func (b *bus) GetByID(id int64) (*entity.Bus, error) {
 		&dest.ID, &dest.Name,
 	)
 
-	dateStr = strings.Split(dateStr, "T")[0]
-	timeStr = strings.TrimSuffix(strings.Split(timeStr, "T")[1], "Z")
-
 	if err != nil {
 		switch {
 		case errors.Is(err, sql.ErrNoRows):
@@ -145,6 +142,9 @@ func (b *bus) GetByID(id int64) (*entity.Bus, error) {
 			return nil, err
 		}
 	}
+
+	dateStr = strings.Split(dateStr, "T")[0]
+	timeStr = strings.TrimSuffix(strings.Split(timeStr, "T")[1], "Z")
 
 	dt, _ := time.Parse(
 		"2006-01-02 15:04:05",
@@ -165,7 +165,7 @@ func (b *bus) Create(bus *entity.Bus) (*entity.Bus, error) {
 	if b.db == nil {
 		return nil, errors.New("database connection is nil")
 	}
-	
+
 	query := `
 		INSERT INTO buses (
 			source_city_id,
@@ -258,7 +258,7 @@ func (b *bus) GetSeatsByID(id int64) ([]*entity.Seat, error) {
 	}
 
 	query := `
-		SELECT seat_no, status
+		SELECT id, seat_no, status
 		FROM bus_seats
 		WHERE bus_id = $1
 		ORDER BY seat_no
@@ -274,6 +274,7 @@ func (b *bus) GetSeatsByID(id int64) ([]*entity.Seat, error) {
 	for rows.Next() {
 		seat := &entity.Seat{}
 		if err := rows.Scan(
+			&seat.ID,
 			&seat.SeatNo,
 			&seat.Status,
 		); err != nil {

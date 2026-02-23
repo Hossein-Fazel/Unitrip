@@ -18,6 +18,7 @@ type Route struct {
 }
 
 type Seat struct {
+	ID     int64
 	SeatNo int
 	Status SeatStatus
 }

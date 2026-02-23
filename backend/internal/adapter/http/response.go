@@ -32,14 +32,14 @@ type BusResponse struct {
 }
 
 type DetailedBusResponse struct {
-	ID                  int64          `json:"id"`
-	SourceCity          string         `json:"source_city"`
-	DestCity            string         `json:"dest_city"`
-	Seats               []Seat         `json:"seats"`
-	TravelDate          string         `json:"travel_date"`
-	TravelTime          string         `json:"travel_time"`
-	Price               float64        `json:"price"`
-	Rating              RatingResponse `json:"rating"`
+	ID         int64          `json:"id"`
+	SourceCity string         `json:"source_city"`
+	DestCity   string         `json:"dest_city"`
+	Seats      []Seat         `json:"seats"`
+	TravelDate string         `json:"travel_date"`
+	TravelTime string         `json:"travel_time"`
+	Price      float64        `json:"price"`
+	Rating     RatingResponse `json:"rating"`
 }
 
 type RatingResponse struct {
@@ -48,6 +48,7 @@ type RatingResponse struct {
 }
 
 type Seat struct {
+	ID     int64             `json:"id"`
 	SeatNo int               `json:"number"`
 	Status entity.SeatStatus `json:"status"`
 }
