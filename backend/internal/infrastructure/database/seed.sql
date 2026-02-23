@@ -1,4 +1,3 @@
-
 -- Cities
 INSERT INTO cities (name) VALUES ('Tehran'), ('Isfahan'), ('Shiraz'), ('Mashhad'), ('Yazd'), ('Kerman'), ('Tabriz'), ('Hamedan');
 
@@ -45,6 +44,7 @@ INSERT INTO bus_seats (bus_id, seat_no) SELECT 7, generate_series(1, 25);
 INSERT INTO bus_seats (bus_id, seat_no) SELECT 8, generate_series(1, 25);
 
 -- Assume reservations start with ID=1 and auto-increment
+
 -- Scenario 1: Successful bus booking for 2 passengers (bus 1, seats 5 & 6)
 INSERT INTO reservations (user_id, reservation_type, buyer_full_name, buyer_phone, buyer_national_code, buyer_birth_date) VALUES (1, 'BUS', 'Ali Rezaei', '09123456789', '0011223344', '1990-05-15'); -- res_id=1
 INSERT INTO bus_reservations (reservation_id, bus_id) VALUES (1, 1);
@@ -60,6 +60,7 @@ INSERT INTO payments (reservation_id, amount, status, paid_at) VALUES (2, 120000
 INSERT INTO reservations (user_id, reservation_type, buyer_full_name, buyer_phone, buyer_national_code, buyer_birth_date) VALUES (3, 'BUS', 'Hasan Karimi', '09121112233', '2233445566', '1985-01-30'); -- res_id=3
 INSERT INTO bus_reservations (reservation_id, bus_id) VALUES (3, 2);
 INSERT INTO passengers (reservation_id, seat_id, full_name, national_code, gender) VALUES (3, 35, 'Hasan Karimi', '2233445566', 'MALE'); -- seat_id 35 = bus 2, seat 10
+-- No payment inserted for unpaid reservation, status remains PENDING by default
 
 -- Scenario 4: Post reviews
 INSERT INTO reviews (user_id, target_type, target_id, rating, comment) VALUES (1, 'BUS', 1, 5, 'Very clean bus.'), (2, 'HOTEL', 2, 4, 'Beautiful hotel.');
@@ -81,45 +82,13 @@ INSERT INTO reviews (user_id, target_type, target_id, rating, comment) VALUES (4
 -- Scenario 8: Unpaid hotel reservation (hotel 5, room 8)
 INSERT INTO reservations (user_id, reservation_type, buyer_full_name, buyer_phone, buyer_national_code, buyer_birth_date) VALUES (6, 'HOTEL', 'Fatemeh Najafi', '09151112222', '4455667788', '2000-10-01'); -- res_id=6
 INSERT INTO hotel_reservations (reservation_id, room_id, check_in, check_out) VALUES (6, 8, '2026-05-01', '2026-05-05');
+-- No payment inserted for unpaid reservation, status remains PENDING by default
 
 -- Scenario 9: New booking for the hotel in Hamedan (hotel 6, room 11)
 INSERT INTO reservations (user_id, reservation_type, buyer_full_name, buyer_phone, buyer_national_code, buyer_birth_date) VALUES (7, 'HOTEL', 'Babak Zandi', '09188118811', '5566778899', '1988-08-10'); -- res_id=7
 INSERT INTO hotel_reservations (reservation_id, room_id, check_in, check_out) VALUES (7, 11, '2026-05-10', '2026-05-12');
 INSERT INTO payments (reservation_id, amount, status, paid_at) VALUES (7, 5600000, 'PAID', CURRENT_TIMESTAMP);
+
 INSERT INTO reviews (user_id, target_type, target_id, rating, comment) VALUES (7, 'HOTEL', 6, 5, 'Great location.');
 
 UPDATE users SET role = 'ADMIN' WHERE id IN (1, 2);
-
-INSERT INTO wallet_transactions (wallet_id, amount, transaction_type)
-VALUES
-(1, 500000000, 'DEPOSIT'),
-(2, 800000000, 'DEPOSIT'),
-(3, 100000000, 'DEPOSIT'),
-(4, 300000000, 'DEPOSIT'),
-(5, 600000000, 'DEPOSIT'),
-(6, 200000000, 'DEPOSIT'),
-(7, 400000000, 'DEPOSIT');
-
--- Wallet payment for Scenario 1: Successful bus reservation (Reservation ID = 1)
-INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
-VALUES (1, 900000, 'PAYMENT', 1);
-
--- Wallet payment for Scenario 2: Successful hotel reservation (Reservation ID = 2)
-INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
-VALUES (2, 12000000, 'PAYMENT', 2);
-
--- Wallet payment for Scenario 4: Successful bus reservation (Reservation ID = 4)
-INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
-VALUES (4, 450000, 'PAYMENT', 4);
-
--- Wallet payment for Scenario 6: Successful hotel reservation (Reservation ID = 5)
-INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
-VALUES (1, 7000000, 'PAYMENT', 5);
-
--- Wallet payment for Scenario 9: Successful hotel reservation (Reservation ID = 7)
-INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
-VALUES (7, 5600000, 'PAYMENT', 7);
-
--- Refund for Scenario 3: Unpaid bus reservation was cancelled (Reservation ID = 3)
-INSERT INTO wallet_transactions (wallet_id, amount, transaction_type, reference_id)
-VALUES (3, 300000, 'REFUND', 3);

@@ -9,23 +9,6 @@ CREATE TABLE users (
     created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE wallets (
-    id SERIAL PRIMARY KEY,
-    user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    balance NUMERIC(12,2) NOT NULL DEFAULT 0,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE wallet_transactions (
-    id               SERIAL PRIMARY KEY,
-    wallet_id        INT REFERENCES wallets(id),
-    amount           NUMERIC(12,2) NOT NULL,
-    transaction_type VARCHAR(10) NOT NULL CHECK (transaction_type IN ('DEPOSIT','WITHDRAW','PAYMENT','REFUND')),
-    reference_id     INT,
-    created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
 CREATE TABLE cities (
     id   SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
@@ -105,7 +88,7 @@ CREATE TABLE payments (
     id             SERIAL PRIMARY KEY,
     reservation_id INT REFERENCES reservations(id) ON DELETE CASCADE ON UPDATE CASCADE,
     amount         NUMERIC(10,2),
-    status         VARCHAR(20),
+    status         VARCHAR(20) CHECK (status IN ('PAID','PENDING', 'CANCELED')) DEFAULT 'PENDING',
     paid_at        TIMESTAMP
 );
 
@@ -263,66 +246,3 @@ BEGIN
     );
 END;
 $$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION update_wallet_balance()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF NEW.transaction_type IN ('DEPOSIT','REFUND') THEN
-        UPDATE wallets
-        SET balance = balance + NEW.amount,
-            updated_at = NOW()
-        WHERE id = NEW.wallet_id;
-
-    ELSE
-        UPDATE wallets
-        SET balance = balance - NEW.amount,
-            updated_at = NOW()
-        WHERE id = NEW.wallet_id;
-    END IF;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_wallet_balance
-AFTER INSERT ON wallet_transactions
-FOR EACH ROW
-EXECUTE FUNCTION update_wallet_balance();
-
-
-CREATE OR REPLACE FUNCTION prevent_negative_wallet()
-RETURNS TRIGGER AS $$
-DECLARE
-    current_balance NUMERIC;
-BEGIN
-    SELECT balance INTO current_balance
-    FROM wallets
-    WHERE id = NEW.wallet_id
-    FOR UPDATE;
-
-    IF NEW.transaction_type IN ('WITHDRAW','PAYMENT')
-       AND current_balance < NEW.amount THEN
-        RAISE EXCEPTION 'Insufficient wallet balance';
-    END IF;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_prevent_negative_wallet
-BEFORE INSERT ON wallet_transactions
-FOR EACH ROW
-EXECUTE FUNCTION prevent_negative_wallet();
-
-CREATE OR REPLACE FUNCTION create_wallet_for_user()
-RETURNS TRIGGER AS $$
-BEGIN
-    INSERT INTO wallets(user_id) VALUES (NEW.id);
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_create_wallet
-AFTER INSERT ON users
-FOR EACH ROW
-EXECUTE FUNCTION create_wallet_for_user();
